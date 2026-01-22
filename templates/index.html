@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h2>Welcome to Auto Industry Hub</h2>
+    <p>Your ultimate destination for automotive news, detailed car specifications, and comprehensive industry insights. Stay ahead of the curve in the rapidly evolving world of automobiles.</p>
+    <a href="/cars" class="hero-btn">Explore Car Specifications</a>
+</div>
+
+<div class="section-header">
+    <h2>Featured Categories</h2>
+    <p>Browse through our comprehensive collection of vehicles</p>
+</div>
+
+<div class="card-grid">
+    <div class="card">
+        <div class="card-image">🚗</div>
+        <div class="card-content">
+            <h3>Sedans</h3>
+            <p>Explore our collection of reliable and efficient sedans, from compact cars to full-size luxury vehicles.</p>
+            <a href="/cars?type=sedan" class="card-link">View Sedans →</a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-image">🚙</div>
+        <div class="card-content">
+            <h3>SUVs & Crossovers</h3>
+            <p>Discover versatile SUVs offering space, comfort, and capability for families and adventure seekers.</p>
+            <a href="/cars?type=suv" class="card-link">View SUVs →</a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-image">🏎️</div>
+        <div class="card-content">
+            <h3>Sports Cars</h3>
+            <p>Experience the thrill of high-performance sports cars designed for speed, agility, and driving excitement.</p>
+            <a href="/cars?type=sports" class="card-link">View Sports Cars →</a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-image">⚡</div>
+        <div class="card-content">
+            <h3>Electric Vehicles</h3>
+            <p>Browse the latest electric cars featuring cutting-edge battery technology and zero-emission driving.</p>
+            <a href="/cars?type=electric" class="card-link">View EVs →</a>
+        </div>
+    </div>
+</div>
+
+<div class="section-header">
+    <h2>Quick Access</h2>
+    <p>Navigate to your area of interest</p>
+</div>
+
+<div class="quick-links">
+    <a href="/news" class="quick-link">
+        <div class="quick-link-icon"><i class="fas fa-newspaper"></i></div>
+        <div class="quick-link-text">
+            <h4>Latest News</h4>
+            <p>Stay updated with breaking automotive news</p>
+        </div>
+    </a>
+    
+    <a href="/cars" class="quick-link">
+        <div class="quick-link-icon"><i class="fas fa-car"></i></div>
+        <div class="quick-link-text">
+            <h4>Car Specifications</h4>
+            <p>Detailed specs for hundreds of car models</p>
+        </div>
+    </a>
+    
+    <a href="/info" class="quick-link">
+        <div class="quick-link-icon"><i class="fas fa-industry"></i></div>
+        <div class="quick-link-text">
+            <h4>Industry Information</h4>
+            <p>Learn about the auto industry history and trends</p>
+        </div>
+    </a>
+</div>
+
+<div class="info-section mt-3">
+    <h2>Why Choose Auto Industry Hub?</h2>
+    <p>We're your trusted source for comprehensive automotive information. Our platform brings together the latest industry news, detailed car specifications, and insightful analysis to help you make informed decisions.</p>
+    <p>Whether you're a car enthusiast, potential buyer, or industry professional, our curated content covers everything from classic models to the latest electric vehicles and emerging technologies.</p>
+    
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Car Models</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Manufacturers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">News Updates</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">Free</div>
+            <div class="stat-label">Access</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

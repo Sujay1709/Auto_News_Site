@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="section-header">
+    <h2>🚗 Car Specifications</h2>
+    <p>Explore detailed specifications of the most popular car models across different categories</p>
+</div>
+
+<div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All Cars</button>
+    <button class="filter-btn" data-filter="sedan">Sedans</button>
+    <button class="filter-btn" data-filter="suv">SUVs</button>
+    <button class="filter-btn" data-filter="sports">Sports Cars</button>
+    <button class="filter-btn" data-filter="electric">Electric</button>
+</div>
+
+<div class="card-grid">
+    {% for car in cars %}
+    <div class="car-specs-card" data-category="{{ car.type }}">
+        <div class="car-header">
+            {% if car.new %}
+            <span class="car-badge">NEW</span>
+            {% endif %}
+            <h3>{{ car.make }} {{ car.model }}</h3>
+            <p>{{ car.year }} {{ car.category }}</p>
+        </div>
+        <div class="car-image-placeholder">
+            <i class="fas fa-car"></i>
+        </div>
+        <div class="car-specs-grid">
+            <div class="spec-item">
+                <div class="spec-label">Engine</div>
+                <div class="spec-value">{{ car.engine }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Horsepower</div>
+                <div class="spec-value">{{ car.horsepower }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">0-60 mph</div>
+                <div class="spec-value highlight">{{ car.acceleration }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Top Speed</div>
+                <div class="spec-value">{{ car.top_speed }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Transmission</div>
+                <div class="spec-value">{{ car.transmission }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Drivetrain</div>
+                <div class="spec-value">{{ car.drivetrain }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Fuel Economy</div>
+                <div class="spec-value">{{ car.fuel_economy }}</div>
+            </div>
+            <div class="spec-item">
+                <div class="spec-label">Seating</div>
+                <div class="spec-value">{{ car.seating }}</div>
+            </div>
+        </div>
+        <div class="car-price">{{ car.price }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const carCards = document.querySelectorAll('.car-specs-card');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filter = this.dataset.filter;
+            
+            carCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease forwards';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
+
