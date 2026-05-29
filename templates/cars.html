@@ -1,94 +1,318 @@
 {% extends "base.html" %}
+{% block title %}3D Car Specs — AutoHub{% endblock %}
 
 {% block content %}
-<div class="section-header">
-    <h2>🚗 Car Specifications</h2>
-    <p>Explore detailed specifications of the most popular car models across different categories</p>
-</div>
+<div class="cars-page-wrap">
 
-<div class="filter-buttons">
-    <button class="filter-btn active" data-filter="all">All Cars</button>
-    <button class="filter-btn" data-filter="sedan">Sedans</button>
-    <button class="filter-btn" data-filter="suv">SUVs</button>
-    <button class="filter-btn" data-filter="sports">Sports Cars</button>
-    <button class="filter-btn" data-filter="electric">Electric</button>
-</div>
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <span class="filter-bar-label">Filter:</span>
+    <button class="filter-chip active" data-filter="all">All ({{ cars|length }})</button>
+    <button class="filter-chip" data-filter="sedan">Sedans</button>
+    <button class="filter-chip" data-filter="suv">SUVs</button>
+    <button class="filter-chip" data-filter="sports">Sports Cars</button>
+    <button class="filter-chip" data-filter="electric">Electric</button>
+  </div>
 
-<div class="card-grid">
-    {% for car in cars %}
-    <div class="car-specs-card" data-category="{{ car.type }}">
-        <div class="car-header">
-            {% if car.new %}
-            <span class="car-badge">NEW</span>
-            {% endif %}
-            <h3>{{ car.make }} {{ car.model }}</h3>
-            <p>{{ car.year }} {{ car.category }}</p>
+  <!-- Main layout: grid + detail panel -->
+  <div class="cars-layout">
+
+    <!-- Left: car card grid -->
+    <div class="cars-list-pane">
+      <div class="cars-grid" id="cars-grid">
+        {% for car in cars %}
+        <div
+          class="car-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} selected{% endif %}"
+          data-type="{{ car.type }}"
+          data-slug="{{ car.slug }}"
+          data-index="{{ loop.index0 }}"
+          role="button"
+          tabindex="0"
+        >
+          {% if car.new %}<span class="car-new-tag">NEW</span>{% endif %}
+          {% if car.model_3d_available %}<span class="car-3d-tag"><i class="fas fa-cube"></i> 3D</span>{% endif %}
+
+          <div class="car-card-icon">
+            {% if car.type == 'sedan' %}<i class="fas fa-car-side"></i>
+            {% elif car.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
+            {% elif car.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
+            {% elif car.type == 'electric' %}<i class="fas fa-bolt"></i>
+            {% else %}<i class="fas fa-car"></i>{% endif %}
+          </div>
+
+          <div class="car-card-make">{{ car.make }}</div>
+          <div class="car-card-name">{{ car.model }}</div>
+          <div class="car-card-cat">{{ car.year }} · {{ car.category }}</div>
+
+          <div class="car-card-stats">
+            <div class="cstat">
+              <span class="cstat-val">{{ car.horsepower }}</span>
+              <span class="cstat-lbl">Power</span>
+            </div>
+            <div class="cstat">
+              <span class="cstat-val">{{ car.acceleration }}</span>
+              <span class="cstat-lbl">0–60</span>
+            </div>
+            <div class="cstat">
+              <span class="cstat-val">{{ car.price }}</span>
+              <span class="cstat-lbl">MSRP</span>
+            </div>
+          </div>
         </div>
-        <div class="car-image-placeholder">
-            <i class="fas fa-car"></i>
-        </div>
-        <div class="car-specs-grid">
-            <div class="spec-item">
-                <div class="spec-label">Engine</div>
-                <div class="spec-value">{{ car.engine }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Horsepower</div>
-                <div class="spec-value">{{ car.horsepower }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">0-60 mph</div>
-                <div class="spec-value highlight">{{ car.acceleration }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Top Speed</div>
-                <div class="spec-value">{{ car.top_speed }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Transmission</div>
-                <div class="spec-value">{{ car.transmission }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Drivetrain</div>
-                <div class="spec-value">{{ car.drivetrain }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Fuel Economy</div>
-                <div class="spec-value">{{ car.fuel_economy }}</div>
-            </div>
-            <div class="spec-item">
-                <div class="spec-label">Seating</div>
-                <div class="spec-value">{{ car.seating }}</div>
-            </div>
-        </div>
-        <div class="car-price">{{ car.price }}</div>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
+
+    <!-- Right: sticky detail panel -->
+    <aside class="car-detail-panel" id="car-detail-panel">
+
+      <!-- 3D Viewer: procedural Three.js fallback + optional real GLB overlay -->
+      <div class="detail-viewer" id="detail-viewer" style="position:relative">
+        {% set first = namespace(car=None) %}
+        {% for car in cars %}
+          {% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %}
+            {% set first.car = car %}
+          {% endif %}
+        {% endfor %}
+
+        <!-- Procedural Three.js viewer mounts here for every car. -->
+        <div id="procedural-viewer-mount" style="width:100%;height:100%"></div>
+
+        {% if first.car and first.car.model_3d_available and first.car.model_3d_url and not first.car.model_is_placeholder %}
+          <!-- Real (non-placeholder) GLB overlays the procedural one. -->
+          <model-viewer
+            id="main-model-viewer"
+            src="{{ first.car.model_3d_url }}"
+            alt="{{ first.car.make }} {{ first.car.model }} 3D model"
+            auto-rotate
+            auto-rotate-delay="2000"
+            rotation-per-second="12deg"
+            camera-controls
+            shadow-intensity="1.1"
+            shadow-softness="0.8"
+            environment-image="neutral"
+            exposure="1.0"
+            interaction-prompt="auto"
+            style="position:absolute;inset:0;width:100%;height:100%"
+          >
+            <div slot="progress-bar" style="display:none"></div>
+          </model-viewer>
+        {% endif %}
+
+        <div class="detail-viewer-hint">
+          <span><i class="fas fa-hand-pointer"></i> Drag to rotate</span>
+          <span><i class="fas fa-search-plus"></i> Scroll to zoom</span>
+        </div>
+      </div>
+
+      <!-- Specs -->
+      <div class="detail-body" id="detail-body">
+        {% if first.car %}
+        <div class="detail-yr-cat" id="d-yr-cat">{{ first.car.year }} &middot; {{ first.car.category }}</div>
+        <div class="detail-title" id="d-title">{{ first.car.make }} {{ first.car.model }}</div>
+        <div class="detail-price" id="d-price">{{ first.car.price }}</div>
+
+        <div class="detail-specs" id="d-specs">
+          <div class="spec-item full">
+            <div>
+              <div class="spec-lbl">0–60 mph</div>
+              <div class="spec-val" id="d-accel">{{ first.car.acceleration }}</div>
+            </div>
+            <div>
+              <div class="spec-lbl">Top Speed</div>
+              <div class="spec-val" id="d-top">{{ first.car.top_speed }}</div>
+            </div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Engine</div>
+            <div class="spec-val" id="d-engine">{{ first.car.engine }}</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Horsepower</div>
+            <div class="spec-val" id="d-hp">{{ first.car.horsepower }}</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Transmission</div>
+            <div class="spec-val" id="d-trans">{{ first.car.transmission }}</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Drivetrain</div>
+            <div class="spec-val" id="d-drive">{{ first.car.drivetrain }}</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Fuel Economy</div>
+            <div class="spec-val" id="d-fuel">{{ first.car.fuel_economy }}</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-lbl">Seating</div>
+            <div class="spec-val" id="d-seat">{{ first.car.seating }}</div>
+          </div>
+        </div>
+
+        <div class="detail-attr" id="d-attr">
+          {% if first.car.model_3d_available %}
+            <i class="fas fa-cube" style="color:var(--red);margin-right:5px"></i>
+            3D model: {{ first.car.model_display_name }}
+            {% if first.car.model_is_placeholder %} (generic placeholder){% endif %}
+            &nbsp;&middot;&nbsp; {{ first.car.model_license }}
+          {% else %}
+            <i class="fas fa-info-circle" style="margin-right:5px"></i>
+            No 3D model for this vehicle yet.
+            {% if first.car.missing_asset_path %}
+              Add a GLB at <code style="font-size:0.7rem">{{ first.car.missing_asset_path }}</code>
+            {% endif %}
+          {% endif %}
+        </div>
+        {% else %}
+        <p style="color:var(--text-3);padding:var(--s8) 0;text-align:center">Select a car to view specs.</p>
+        {% endif %}
+      </div>
+
+    </aside>
+  </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const carCards = document.querySelectorAll('.car-specs-card');
-    
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            const filter = this.dataset.filter;
-            
-            carCards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease forwards';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-</script>
+<!-- Cars data injected for JS -->
+<script type="application/json" id="cars-data">{{ cars | tojson }}</script>
+<script type="application/json" id="selected-slug">{{ (selected_slug or '') | tojson }}</script>
 {% endblock %}
 
+{% block scripts %}
+<script>
+(function () {
+  const carsData  = JSON.parse(document.getElementById('cars-data').textContent);
+  const cards     = document.querySelectorAll('.car-card');
+  const filterBtns= document.querySelectorAll('.filter-chip');
+  const viewer    = document.getElementById('detail-viewer');
+  const hintBar   = viewer ? viewer.querySelector('.detail-viewer-hint') : null;
+  const procMount = document.getElementById('procedural-viewer-mount');
+
+  let procViewer = null;
+  let pendingInitCar = null;
+  if (procMount) {
+    const initIdx = Array.from(cards).findIndex(c => c.classList.contains('selected'));
+    pendingInitCar = carsData[initIdx >= 0 ? initIdx : 0];
+
+    import("{{ url_for('static', filename='js/procedural_car.js') }}")
+      .then(mod => {
+        procViewer = new mod.ProceduralCarViewer(procMount);
+        if (pendingInitCar) procViewer.setCar(pendingInitCar);
+      })
+      .catch(err => {
+        console.error('[ProceduralCar] failed to load 3D viewer:', err);
+        procMount.innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:0.9rem">3D viewer unavailable</div>';
+      });
+  }
+
+  // ── Field refs ──
+  const fYrCat = document.getElementById('d-yr-cat');
+  const fTitle = document.getElementById('d-title');
+  const fPrice = document.getElementById('d-price');
+  const fAccel = document.getElementById('d-accel');
+  const fTop   = document.getElementById('d-top');
+  const fEng   = document.getElementById('d-engine');
+  const fHp    = document.getElementById('d-hp');
+  const fTrans = document.getElementById('d-trans');
+  const fDrive = document.getElementById('d-drive');
+  const fFuel  = document.getElementById('d-fuel');
+  const fSeat  = document.getElementById('d-seat');
+  const fAttr  = document.getElementById('d-attr');
+
+  function typeIcon(t) {
+    const map = { sedan:'fa-car-side', suv:'fa-truck-pickup', sports:'fa-flag-checkered', electric:'fa-bolt' };
+    return map[t] || 'fa-car';
+  }
+
+  function updatePanel(car) {
+    if (!car) return;
+
+    // Update text fields
+    if (fYrCat) fYrCat.textContent = `${car.year} · ${car.category}`;
+    if (fTitle) fTitle.textContent = `${car.make} ${car.model}`;
+    if (fPrice) fPrice.textContent = car.price;
+    if (fAccel) fAccel.textContent = car.acceleration;
+    if (fTop)   fTop.textContent   = car.top_speed;
+    if (fEng)   fEng.textContent   = car.engine;
+    if (fHp)    fHp.textContent    = car.horsepower;
+    if (fTrans) fTrans.textContent = car.transmission;
+    if (fDrive) fDrive.textContent = car.drivetrain;
+    if (fFuel)  fFuel.textContent  = car.fuel_economy;
+    if (fSeat)  fSeat.textContent  = car.seating;
+
+    if (fAttr) {
+      if (car.model_3d_available) {
+        fAttr.innerHTML = `<i class="fas fa-cube" style="color:var(--red);margin-right:5px"></i>3D: ${car.model_display_name || 'Available'}`;
+      } else {
+        fAttr.innerHTML = `<i class="fas fa-info-circle" style="margin-right:5px"></i>No 3D model yet.`;
+      }
+    }
+
+    // Update 3D viewer
+    if (!viewer) return;
+
+    // Always update the procedural viewer (it's the default for every car)
+    if (procViewer) procViewer.setCar(car);
+
+    const hasRealGlb = car.model_3d_available && car.model_3d_url && !car.model_is_placeholder;
+    let mv = viewer.querySelector('model-viewer');
+
+    if (hasRealGlb) {
+      // Overlay real GLB on top of procedural viewer
+      if (!mv) {
+        mv = document.createElement('model-viewer');
+        mv.id = 'main-model-viewer';
+        mv.setAttribute('auto-rotate', '');
+        mv.setAttribute('auto-rotate-delay', '2000');
+        mv.setAttribute('rotation-per-second', '12deg');
+        mv.setAttribute('camera-controls', '');
+        mv.setAttribute('shadow-intensity', '1.1');
+        mv.setAttribute('shadow-softness', '0.8');
+        mv.setAttribute('environment-image', 'neutral');
+        mv.setAttribute('exposure', '1.0');
+        mv.setAttribute('interaction-prompt', 'auto');
+        mv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+        mv.innerHTML = '<div slot="progress-bar" style="display:none"></div>';
+        viewer.appendChild(mv);
+      }
+      mv.setAttribute('src', car.model_3d_url);
+      mv.setAttribute('alt', `${car.make} ${car.model} 3D model`);
+    } else if (mv) {
+      // Remove any leftover real-GLB overlay so procedural shows through
+      mv.remove();
+    }
+
+    if (hintBar) hintBar.style.display = '';
+  }
+
+  // ── Card click ──
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
+      const idx = parseInt(card.dataset.index, 10);
+      const car = carsData[idx];
+      if (car) updatePanel(car);
+    });
+
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
+
+  // ── Filter chips ──
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        const show = f === 'all' || card.dataset.type === f;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+{% endblock %}
