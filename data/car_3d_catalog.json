@@ -1,0 +1,152 @@
+{
+  "toyota|camry|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "honda|accord|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "bmw|3 series|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "mercedes benz|c class|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "hyundai|sonata|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "kia|k5|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "nissan|altima|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "audi|a4|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "lexus|es|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "genesis|g70|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "toyota|rav4|default|default": {
+    "url": "/static/models/community/milk_truck.glb",
+    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
+    "license": "CC BY 4.0 \u2014 Cesium",
+    "is_placeholder": true
+  },
+  "ford|explorer|default|default": {
+    "url": "/static/models/community/milk_truck.glb",
+    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
+    "license": "CC BY 4.0 \u2014 Cesium",
+    "is_placeholder": true
+  },
+  "tesla|model x|default|default": {
+    "url": "/static/models/community/milk_truck.glb",
+    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
+    "license": "CC BY 4.0 \u2014 Cesium",
+    "is_placeholder": true
+  },
+  "porsche|cayenne|default|default": {
+    "url": "/static/models/community/milk_truck.glb",
+    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
+    "license": "CC BY 4.0 \u2014 Cesium",
+    "is_placeholder": true
+  },
+  "porsche|911 carrera|default|default": {
+    "url": "/static/models/community/ferrari.glb",
+    "display_name": "Ferrari 458 Italia (sports silhouette)",
+    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "is_placeholder": true
+  },
+  "chevrolet|corvette c8|default|default": {
+    "url": "/static/models/community/ferrari.glb",
+    "display_name": "Ferrari 458 Italia (sports silhouette)",
+    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "is_placeholder": true
+  },
+  "ferrari|296 gtb|default|default": {
+    "url": "/static/models/community/ferrari.glb",
+    "display_name": "Ferrari 458 Italia (sports silhouette)",
+    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "is_placeholder": true
+  },
+  "ford|mustang dark horse|default|default": {
+    "url": "/static/models/community/ferrari.glb",
+    "display_name": "Ferrari 458 Italia (sports silhouette)",
+    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "is_placeholder": true
+  },
+  "tesla|model 3|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "tesla|model s plaid|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "lucid|air pure|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "rivian|r1t|default|default": {
+    "url": "/static/models/community/milk_truck.glb",
+    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
+    "license": "CC BY 4.0 \u2014 Cesium",
+    "is_placeholder": true
+  },
+  "hyundai|ioniq 6|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "bmw|i7|default|default": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  },
+  "__global_fallback__": {
+    "url": "/static/models/community/toy_car.glb",
+    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
+    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "is_placeholder": true
+  }
+}
