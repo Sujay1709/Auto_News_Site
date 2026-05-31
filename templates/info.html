@@ -1,112 +1,73 @@
 {% extends "base.html" %}
+{% block title %}Industry Info — AutoHub{% endblock %}
 
 {% block content %}
-<div class="section-header">
-    <h2>🏭 Automobile Industry Overview</h2>
-    <p>Discover the rich history, current trends, and future of the automotive industry</p>
+
+<!-- Page header -->
+<div style="background:var(--dark);color:#fff;padding:4rem 2rem 3.5rem">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="section-label" style="color:rgba(255,100,100,0.9)">Deep Dive</div>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:0.75rem">Automobile Industry</h1>
+    <p style="font-size:1rem;color:rgba(255,255,255,0.6);max-width:560px">From Karl Benz to full electric fleets — explore the history, economics, and future of one of the world's largest industries.</p>
+  </div>
 </div>
 
-<div class="info-section">
-    <h2>The Evolution of the Automobile</h2>
-    <p>The automobile industry has undergone a remarkable transformation since the late 19th century. From the first practical automobiles powered by internal combustion engines to today's sophisticated electric vehicles, the journey has been nothing short of revolutionary.</p>
-    <p>The industry began with pioneers like Karl Benz, who created the first true automobile in 1885-1886, and Henry Ford, who revolutionized manufacturing with the assembly line in 1913, making cars affordable for the average person.</p>
-    
-    <div class="timeline">
-        <div class="timeline-item">
-            <h4>1886 - The Beginning</h4>
-            <p>Karl Benz patents the first automobile with an internal combustion engine in Germany.</p>
-        </div>
-        <div class="timeline-item">
-            <h4>1908 - Model T Revolution</h4>
-            <p>Ford introduces the Model T, making cars accessible to the masses with mass production techniques.</p>
-        </div>
-        <div class="timeline-item">
-            <h4>1997 - Toyota Prius</h4>
-            <p>Launch of the first mass-produced hybrid electric vehicle, sparking the modern EV revolution.</p>
-        </div>
-        <div class="timeline-item">
-            <h4>2008 - Tesla Roadster</h4>
-            <p>Tesla introduces the Roadster, proving that electric cars can be both practical and desirable.</p>
-        </div>
-        <div class="timeline-item">
-            <h4>2020s - Electric Future</h4>
-            <p>Major automakers commit to fully electric lineups, with many countries setting deadlines for gas vehicle sales.</p>
-        </div>
+<div class="info-page">
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val">80M+</div><div class="stat-lbl">Vehicles / Year</div></div>
+    <div class="stat-card"><div class="stat-val">$3T</div><div class="stat-lbl">Global Market</div></div>
+    <div class="stat-card"><div class="stat-val">14M</div><div class="stat-lbl">Jobs Worldwide</div></div>
+    <div class="stat-card"><div class="stat-val">1.4B</div><div class="stat-lbl">Vehicles on Roads</div></div>
+  </div>
+
+  <h2>The Evolution of the Automobile</h2>
+  <p>The automobile industry has undergone a remarkable transformation since the late 19th century. From the first practical automobiles powered by internal combustion engines to today's sophisticated electric vehicles, the journey has been nothing short of revolutionary.</p>
+  <p>The industry began with pioneers like Karl Benz, who created the first true automobile in 1885–1886, and Henry Ford, who revolutionized manufacturing with the assembly line in 1913, making cars affordable for the average person.</p>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1886 — The Beginning</div>
+      <p>Karl Benz patents the first automobile with an internal combustion engine in Germany.</p>
     </div>
-</div>
-
-<div class="info-section">
-    <h2>Current Market Statistics</h2>
-    <p>The global automobile industry is one of the largest economic sectors in the world, producing millions of vehicles annually and employing millions of workers directly and indirectly.</p>
-    
-    <div class="stats-grid">
-        <div class="stat-item">
-            <div class="stat-value">80M+</div>
-            <div class="stat-label">Vehicles Produced Annually</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">$3T</div>
-            <div class="stat-label">Global Market Size</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">14M</div>
-            <div class="stat-label">Jobs Worldwide</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">1.4B</div>
-            <div class="stat-label">Vehicles on Roads</div>
-        </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1908 — Model T Revolution</div>
+      <p>Ford introduces the Model T, making cars accessible to the masses through assembly-line mass production.</p>
     </div>
-</div>
+    <div class="timeline-item">
+      <div class="timeline-year">1973 — Oil Crisis Shifts</div>
+      <p>The OPEC oil embargo forces automakers to rethink fuel efficiency for the first time.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">1997 — Toyota Prius</div>
+      <p>Launch of the first mass-produced hybrid electric vehicle, sparking the modern EV revolution.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2008 — Tesla Roadster</div>
+      <p>Tesla introduces the Roadster, proving that electric cars can be both practical and desirable.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020s — Electric Future</div>
+      <p>Major automakers commit to fully electric lineups, with many countries setting deadlines for ICE vehicle sales bans.</p>
+    </div>
+  </div>
 
-<div class="info-section">
-    <h2>Key Industry Segments</h2>
-    <p><strong>Passenger Vehicles:</strong> The largest segment includes sedans, SUVs, hatchbacks, and crossover vehicles designed for personal transportation. This segment continues to evolve with changing consumer preferences.</p>
-    <p><strong>Commercial Vehicles:</strong> Includes trucks, vans, and buses essential for logistics and public transportation. The commercial segment is seeing significant innovation in electric and autonomous technologies.</p>
-    <p><strong>Electric Vehicles:</strong> The fastest-growing segment, with battery electric vehicles (BEVs) and plug-in hybrid electric vehicles (PHEVs) gaining market share rapidly across all vehicle categories.</p>
-</div>
+  <h2>Current Market Dynamics</h2>
+  <p>The global automobile industry is one of the largest economic sectors in the world, producing millions of vehicles annually and employing millions of workers directly and indirectly. The industry is currently undergoing its most significant transformation since the invention of the automobile itself.</p>
+  <p>Electric vehicle adoption is accelerating rapidly, driven by falling battery costs, government incentives, and increasing consumer awareness of environmental impact. By 2030, EVs are projected to account for over 30% of new vehicle sales globally.</p>
 
-<div class="info-section">
-    <h2>Industry Trends & Innovations</h2>
-    <p><strong>Electric Revolution:</strong> The transition to electric powertrains is the biggest shift in automotive history. Major manufacturers are investing billions in EV development, battery technology, and charging infrastructure.</p>
-    <p><strong>Autonomous Driving:</strong> Advanced driver assistance systems (ADAS) are becoming standard, with full self-driving technology being tested and developed by multiple companies worldwide.</p>
-    <p><strong>Connected Vehicles:</strong> Modern cars are becoming smartphones on wheels, with over-the-air updates, advanced infotainment systems, and vehicle-to-everything (V2X) communication.</p>
-    <p><strong>Sustainability:</strong> Beyond EVs, the industry is focused on sustainable manufacturing, recyclable materials, and reducing carbon footprint throughout the vehicle lifecycle.</p>
-    <p><strong>Mobility Services:</strong> Car-sharing, ride-hailing, and subscription services are changing how people think about vehicle ownership, especially in urban areas.</p>
-</div>
+  <h2>Key Industry Segments</h2>
+  <p>The automotive industry spans several distinct segments, each serving different consumer needs and market demands. Sedans and compact cars remain the dominant segment in many markets, though SUVs and crossovers have seen explosive growth over the past decade. Luxury vehicles represent a smaller but highly profitable segment, while commercial vehicles form the backbone of global logistics.</p>
 
-<div class="info-section">
-    <h2>Major Automotive Markets</h2>
-    <p><strong>China:</strong> The world's largest automotive market, both in production and sales. Chinese manufacturers are becoming global players, especially in the EV segment.</p>
-    <p><strong>United States:</strong> A mature market with strong preference for trucks and SUVs. The US is a key market for both domestic and foreign manufacturers.</p>
-    <p><strong>Europe:</strong> Known for premium brands and strict emissions regulations. European manufacturers are leading the EV transition with numerous new models.</p>
-    <p><strong>India:</strong> One of the fastest-growing markets, with a focus on affordable vehicles. The market is also becoming a major manufacturing hub.</p>
-</div>
+  <h2>Major Automotive Markets</h2>
+  <p>China is now the world's largest automotive market, producing and consuming more vehicles than any other country. The United States remains the second-largest market, with Europe close behind. Emerging markets in Southeast Asia, India, and Africa represent significant growth opportunities for global automakers.</p>
+  <p>The competitive landscape is shifting rapidly, with traditional OEMs facing increasing competition from technology companies and pure-play EV manufacturers. Companies like Tesla have demonstrated that disruptive new entrants can capture significant market share in a relatively short time.</p>
 
-<div class="info-section">
-    <h2>Future Outlook</h2>
-    <p>The automotive industry stands at a crossroads of unprecedented change. Several factors will shape its future:</p>
-    <p><strong>Government Regulations:</strong> Stricter emissions standards and mandates for electric vehicles will continue to drive industry transformation.</p>
-    <p><strong>Consumer Preferences:</strong> Growing environmental awareness and changing lifestyles are influencing vehicle preferences toward EVs and alternative mobility solutions.</p>
-    <p><strong>Technology Integration:</strong> Advances in battery technology, AI, and connectivity will enable new features and business models.</p>
-    <p><strong>Competition:</strong> Traditional automakers face competition from new entrants, especially in the EV space, where tech companies are bringing fresh perspectives.</p>
-</div>
+  <h2>Technology Trends</h2>
+  <p>Advanced driver assistance systems (ADAS), vehicle-to-infrastructure communication, and over-the-air software updates are becoming standard features across all segments. Autonomous driving technology, while not yet fully realized for consumer use, continues to advance rapidly in commercial applications like robotaxis and long-haul trucking.</p>
+  <p>Connectivity is now a core selling point: modern vehicles generate and consume enormous amounts of data, enabling predictive maintenance, real-time navigation, and personalized in-car experiences.</p>
 
-<div class="quick-links">
-    <a href="/news" class="quick-link">
-        <div class="quick-link-icon"><i class="fas fa-newspaper"></i></div>
-        <div class="quick-link-text">
-            <h4>Latest News</h4>
-            <p>Stay updated with industry news</p>
-        </div>
-    </a>
-    <a href="/cars" class="quick-link">
-        <div class="quick-link-icon"><i class="fas fa-car"></i></div>
-        <div class="quick-link-text">
-            <h4>Car Specs</h4>
-            <p>Explore detailed specifications</p>
-        </div>
-    </a>
 </div>
 {% endblock %}
-

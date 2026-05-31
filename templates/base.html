@@ -1,65 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Industry Hub - Your Guide to the Automotive World</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AutoHub — Premium Automotive Intelligence{% endblock %}</title>
+  <meta name="description" content="The definitive automotive resource. Real-time news, 3D car models, and deep industry insights.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='gaming-theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='modern-cars.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+  {% block head_extra %}{% endblock %}
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1><a href="/">🚗 Auto Industry Hub</a></h1>
-            <nav>
-                <a href="/" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
-                <a href="/news" {% if request.path == '/news' %}class="active"{% endif %}>News</a>
-                <a href="/cars" {% if request.path == '/cars' %}class="active"{% endif %}>Car Specs</a>
-                <a href="/info" {% if request.path == '/info' %}class="active"{% endif %}>Industry Info</a>
-            </nav>
-            <div class="search-container">
-                <input type="text" placeholder="Search...">
-                <button type="button"><i class="fas fa-search"></i></button>
-            </div>
+
+  <header>
+    <div class="header-container">
+      <a href="/" class="site-logo">
+        <div class="logo-mark">AH</div>
+        <span>Auto<strong>Hub</strong></span>
+      </a>
+      <nav>
+        <a href="/" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
+        <a href="/news" {% if request.path == '/news' %}class="active"{% endif %}>News</a>
+        <a href="/cars" {% if request.path == '/cars' %}class="active"{% endif %}>Cars</a>
+        <a href="/info" {% if request.path == '/info' %}class="active"{% endif %}>Industry</a>
+      </nav>
+      <div class="header-right">
+        <div class="search-container" id="global-search">
+          <input type="text" id="global-search-input" placeholder="Search cars, news…" aria-label="Search">
+          <button type="button" id="global-search-btn" aria-label="Search"><i class="fas fa-search"></i></button>
         </div>
-    </header>
-    
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h4>Auto Industry Hub</h4>
-                <p>Your comprehensive resource for automotive news, car specifications, and industry insights. Stay informed about the latest developments in the automobile world.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="/"><i class="fas fa-home"></i> Home</a>
-                <a href="/news"><i class="fas fa-newspaper"></i> Latest News</a>
-                <a href="/cars"><i class="fas fa-car"></i> Car Specifications</a>
-                <a href="/info"><i class="fas fa-industry"></i> Industry Info</a>
-            </div>
-            <div class="footer-section">
-                <h4>Categories</h4>
-                <a href="/cars?type=sedan"><i class="fas fa-car-side"></i> Sedans</a>
-                <a href="/cars?type=suv"><i class="fas fa-truck-pickup"></i> SUVs</a>
-                <a href="/cars?type=sports"><i class="fas fa-flag-checkered"></i> Sports Cars</a>
-                <a href="/cars?type=electric"><i class="fas fa-bolt"></i> Electric Vehicles</a>
-            </div>
-            <div class="footer-section">
-                <h4>Connect With Us</h4>
-                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-            </div>
+        <a href="/cars" class="btn btn-primary btn-sm">3D Garage</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="site-logo">
+            <div class="logo-mark">AH</div>
+            <span>Auto<strong>Hub</strong></span>
+          </a>
+          <p>Your definitive resource for automotive news, interactive 3D car models, and deep industry insights.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Auto Industry Hub. All rights reserved. | Privacy Policy | Terms of Service</p>
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="/">Home</a>
+          <a href="/news">Latest News</a>
+          <a href="/cars">3D Car Specs</a>
+          <a href="/info">Industry Info</a>
         </div>
-    </footer>
+        <div class="footer-col">
+          <h5>Categories</h5>
+          <a href="/cars?type=sedan">Sedans</a>
+          <a href="/cars?type=suv">SUVs</a>
+          <a href="/cars?type=sports">Sports Cars</a>
+          <a href="/cars?type=electric">Electric</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="#"><i class="fab fa-x-twitter"></i> Twitter / X</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 AutoHub. All rights reserved.</span>
+        <span>Privacy Policy &nbsp;&middot;&nbsp; Terms of Service</span>
+      </div>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+
+  <script>
+  // Global search: filters cars in place on /cars, otherwise routes to /cars?q=
+  (function () {
+    const input = document.getElementById('global-search-input');
+    const btn   = document.getElementById('global-search-btn');
+    if (!input || !btn) return;
+
+    function applyCarsFilter(query) {
+      const cards = document.querySelectorAll('.car-card');
+      if (!cards.length) return false;
+      const q = (query || '').trim().toLowerCase();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const show = !q || text.includes(q);
+        card.style.display = show ? '' : 'none';
+      });
+      // Reset category chips to "all" so the search isn't masked by a type filter
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      const allChip = document.querySelector('.filter-chip[data-filter="all"]');
+      if (allChip) allChip.classList.add('active');
+      return true;
+    }
+
+    function doSearch() {
+      const q = input.value.trim();
+      const onCars = window.location.pathname.startsWith('/cars');
+      if (onCars) {
+        applyCarsFilter(q);
+      } else {
+        window.location.href = q ? `/cars?q=${encodeURIComponent(q)}` : '/cars';
+      }
+    }
+
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
+    });
+    // Live filter while typing on /cars
+    input.addEventListener('input', () => {
+      if (window.location.pathname.startsWith('/cars')) applyCarsFilter(input.value);
+    });
+
+    // On /cars page load: prefill from ?q= and apply
+    if (window.location.pathname.startsWith('/cars')) {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q') || '';
+      if (q) {
+        input.value = q;
+        const tryApply = () => applyCarsFilter(q);
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', tryApply);
+        } else {
+          tryApply();
+        }
+      }
+    }
+  })();
+  </script>
 </body>
 </html>
-

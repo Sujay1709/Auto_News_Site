@@ -1,109 +1,157 @@
 {% extends "base.html" %}
+{% block title %}AutoHub — The Automotive Intelligence Platform{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <h2>Welcome to Auto Industry Hub</h2>
-    <p>Your ultimate destination for automotive news, detailed car specifications, and comprehensive industry insights. Stay ahead of the curve in the rapidly evolving world of automobiles.</p>
-    <a href="/cars" class="hero-btn">Explore Car Specifications</a>
-</div>
 
-<div class="section-header">
-    <h2>Featured Categories</h2>
-    <p>Browse through our comprehensive collection of vehicles</p>
-</div>
+<!-- ── HERO: full-bleed dark section with live 3D model ── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <i class="fas fa-circle" style="font-size:0.45rem"></i>
+      Live Automotive Intelligence
+    </div>
+    <h1>Drive <em>smarter</em><br>decisions.</h1>
+    <p class="hero-sub">Real-time news, interactive 3D car models, and deep industry data — everything you need in one place.</p>
+    <div class="hero-actions">
+      <a href="/cars" class="btn btn-primary"><i class="fas fa-cube"></i> Explore 3D Garage</a>
+      <a href="/news" class="btn btn-outline-inv"><i class="fas fa-newspaper"></i> Latest News</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-val">25+</div>
+        <div class="hero-stat-label">3D Car Models</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">Live</div>
+        <div class="hero-stat-label">News Feed</div>
+      </div>
+      <div>
+        <div class="hero-stat-val">4</div>
+        <div class="hero-stat-label">Categories</div>
+      </div>
+    </div>
+  </div>
 
-<div class="card-grid">
-    <div class="card">
-        <div class="card-image">🚗</div>
-        <div class="card-content">
-            <h3>Sedans</h3>
-            <p>Explore our collection of reliable and efficient sedans, from compact cars to full-size luxury vehicles.</p>
-            <a href="/cars?type=sedan" class="card-link">View Sedans →</a>
-        </div>
+  <div class="hero-3d-pane">
+    <model-viewer
+      src="{{ url_for('static', filename='models/carconcept/CarConcept.gltf') }}"
+      alt="Interactive 3D concept car — drag to rotate"
+      auto-rotate
+      auto-rotate-delay="1000"
+      rotation-per-second="18deg"
+      camera-controls
+      shadow-intensity="1.2"
+      shadow-softness="0.9"
+      environment-image="neutral"
+      exposure="1.1"
+      camera-orbit="-20deg 75deg 8m"
+      min-camera-orbit="auto auto 4m"
+      max-camera-orbit="auto auto 14m"
+      interaction-prompt="auto"
+    >
+      <div slot="progress-bar" style="display:none"></div>
+    </model-viewer>
+    <div class="viewer-hint-bar">
+      <span><i class="fas fa-hand-pointer"></i> Drag to rotate</span>
+      <span><i class="fas fa-search-plus"></i> Scroll to zoom</span>
     </div>
-    
-    <div class="card">
-        <div class="card-image">🚙</div>
-        <div class="card-content">
-            <h3>SUVs & Crossovers</h3>
-            <p>Discover versatile SUVs offering space, comfort, and capability for families and adventure seekers.</p>
-            <a href="/cars?type=suv" class="card-link">View SUVs →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <div class="card-image">🏎️</div>
-        <div class="card-content">
-            <h3>Sports Cars</h3>
-            <p>Experience the thrill of high-performance sports cars designed for speed, agility, and driving excitement.</p>
-            <a href="/cars?type=sports" class="card-link">View Sports Cars →</a>
-        </div>
-    </div>
-    
-    <div class="card">
-        <div class="card-image">⚡</div>
-        <div class="card-content">
-            <h3>Electric Vehicles</h3>
-            <p>Browse the latest electric cars featuring cutting-edge battery technology and zero-emission driving.</p>
-            <a href="/cars?type=electric" class="card-link">View EVs →</a>
-        </div>
-    </div>
-</div>
+  </div>
+</section>
 
-<div class="section-header">
-    <h2>Quick Access</h2>
-    <p>Navigate to your area of interest</p>
-</div>
-
-<div class="quick-links">
-    <a href="/news" class="quick-link">
-        <div class="quick-link-icon"><i class="fas fa-newspaper"></i></div>
-        <div class="quick-link-text">
-            <h4>Latest News</h4>
-            <p>Stay updated with breaking automotive news</p>
-        </div>
+<!-- ── VEHICLE CATEGORIES ── -->
+<div class="section">
+  <div class="section-hd">
+    <div class="section-label">Browse by Category</div>
+    <h2 class="section-title">What are you looking for?</h2>
+    <p class="section-sub">From daily commuters to track-focused exotics — explore every segment with full specs.</p>
+  </div>
+  <div class="category-grid">
+    <a href="/cars?type=sedan" class="category-card c-sedan">
+      <div class="cat-icon"><i class="fas fa-car-side"></i></div>
+      <div class="cat-title">Sedans</div>
+      <p class="cat-desc">Efficiency and comfort fused into everyday icons. From the Camry to the BMW 3 Series.</p>
+      <span class="cat-cta">Explore Sedans <i class="fas fa-arrow-right"></i></span>
     </a>
-    
-    <a href="/cars" class="quick-link">
-        <div class="quick-link-icon"><i class="fas fa-car"></i></div>
-        <div class="quick-link-text">
-            <h4>Car Specifications</h4>
-            <p>Detailed specs for hundreds of car models</p>
-        </div>
+    <a href="/cars?type=suv" class="category-card c-suv">
+      <div class="cat-icon"><i class="fas fa-truck-pickup"></i></div>
+      <div class="cat-title">SUVs</div>
+      <p class="cat-desc">Space, capability, and style. From the RAV4 to the Porsche Cayenne.</p>
+      <span class="cat-cta">Explore SUVs <i class="fas fa-arrow-right"></i></span>
     </a>
-    
-    <a href="/info" class="quick-link">
-        <div class="quick-link-icon"><i class="fas fa-industry"></i></div>
-        <div class="quick-link-text">
-            <h4>Industry Information</h4>
-            <p>Learn about the auto industry history and trends</p>
-        </div>
+    <a href="/cars?type=sports" class="category-card c-sports">
+      <div class="cat-icon"><i class="fas fa-flag-checkered"></i></div>
+      <div class="cat-title">Sports Cars</div>
+      <p class="cat-desc">Zero compromises. The Porsche 911, Ferrari 296, Corvette C8, and more.</p>
+      <span class="cat-cta">Explore Sports <i class="fas fa-arrow-right"></i></span>
     </a>
+    <a href="/cars?type=electric" class="category-card c-ev">
+      <div class="cat-icon"><i class="fas fa-bolt"></i></div>
+      <div class="cat-title">Electric Vehicles</div>
+      <p class="cat-desc">The future, now. Lucid Air, Tesla Model S Plaid, Rivian, and beyond.</p>
+      <span class="cat-cta">Explore EVs <i class="fas fa-arrow-right"></i></span>
+    </a>
+  </div>
 </div>
 
-<div class="info-section mt-3">
-    <h2>Why Choose Auto Industry Hub?</h2>
-    <p>We're your trusted source for comprehensive automotive information. Our platform brings together the latest industry news, detailed car specifications, and insightful analysis to help you make informed decisions.</p>
-    <p>Whether you're a car enthusiast, potential buyer, or industry professional, our curated content covers everything from classic models to the latest electric vehicles and emerging technologies.</p>
-    
-    <div class="stats-grid">
-        <div class="stat-item">
-            <div class="stat-value">500+</div>
-            <div class="stat-label">Car Models</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">50+</div>
-            <div class="stat-label">Manufacturers</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">24/7</div>
-            <div class="stat-label">News Updates</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">Free</div>
-            <div class="stat-label">Access</div>
-        </div>
+<!-- ── 3D FEATURE CALLOUT ── -->
+<div class="section-dark">
+  <div class="section-dark-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+    <div>
+      <div class="section-label">3D Technology</div>
+      <h2 class="section-title">Inspect every detail — in three dimensions.</h2>
+      <p class="section-sub" style="margin-bottom:2rem">
+        AutoHub uses WebGL-powered 3D models so you can rotate, zoom, and explore vehicles as if they were right in front of you. Paint variants, interior details, and real-time lighting — no showroom required.
+      </p>
+      <a href="/cars" class="btn btn-primary"><i class="fas fa-cube"></i> Open 3D Garage</a>
     </div>
+    <div style="background:var(--dark-3);border-radius:14px;overflow:hidden;aspect-ratio:4/3;position:relative">
+      <model-viewer
+        src="{{ url_for('static', filename='models/carconcept/CarConcept.gltf') }}"
+        alt="3D car model"
+        auto-rotate
+        camera-controls
+        shadow-intensity="1"
+        environment-image="neutral"
+        exposure="0.9"
+        style="width:100%;height:100%"
+      >
+        <div slot="progress-bar" style="display:none"></div>
+      </model-viewer>
+      <div class="viewer-hint-bar">
+        <span><i class="fas fa-hand-pointer"></i> Interactive</span>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- ── QUICK LINKS ── -->
+<div class="section">
+  <div class="section-hd">
+    <div class="section-label">Quick Access</div>
+    <h2 class="section-title">Everything in one place.</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <a href="/news" style="display:flex;align-items:center;gap:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all 220ms;text-decoration:none" onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+      <div style="width:56px;height:56px;border-radius:12px;background:rgba(212,0,42,0.08);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--red);flex-shrink:0">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div>
+        <div style="font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text)">Latest News</div>
+        <div style="font-size:0.85rem;color:var(--text-2)">Real-time auto industry news powered by NewsAPI.</div>
+      </div>
+      <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-3)"></i>
+    </a>
+    <a href="/info" style="display:flex;align-items:center;gap:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all 220ms;text-decoration:none" onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
+      <div style="width:56px;height:56px;border-radius:12px;background:rgba(74,144,226,0.09);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#4A90E2;flex-shrink:0">
+        <i class="fas fa-industry"></i>
+      </div>
+      <div>
+        <div style="font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text)">Industry Info</div>
+        <div style="font-size:0.85rem;color:var(--text-2)">History, market data, trends, and global statistics.</div>
+      </div>
+      <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-3)"></i>
+    </a>
+  </div>
+</div>
+
 {% endblock %}
-
