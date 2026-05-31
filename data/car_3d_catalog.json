@@ -1,152 +1,152 @@
 {
   "toyota|camry|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/toyota_supra_mk4_a80.glb",
+    "display_name": "Toyota Supra MK4 A80 (closest Toyota match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "honda|accord|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "bmw|3 series|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/BMW_2018.glb",
+    "display_name": "BMW 2018",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "mercedes benz|c class|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "hyundai|sonata|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "kia|k5|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "nissan|altima|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "audi|a4|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "lexus|es|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "genesis|g70|default|default": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   },
   "toyota|rav4|default|default": {
     "url": "/static/models/community/milk_truck.glb",
     "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
-    "license": "CC BY 4.0 \u2014 Cesium",
+    "license": "CC BY 4.0 — Cesium",
     "is_placeholder": true
   },
   "ford|explorer|default|default": {
     "url": "/static/models/community/milk_truck.glb",
     "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
-    "license": "CC BY 4.0 \u2014 Cesium",
+    "license": "CC BY 4.0 — Cesium",
     "is_placeholder": true
   },
   "tesla|model x|default|default": {
-    "url": "/static/models/community/milk_truck.glb",
-    "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
-    "license": "CC BY 4.0 \u2014 Cesium",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/tesla_roadster_2020.glb",
+    "display_name": "Tesla Roadster 2020 (closest Tesla match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "porsche|cayenne|default|default": {
     "url": "/static/models/community/milk_truck.glb",
     "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
-    "license": "CC BY 4.0 \u2014 Cesium",
+    "license": "CC BY 4.0 — Cesium",
     "is_placeholder": true
   },
   "porsche|911 carrera|default|default": {
     "url": "/static/models/community/ferrari.glb",
     "display_name": "Ferrari 458 Italia (sports silhouette)",
-    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "license": "CC BY 3.0 — vicente betoret ferrero (via three.js)",
     "is_placeholder": true
   },
   "chevrolet|corvette c8|default|default": {
     "url": "/static/models/community/ferrari.glb",
     "display_name": "Ferrari 458 Italia (sports silhouette)",
-    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
+    "license": "CC BY 3.0 — vicente betoret ferrero (via three.js)",
     "is_placeholder": true
   },
   "ferrari|296 gtb|default|default": {
-    "url": "/static/models/community/ferrari.glb",
-    "display_name": "Ferrari 458 Italia (sports silhouette)",
-    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/ferrari_599.glb",
+    "display_name": "Ferrari 599",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "ford|mustang dark horse|default|default": {
-    "url": "/static/models/community/ferrari.glb",
-    "display_name": "Ferrari 458 Italia (sports silhouette)",
-    "license": "CC BY 3.0 \u2014 vicente betoret ferrero (via three.js)",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/ford_gt40.glb",
+    "display_name": "Ford GT40 (closest Ford match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "tesla|model 3|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/tesla_roadster_2020.glb",
+    "display_name": "Tesla Roadster 2020 (closest Tesla match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "tesla|model s plaid|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/tesla_roadster_2020.glb",
+    "display_name": "Tesla Roadster 2020 (closest Tesla match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "lucid|air pure|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/free_concept_car_037_-_public_domain_cc0.glb",
+    "display_name": "Concept Car 037 (futuristic EV)",
+    "license": "CC0 1.0 — public domain",
+    "is_placeholder": false
   },
   "rivian|r1t|default|default": {
     "url": "/static/models/community/milk_truck.glb",
     "display_name": "Cesium Milk Truck (SUV/pickup silhouette)",
-    "license": "CC BY 4.0 \u2014 Cesium",
+    "license": "CC BY 4.0 — Cesium",
     "is_placeholder": true
   },
   "hyundai|ioniq 6|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/free_concept_car_037_-_public_domain_cc0.glb",
+    "display_name": "Concept Car 037 (futuristic EV)",
+    "license": "CC0 1.0 — public domain",
+    "is_placeholder": false
   },
   "bmw|i7|default|default": {
-    "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
-    "is_placeholder": true
+    "url": "/static/models/community-cars/2020_bmw_m8.glb",
+    "display_name": "2020 BMW M8 (closest BMW match)",
+    "license": "via Vivekkk-1/3D-Models (Boost SL 1.0), upstream Sketchfab",
+    "is_placeholder": false
   },
   "__global_fallback__": {
     "url": "/static/models/community/toy_car.glb",
-    "display_name": "Khronos Toy Car (sedan/EV silhouette)",
-    "license": "CC0 1.0 \u2014 Guido Odendahl & Eric Chadwick",
+    "display_name": "Khronos Toy Car (sedan silhouette)",
+    "license": "CC0 1.0 — Guido Odendahl & Eric Chadwick",
     "is_placeholder": true
   }
 }
