@@ -894,7 +894,7 @@ def catalog_upsert_model(make: str, model: str, year, local_url: str, display_na
         else:
             catalog = {}
 
-        key = f"{make.strip().lower()}|{model.strip().lower()}|{str(year).strip()}|default"
+        key = f"{normalize_token(make)}|{normalize_token(model)}|{str(year).strip()}|default"
         catalog[key] = {
             "url": local_url,
             "display_name": display_name,
