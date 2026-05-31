@@ -925,7 +925,7 @@ def _poll_pending_jobs():
             with _jobs_lock:
                 jobs = load_generated_jobs()
 
-            active = [j for j in jobs if j.get("status") in ("queued", "processing")]
+            active = [j for j in jobs if j.get("status") not in ("completed", "failed")]
             if not active:
                 continue
 
