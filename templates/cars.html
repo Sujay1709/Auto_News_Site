@@ -85,15 +85,23 @@
             src="{{ first.car.model_3d_url }}"
             alt="{{ first.car.make }} {{ first.car.model }} 3D model"
             auto-rotate
-            auto-rotate-delay="2000"
-            rotation-per-second="12deg"
+            auto-rotate-delay="1500"
+            rotation-per-second="18deg"
             camera-controls
-            shadow-intensity="1.1"
-            shadow-softness="0.8"
-            environment-image="neutral"
-            exposure="1.0"
+            camera-orbit="-25deg 75deg auto"
+            min-camera-orbit="auto auto 30%"
+            max-camera-orbit="auto auto 200%"
+            field-of-view="30deg"
+            shadow-intensity="1.5"
+            shadow-softness="0.6"
+            environment-image="https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr"
+            skybox-image=""
+            exposure="1.1"
+            tone-mapping="aces"
             interaction-prompt="auto"
-            style="position:absolute;inset:0;width:100%;height:100%"
+            interaction-prompt-style="basic"
+            interaction-prompt-threshold="3000"
+            style="position:absolute;inset:0;width:100%;height:100%;background:radial-gradient(circle at 50% 60%, #1a2030 0%, #0a0e18 100%)"
           >
             <div slot="progress-bar" style="display:none"></div>
           </model-viewer>
@@ -163,6 +171,39 @@
             {% endif %}
           {% endif %}
         </div>
+
+        <!-- Rich content: overview + driving feel + features + best-for -->
+        <div class="detail-rich" id="d-rich">
+          {% if first.car.overview %}
+          <div class="rich-block">
+            <div class="rich-heading"><i class="fas fa-info-circle"></i> Overview</div>
+            <p class="rich-text" id="d-overview">{{ first.car.overview }}</p>
+          </div>
+          {% endif %}
+
+          {% if first.car.drives_like %}
+          <div class="rich-block">
+            <div class="rich-heading"><i class="fas fa-tachometer-alt"></i> How it drives</div>
+            <p class="rich-text" id="d-drives">{{ first.car.drives_like }}</p>
+          </div>
+          {% endif %}
+
+          {% if first.car.features %}
+          <div class="rich-block">
+            <div class="rich-heading"><i class="fas fa-star"></i> Notable features</div>
+            <ul class="rich-list" id="d-features">
+              {% for f in first.car.features %}<li>{{ f }}</li>{% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
+          {% if first.car.best_for %}
+          <div class="rich-block best-for-block">
+            <div class="rich-heading"><i class="fas fa-thumbs-up"></i> Best for</div>
+            <p class="rich-text best-for-text" id="d-bestfor">{{ first.car.best_for }}</p>
+          </div>
+          {% endif %}
+        </div>
         {% else %}
         <p style="color:var(--text-3);padding:var(--s8) 0;text-align:center">Select a car to view specs.</p>
         {% endif %}
@@ -218,10 +259,20 @@
   const fFuel  = document.getElementById('d-fuel');
   const fSeat  = document.getElementById('d-seat');
   const fAttr  = document.getElementById('d-attr');
+  const fOverview = document.getElementById('d-overview');
+  const fDrives   = document.getElementById('d-drives');
+  const fFeatures = document.getElementById('d-features');
+  const fBestFor  = document.getElementById('d-bestfor');
+  const fRich     = document.getElementById('d-rich');
 
   function typeIcon(t) {
     const map = { sedan:'fa-car-side', suv:'fa-truck-pickup', sports:'fa-flag-checkered', electric:'fa-bolt' };
     return map[t] || 'fa-car';
+  }
+
+  function setBlockVisibility(parent, hasContent) {
+    const block = parent ? parent.closest('.rich-block') : null;
+    if (block) block.style.display = hasContent ? '' : 'none';
   }
 
   function updatePanel(car) {
@@ -239,6 +290,18 @@
     if (fDrive) fDrive.textContent = car.drivetrain;
     if (fFuel)  fFuel.textContent  = car.fuel_economy;
     if (fSeat)  fSeat.textContent  = car.seating;
+
+    // Update rich content blocks (overview / drives_like / features / best_for)
+    if (fOverview) { fOverview.textContent = car.overview || ''; setBlockVisibility(fOverview, !!car.overview); }
+    if (fDrives)   { fDrives.textContent   = car.drives_like || ''; setBlockVisibility(fDrives, !!car.drives_like); }
+    if (fBestFor)  { fBestFor.textContent  = car.best_for || ''; setBlockVisibility(fBestFor, !!car.best_for); }
+    if (fFeatures) {
+      const features = Array.isArray(car.features) ? car.features : [];
+      fFeatures.innerHTML = features.map(f =>
+        `<li>${f.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</li>`
+      ).join('');
+      setBlockVisibility(fFeatures, features.length > 0);
+    }
 
     if (fAttr) {
       if (car.model_3d_available) {
@@ -263,15 +326,18 @@
         mv = document.createElement('model-viewer');
         mv.id = 'main-model-viewer';
         mv.setAttribute('auto-rotate', '');
-        mv.setAttribute('auto-rotate-delay', '2000');
-        mv.setAttribute('rotation-per-second', '12deg');
+        mv.setAttribute('auto-rotate-delay', '1500');
+        mv.setAttribute('rotation-per-second', '18deg');
         mv.setAttribute('camera-controls', '');
-        mv.setAttribute('shadow-intensity', '1.1');
-        mv.setAttribute('shadow-softness', '0.8');
-        mv.setAttribute('environment-image', 'neutral');
-        mv.setAttribute('exposure', '1.0');
+        mv.setAttribute('camera-orbit', '-25deg 75deg auto');
+        mv.setAttribute('field-of-view', '30deg');
+        mv.setAttribute('shadow-intensity', '1.5');
+        mv.setAttribute('shadow-softness', '0.6');
+        mv.setAttribute('environment-image', 'https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr');
+        mv.setAttribute('exposure', '1.1');
+        mv.setAttribute('tone-mapping', 'aces');
         mv.setAttribute('interaction-prompt', 'auto');
-        mv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+        mv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;background:radial-gradient(circle at 50% 60%, #1a2030 0%, #0a0e18 100%)';
         mv.innerHTML = '<div slot="progress-bar" style="display:none"></div>';
         viewer.appendChild(mv);
       }

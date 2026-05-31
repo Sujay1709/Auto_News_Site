@@ -15,6 +15,7 @@ import uuid
 # Paths & storage constants
 # ---------------------------------------------------------------------------
 CATALOG_PATH = Path("data/car_3d_catalog.json")
+CARS_DETAILS_PATH = Path("data/cars_details.json")
 GENERATED_JOBS_PATH = Path("data/generated_jobs.json")
 GENERATED_MODELS_DIR = Path("static/models/generated")
 MAX_IMAGE_BYTES = 10 * 1024 * 1024
@@ -545,6 +546,16 @@ def resolve_3d_model(catalog, make, model, year=None, trim=None):
     return fallback, "global_fallback", "__global_fallback__"
 
 
+def load_cars_details() -> dict:
+    """Return slug -> {overview, drives_like, features, best_for}. Empty on miss."""
+    try:
+        if CARS_DETAILS_PATH.exists():
+            return json.loads(CARS_DETAILS_PATH.read_text(encoding="utf-8"))
+    except Exception as exc:
+        log.warning("cars_details load failed: %s", exc)
+    return {}
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -585,6 +596,7 @@ def cars():
         source = cars_data
 
     catalog = load_3d_catalog()
+    details_map = load_cars_details()
     enriched_cars = []
 
     for car in source:
@@ -596,9 +608,15 @@ def cars():
             trim=car.get('trim', 'default')
         )
 
+        slug = _car_slug(car)
+        car_details = details_map.get(slug, {})
+        hero_path = f"static/images/cars/{slug}.webp"
+        has_hero_image = (Path(hero_path).exists() or
+                          Path(f"static/images/cars/{slug}.jpg").exists())
+
         enriched_cars.append({
             **car,
-            'slug': _car_slug(car),
+            'slug': slug,
             'model_3d_url': model_entry["url"],
             'model_3d_source': model_3d_source,
             'matched_catalog_key': matched_key,
@@ -607,6 +625,11 @@ def cars():
             'model_license': model_entry["license"],
             'model_is_placeholder': model_entry["is_placeholder"],
             'missing_asset_path': model_entry.get("missing_asset_path"),
+            'overview': car_details.get('overview'),
+            'drives_like': car_details.get('drives_like'),
+            'features': car_details.get('features', []),
+            'best_for': car_details.get('best_for'),
+            'hero_image_url': f"/static/images/cars/{slug}.webp" if has_hero_image else None,
         })
 
     # Resolve selected slug from querystring

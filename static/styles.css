@@ -550,6 +550,35 @@ main { flex: 1; }
   border-top:1px solid var(--border); padding-top:var(--s4); margin-top:var(--s2);
 }
 
+/* ═══ RICH CAR CONTENT (overview / drives / features / best-for) ═══ */
+.detail-rich { margin-top: var(--s6); display:flex; flex-direction:column; gap:var(--s5); }
+.rich-block { display:flex; flex-direction:column; gap:var(--s2); }
+.rich-heading {
+  font-size:0.72rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--text-2);
+  display:flex; align-items:center; gap:var(--s2);
+}
+.rich-heading i { color: var(--red); font-size:0.85rem; }
+.rich-text { font-size:0.88rem; color:var(--text-1); line-height:1.55; margin:0; }
+.rich-list {
+  list-style:none; padding:0; margin:0;
+  display:flex; flex-direction:column; gap:var(--s1);
+}
+.rich-list li {
+  font-size:0.82rem; color:var(--text-1); line-height:1.5;
+  padding-left:var(--s5); position:relative;
+}
+.rich-list li::before {
+  content:""; position:absolute; left:var(--s2); top:0.55em;
+  width:5px; height:5px; border-radius:50%; background:var(--red);
+}
+.best-for-block {
+  background: rgba(220, 38, 38, 0.06);
+  border-left: 3px solid var(--red);
+  padding: var(--s3) var(--s4); border-radius: 4px;
+}
+.best-for-text { font-style:italic; color:var(--text-2); font-size:0.83rem; }
+
 /* ═══ INFO PAGE ═════════════════════════════════════════════ */
 .info-page {
   max-width: 860px; margin: 0 auto; padding: var(--s16) var(--s8);
