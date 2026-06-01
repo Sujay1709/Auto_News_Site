@@ -697,11 +697,29 @@ def car_detail_page(slug):
         'overview': car_details.get('overview'),
         'drives_like': car_details.get('drives_like'),
         'features': car_details.get('features', []),
+        'pros': car_details.get('pros', []),
+        'cons': car_details.get('cons', []),
+        'awards': car_details.get('awards', []),
+        'expert_quote': car_details.get('expert_quote'),
         'best_for': car_details.get('best_for'),
+        'competitor_slugs': car_details.get('competitors', []),
         'hero_image_url': hero_url,
     }
 
-    return render_template('car_detail.html', car=enriched)
+    # Resolve competitor slugs to summary cards
+    competitor_cards = []
+    for cs in enriched['competitor_slugs']:
+        other = next((c for c in cars_data if _car_slug(c) == cs), None)
+        if other:
+            competitor_cards.append({
+                'slug':  cs,
+                'make':  other['make'],
+                'model': other['model'],
+                'price': other.get('price', ''),
+                'type':  other.get('type', 'car'),
+            })
+
+    return render_template('car_detail.html', car=enriched, competitors=competitor_cards)
 
 
 @app.route('/api/car-details')

@@ -1,37 +1,71 @@
 {
   "toyota-camry": {
-    "overview": "America's best-selling sedan for two decades. Reliable, efficient, and packed with safety tech as standard. A no-drama daily driver that consistently leads its segment in long-term resale value.",
-    "drives_like": "Smooth, composed, and quiet at highway speeds. Light steering makes city driving effortless. The hybrid variant is the sweet spot — instant low-end torque and 51 mpg combined.",
+    "overview": "America's best-selling sedan for two decades. Reliable, efficient, and packed with safety tech as standard. A no-drama daily driver that consistently leads its segment in long-term resale value and recently moved to an all-hybrid lineup for 2025.",
+    "drives_like": "Smooth, composed, and quiet at highway speeds. Light steering makes city driving effortless. The hybrid variant is the sweet spot — instant low-end torque from the electric motor and 51 mpg combined.",
     "features": [
       "Toyota Safety Sense 3.0 (Pre-Collision, Lane Departure Alert, Adaptive Cruise) — standard",
       "9-inch touchscreen with wireless Apple CarPlay & Android Auto",
-      "Optional Hybrid powertrain delivering up to 51 mpg combined",
+      "Hybrid powertrain delivering up to 51 mpg combined",
       "Heated front seats and steering wheel (XSE and above)",
       "Panoramic moonroof option",
       "Available 9-speaker JBL premium audio",
       "Wireless phone charging pad",
       "Blind Spot Monitor with Rear Cross-Traffic Alert"
     ],
-    "best_for": "Commuters, families, and anyone who wants peace-of-mind reliability"
+    "pros": [
+      "Bulletproof Toyota reliability — top resale value in segment",
+      "Hybrid delivers 51 mpg combined without sacrificing space",
+      "Quiet, comfortable highway manners for road trips",
+      "Standard suite of active safety features at every trim"
+    ],
+    "cons": [
+      "Driving experience is competent rather than engaging",
+      "Cabin materials lag behind Honda Accord and Hyundai Sonata",
+      "Some rivals offer more cargo space"
+    ],
+    "awards": ["IIHS Top Safety Pick+ (2024)", "KBB Best Resale Value Award"],
+    "best_for": "Commuters, families, and anyone who wants peace-of-mind reliability and the lowest total cost of ownership in the segment",
+    "competitors": ["honda-accord", "hyundai-sonata", "nissan-altima"]
   },
   "honda-accord": {
-    "overview": "A perennial Car-of-the-Year contender. Sleek modern styling wraps a class-leading interior and engaging driving dynamics. The Accord routinely outsmarts more expensive luxury sedans on long road trips.",
-    "drives_like": "More engaging than a Camry — sharper steering, firmer chassis, but still composed and comfortable. The 2.0T sport trim feels genuinely quick.",
+    "overview": "A perennial Car of the Year contender and a Car and Driver 10Best 2024 winner. Sleek modern styling wraps a class-leading interior and engaging driving dynamics. Routinely outsmarts more expensive luxury sedans on long road trips.",
+    "drives_like": "More engaging than a Camry — sharper steering, firmer chassis, but still composed and comfortable. The 2.0T sport trim feels genuinely quick, and the Hybrid Touring offers seamless EV-like response in city driving.",
     "features": [
       "Honda Sensing safety suite (Collision Mitigation, Road Departure Mitigation) — standard",
       "Google built-in with Google Maps, Assistant, and Play Store (EX-L and above)",
-      "Optional 204 hp Hybrid achieving up to 48 mpg combined",
+      "Hybrid powertrain achieving up to 44 mpg combined (Touring)",
       "12.3-inch touchscreen on Touring trim",
       "Wireless Apple CarPlay & Android Auto",
       "Heated front seats and heated steering wheel",
       "Bose 12-speaker premium audio (Touring)",
       "Head-up display (Touring)"
     ],
-    "best_for": "Buyers wanting Camry reliability with more driving engagement and a higher-end cabin"
+    "pros": [
+      "Best-in-class interior — feels more premium than its price",
+      "Hybrid powertrain delivers 44 mpg without sacrificing power",
+      "Sharper steering and chassis than Toyota Camry",
+      "Google built-in adds true integrated navigation and voice control"
+    ],
+    "cons": [
+      "Gauge cluster is hard to read for shorter drivers with the seat raised",
+      "Road noise more pronounced than competitors at highway speed",
+      "Passenger seat lacks height adjustment"
+    ],
+    "awards": [
+      "Car and Driver 10Best 2024",
+      "IIHS Top Safety Pick+",
+      "KBB Best Buy: Midsize Car"
+    ],
+    "expert_quote": {
+      "text": "A class-leading midsize sedan with lots of space, refinement, and technology.",
+      "source": "Colin Ryan, Kelley Blue Book"
+    },
+    "best_for": "Buyers wanting Camry reliability with more driving engagement, a higher-end cabin, and modern tech integration",
+    "competitors": ["toyota-camry", "hyundai-sonata", "kia-k5"]
   },
   "bmw-3-series": {
-    "overview": "The benchmark sport sedan for 40 years. Surgical steering, perfectly balanced chassis, and a rev-happy turbo inline-4 that makes every commute feel a little more special.",
-    "drives_like": "Telepathic. The 3 Series sets the standard for steering feel and chassis balance in the segment. The optional M Sport package adds adaptive dampers and sharper limits without ruining ride quality.",
+    "overview": "The benchmark sport sedan for 40 years. Surgical steering, perfectly balanced chassis, and a rev-happy turbo inline-4 that makes every commute feel a little more special. The 2024 refresh added the curved iDrive 8.5 display and refined the M Sport package.",
+    "drives_like": "Telepathic. The 3 Series sets the standard for steering feel and chassis balance in the segment. The optional M Sport package adds adaptive dampers and sharper limits without ruining ride quality. xDrive AWD is excellent in snow without dulling the feel.",
     "features": [
       "14.9-inch curved iDrive 8.5 touchscreen + 12.3-inch digital cluster",
       "Wireless Apple CarPlay & Android Auto",
@@ -42,11 +76,24 @@
       "Available Harman Kardon 16-speaker surround sound",
       "Comfort Access keyless entry with hands-free trunk"
     ],
-    "best_for": "Driving enthusiasts who still need 4 doors and a back seat"
+    "pros": [
+      "Best-in-class steering feel and chassis balance",
+      "Refined turbo inline-4 with strong real-world fuel economy (33 mpg highway)",
+      "Available M Sport package transforms it without ruining daily comfort",
+      "Resale value is among the best in luxury sedans"
+    ],
+    "cons": [
+      "Base trim feels under-equipped for the price (no leather standard)",
+      "iDrive 8.5 buries common functions in menus",
+      "Options pricing escalates rapidly — a loaded M340i nears $70K"
+    ],
+    "awards": ["Car and Driver Editors' Choice 2024", "IIHS Top Safety Pick"],
+    "best_for": "Driving enthusiasts who still need 4 doors and a back seat — and aren't afraid of the options sheet",
+    "competitors": ["mercedes-benz-c-class", "audi-a4", "genesis-g70"]
   },
   "mercedes-benz-c-class": {
-    "overview": "Looks like a baby S-Class, inside and out. The 2024 C-Class brings 'Hey Mercedes' voice control, augmented-reality navigation, and a portrait infotainment screen straight from the flagship.",
-    "drives_like": "Plush and refined first, sporty second — the opposite of a 3 Series. The mild-hybrid 48V system fills in low-end torque seamlessly. AMG variants change the character entirely.",
+    "overview": "Looks like a baby S-Class, inside and out. The 2024 C-Class brings 'Hey Mercedes' voice control, augmented-reality navigation, and a portrait infotainment screen straight from the flagship. The W206 generation is the most luxurious C-Class ever.",
+    "drives_like": "Plush and refined first, sporty second — the opposite of a 3 Series. The mild-hybrid 48V system fills in low-end torque seamlessly. AMG variants change the character entirely with a 469 hp turbo-4 plus electric assist.",
     "features": [
       "11.9-inch portrait MBUX touchscreen with AR navigation",
       "'Hey Mercedes' natural-language voice assistant",
@@ -57,11 +104,24 @@
       "Air Body Control adaptive suspension (optional)",
       "PRE-SAFE collision preparation system — standard"
     ],
-    "best_for": "Buyers who want luxury feel and tech, not lap times"
+    "pros": [
+      "S-Class cabin design at C-Class price",
+      "MBUX is the best voice-control system in the segment",
+      "Ride quality with air suspension is genuinely sublime",
+      "AMG C 63 S E Performance is the most powerful C-Class ever (671 hp combined)"
+    ],
+    "cons": [
+      "Less engaging to drive than a BMW 3 Series",
+      "Touch-capacitive controls on the steering wheel are fiddly",
+      "Rear seat is tight for a 6-footer"
+    ],
+    "awards": ["IIHS Top Safety Pick+"],
+    "best_for": "Buyers who want luxury feel and tech, not lap times — and who appreciate Mercedes's heritage and resale value",
+    "competitors": ["bmw-3-series", "audi-a4", "lexus-es"]
   },
   "hyundai-sonata": {
     "overview": "Bold-styled midsize sedan refreshed for 2024 with seamless front lighting. Exceptional value — equips like a luxury car at midsize-sedan money. Hybrid and N Line performance versions both excellent.",
-    "drives_like": "Smooth and quiet for the base model; the N Line is genuinely quick with 290 hp. Hyundai's chassis tuning has caught up to the Japanese benchmarks.",
+    "drives_like": "Smooth and quiet for the base model; the N Line is genuinely quick with 290 hp. Hyundai's chassis tuning has caught up to the Japanese benchmarks. Steering is precise though slightly numb.",
     "features": [
       "Dual 12.3-inch curved displays (cluster + infotainment)",
       "Hyundai SmartSense safety suite — standard",
@@ -72,11 +132,24 @@
       "Bose 12-speaker premium audio",
       "5-year / 60K-mile bumper-to-bumper warranty"
     ],
-    "best_for": "Value-seekers who want premium tech without the premium price"
+    "pros": [
+      "Best warranty in the segment (5-yr / 60K + 10-yr / 100K powertrain)",
+      "Modern, distinctive styling for 2024 refresh",
+      "Hybrid achieves 47 mpg — segment leader",
+      "Dual 12.3-inch displays feel premium at the price"
+    ],
+    "cons": [
+      "Resale value lags Camry and Accord",
+      "Cabin materials below class average on lower trims",
+      "Smaller dealer network than Toyota and Honda"
+    ],
+    "awards": ["IIHS Top Safety Pick"],
+    "best_for": "Value-seekers who want premium tech and styling without the premium price",
+    "competitors": ["kia-k5", "toyota-camry", "honda-accord"]
   },
   "kia-k5": {
-    "overview": "Aggressively styled midsize sedan with the segment's best warranty. The GT trim makes 290 hp from a 2.5L turbo — genuine fun for under $35K.",
-    "drives_like": "Sportier than a Camry, sharper than an Accord. The GT trim with its 8-speed dual-clutch is the most driver-focused sub-$35K sedan you can buy.",
+    "overview": "Aggressively styled midsize sedan with the segment's best warranty. The GT trim makes 290 hp from a 2.5L turbo — genuine fun for under $35K and the cheapest way into 5-second 0-60.",
+    "drives_like": "Sportier than a Camry, sharper than an Accord. The GT trim with its 8-speed dual-clutch is the most driver-focused sub-$35K sedan you can buy. Standard models prioritize comfort.",
     "features": [
       "Kia Drive Wise safety suite (FCA, BCA, RCCA) — standard",
       "10.25-inch touchscreen with wireless CarPlay & Android Auto",
@@ -87,11 +160,24 @@
       "Wireless phone charging",
       "10-year / 100K-mile powertrain warranty"
     ],
-    "best_for": "Sedan buyers who want sport-trim performance and long warranty coverage"
+    "pros": [
+      "GT trim's 290 hp is unmatched at the price point",
+      "Industry-leading 10-year/100K powertrain warranty",
+      "Sharp styling — among the best-looking sedans on sale",
+      "Strong standard safety equipment"
+    ],
+    "cons": [
+      "No hybrid option (Sonata Hybrid achieves 47 mpg, K5 max ~37 mpg)",
+      "Rear visibility hampered by aggressive C-pillar",
+      "Cabin tech feels a generation behind the dual-screen Sonata"
+    ],
+    "awards": ["IIHS Top Safety Pick"],
+    "best_for": "Sedan buyers who want sport-trim performance and the longest warranty coverage in the segment",
+    "competitors": ["hyundai-sonata", "toyota-camry", "honda-accord"]
   },
   "nissan-altima": {
-    "overview": "Comfortable midsize sedan and the only one in its class offering all-wheel drive. ProPILOT Assist makes long highway drives noticeably less tiring.",
-    "drives_like": "Comfort-tuned and soft, with the optional VC-Turbo adding real punch (248 hp) for SR trim buyers. AWD trims are a snow-belt favorite.",
+    "overview": "Comfortable midsize sedan and the only one in its class offering all-wheel drive. ProPILOT Assist makes long highway drives noticeably less tiring. A practical choice in regions that see snow.",
+    "drives_like": "Comfort-tuned and soft, with the optional VC-Turbo adding real punch (248 hp) for SR trim buyers. AWD trims are a snow-belt favorite. Steering is light; this is a relaxed car, not a sharp one.",
     "features": [
       "Nissan Safety Shield 360 — standard",
       "ProPILOT Assist with adaptive cruise + lane centering",
@@ -102,11 +188,24 @@
       "Heated front seats and steering wheel",
       "Optional Around View Monitor with moving-object detection"
     ],
-    "best_for": "Buyers in snow regions or anyone prioritizing seat comfort"
+    "pros": [
+      "Only midsize sedan with available AWD",
+      "Zero Gravity seats are genuinely the best in segment for long drives",
+      "ProPILOT Assist works well — confident lane centering",
+      "VC-Turbo engine option offers strong performance"
+    ],
+    "cons": [
+      "Interior styling and materials feel dated against newer rivals",
+      "No hybrid powertrain available",
+      "CVT transmission can sound strained under hard acceleration"
+    ],
+    "awards": ["IIHS Top Safety Pick"],
+    "best_for": "Buyers in snow regions or anyone prioritizing seat comfort and minimum highway fatigue",
+    "competitors": ["toyota-camry", "honda-accord", "hyundai-sonata"]
   },
   "audi-a4": {
-    "overview": "Refined compact luxury sedan with Quattro all-wheel drive standard. Cabin quality is segment-leading and the Virtual Cockpit Plus digital cluster is still the best in the business.",
-    "drives_like": "Composed and unflappable. Less playful than a 3 Series, more solid than a C-Class — a quiet, confident touring sedan. The S4 variant adds genuine performance bite.",
+    "overview": "Refined compact luxury sedan with Quattro all-wheel drive standard. Cabin quality is segment-leading and the Virtual Cockpit Plus digital cluster is still the best in the business. Replaced by the new A5 sedan for 2025, making 2024 the last A4.",
+    "drives_like": "Composed and unflappable. Less playful than a 3 Series, more solid than a C-Class — a quiet, confident touring sedan. The S4 variant adds genuine performance bite with a twin-turbo V6.",
     "features": [
       "Quattro all-wheel drive — standard",
       "Audi Virtual Cockpit Plus 12.3-inch digital cluster",
@@ -117,11 +216,24 @@
       "Heated and ventilated front sport seats",
       "Available Sport package with adaptive damping"
     ],
-    "best_for": "All-weather drivers who want German build quality without 3 Series steering"
+    "pros": [
+      "Quattro AWD standard — confident in any weather",
+      "Best-in-class interior build quality",
+      "Virtual Cockpit Plus is the cleanest digital cluster on sale",
+      "Quieter than both 3 Series and C-Class at highway speed"
+    ],
+    "cons": [
+      "Less engaging than BMW 3 Series for enthusiasts",
+      "Rear-seat headroom tight under the sloped roofline",
+      "2024 is the last A4 — A5 sedan replaces it for 2025"
+    ],
+    "awards": ["IIHS Top Safety Pick"],
+    "best_for": "All-weather drivers who want German build quality without 3 Series steering or C-Class flash",
+    "competitors": ["bmw-3-series", "mercedes-benz-c-class", "genesis-g70"]
   },
   "lexus-es": {
-    "overview": "Whisper-quiet luxury sedan with legendary Lexus reliability. The 300h Hybrid achieves 44 mpg combined — best-in-class for any luxury sedan.",
-    "drives_like": "Serenely smooth. The ES isolates passengers from the road like a Lexus should. Steering is light and accurate but not sporty. The F Sport trim adds adaptive variable suspension.",
+    "overview": "Whisper-quiet luxury sedan with legendary Lexus reliability. The 300h Hybrid achieves 44 mpg combined — best-in-class for any luxury sedan. The ES has been the silent steady seller in Lexus's lineup for three decades.",
+    "drives_like": "Serenely smooth. The ES isolates passengers from the road like a Lexus should. Steering is light and accurate but not sporty. The F Sport trim adds adaptive variable suspension but the ES remains a comfort-first proposition.",
     "features": [
       "Lexus Safety System+ 3.0 — standard",
       "12.3-inch touchscreen with wireless CarPlay & Android Auto",
@@ -132,11 +244,24 @@
       "Dynamic Radar Cruise Control with curve speed management",
       "Lexus complimentary maintenance for 2 years / 25K miles"
     ],
-    "best_for": "Buyers who prize quiet, reliability, and long-term ownership economics"
+    "pros": [
+      "Quietest cabin in the luxury sedan segment",
+      "ES 300h Hybrid achieves 44 mpg — best-in-class",
+      "Lexus reliability + complimentary maintenance reduces ownership costs",
+      "Stunning Mark Levinson audio option"
+    ],
+    "cons": [
+      "Drives like a soft Toyota — not engaging",
+      "Front-wheel-drive layout dates the platform",
+      "Cabin tech, while good, trails German rivals' polish"
+    ],
+    "awards": ["IIHS Top Safety Pick+", "J.D. Power Most Dependable Midsize Premium Car"],
+    "best_for": "Buyers who prize quiet, reliability, and long-term ownership economics over driving thrills",
+    "competitors": ["mercedes-benz-c-class", "genesis-g70", "audi-a4"]
   },
   "genesis-g70": {
-    "overview": "Korean luxury sport sedan that punches well above its price. Standout fastback styling, sharp dynamics, and complimentary scheduled maintenance for 3 years.",
-    "drives_like": "Genuinely engaging. The 3.3T Sport trim's twin-turbo V6 makes 365 hp and the chassis tuning rivals BMW. Brembo brakes on Sport trims tighten everything up further.",
+    "overview": "Korean luxury sport sedan that punches well above its price. Standout fastback styling, sharp dynamics, and complimentary scheduled maintenance for 3 years. The 3.3T trim gets BMW M340i-level performance for $15K less.",
+    "drives_like": "Genuinely engaging. The 3.3T Sport trim's twin-turbo V6 makes 365 hp and the chassis tuning rivals BMW. Brembo brakes on Sport trims tighten everything up further. Steering communicates road texture clearly.",
     "features": [
       "3-year / 36K-mile complimentary scheduled maintenance",
       "Available 3.3T twin-turbo V6 producing 365 hp",
@@ -147,11 +272,24 @@
       "Genesis Active Safety Control with Highway Driving Assist",
       "Suede-like headliner and microfiber sport steering wheel"
     ],
-    "best_for": "BMW-curious buyers who want more luxury features per dollar"
+    "pros": [
+      "BMW M340i performance at $15K less",
+      "Complimentary scheduled maintenance for 3 years",
+      "Bold, distinctive styling that doesn't blend in",
+      "Brembo brakes + Sport tuning rivals German benchmarks"
+    ],
+    "cons": [
+      "Newer brand — resale value still establishing",
+      "Smaller dealer network than BMW/Mercedes/Audi",
+      "Infotainment menu structure can feel clunky"
+    ],
+    "awards": ["MotorTrend Car of the Year (G70, 2019)", "IIHS Top Safety Pick+"],
+    "best_for": "BMW-curious buyers who want more luxury features per dollar and don't mind being early to a brand",
+    "competitors": ["bmw-3-series", "mercedes-benz-c-class", "audi-a4"]
   },
   "toyota-rav4": {
-    "overview": "America's best-selling SUV. Practical packaging, hybrid efficiency (40 mpg), and the only PHEV in its class — the RAV4 Prime — with 42 miles of EV-only range.",
-    "drives_like": "Tall, comfortable, and easy to maneuver. The TRD Off-Road trim adds genuine trail capability. The Prime PHEV is surprisingly quick (0-60 in 5.7 sec).",
+    "overview": "America's best-selling SUV. Practical packaging, hybrid efficiency (40 mpg), and the only PHEV in its class — the RAV4 Prime — with 42 miles of EV-only range and 302 combined horsepower.",
+    "drives_like": "Tall, comfortable, and easy to maneuver. The TRD Off-Road trim adds genuine trail capability with bigger tires and tuned suspension. The Prime PHEV is surprisingly quick (0-60 in 5.7 sec).",
     "features": [
       "Toyota Safety Sense 2.0 — standard",
       "Available Hybrid powertrain (40 mpg combined)",
@@ -162,11 +300,24 @@
       "Available JBL 11-speaker premium audio",
       "TRD Off-Road trim with all-terrain tires and tuned suspension"
     ],
-    "best_for": "Active families, light off-roaders, and EV-curious buyers (Prime)"
+    "pros": [
+      "Hybrid achieves 40 mpg combined — best efficiency in segment",
+      "Prime PHEV offers 42 miles of EV range with no compromise",
+      "Strong resale value backed by Toyota reliability",
+      "Most versatile RAV4 lineup ever (LE through TRD Off-Road)"
+    ],
+    "cons": [
+      "Engine drone under hard acceleration on non-hybrid models",
+      "Interior materials lag class leaders",
+      "Cargo capacity below Honda CR-V and Hyundai Tucson"
+    ],
+    "awards": ["IIHS Top Safety Pick+ (with optional features)", "KBB Best Resale Value Award"],
+    "best_for": "Active families, light off-roaders, and EV-curious buyers (Prime) who want Toyota peace of mind",
+    "competitors": ["ford-explorer", "porsche-cayenne", "tesla-model-x"]
   },
   "ford-explorer": {
-    "overview": "Three-row family SUV built on a rear-drive-based platform for towing capability. From efficient 4-cyl turbo to 400 hp ST and Hybrid — there's an Explorer for every need.",
-    "drives_like": "Big and confident, with surprisingly precise steering for its size. The ST trim drives like a sport sedan in a hurry. Hybrid feels seamless in stop-and-go.",
+    "overview": "Three-row family SUV built on a rear-drive-based platform for towing capability. From efficient 4-cyl turbo to 400 hp ST and Hybrid — there's an Explorer for every need. The 2025 refresh is incoming, making 2024 a strong end-of-cycle value.",
+    "drives_like": "Big and confident, with surprisingly precise steering for its size. The ST trim drives like a sport sedan in a hurry. Hybrid feels seamless in stop-and-go. Hands-free BlueCruise transforms long highway drives.",
     "features": [
       "13.2-inch vertical SYNC 4 touchscreen",
       "BlueCruise hands-free highway driving available",
@@ -177,11 +328,24 @@
       "Power-folding third row standard on most trims",
       "5,300 lb maximum towing capacity"
     ],
-    "best_for": "Three-row families, light tow vehicles, road-trippers"
+    "pros": [
+      "BlueCruise hands-free driving works exceptionally well on mapped highways",
+      "ST trim is genuinely quick — 400 hp pulls hard",
+      "Rear-drive platform gives strong towing capability",
+      "Third row is usable for adults on short trips"
+    ],
+    "cons": [
+      "Interior quality varies — some trims feel rental-grade",
+      "Reliability scores below Toyota and Hyundai rivals",
+      "Hybrid only achieves 27 mpg vs. competitors' 35-40 mpg"
+    ],
+    "awards": ["NHTSA 5-Star Overall Safety Rating"],
+    "best_for": "Three-row families, light tow vehicles, road-trippers who want hands-free highway driving",
+    "competitors": ["toyota-rav4", "porsche-cayenne", "tesla-model-x"]
   },
   "tesla-model-x": {
-    "overview": "Falcon-wing electric SUV with up to 7 seats. The Plaid trim is the quickest production SUV ever made — 2.5 sec to 60 mph from a 1,020 hp tri-motor setup.",
-    "drives_like": "Instant. The Plaid's acceleration is physically uncomfortable. The standard Long Range is still faster than most sports cars. Air suspension is plush at highway speeds.",
+    "overview": "Falcon-wing electric SUV with up to 7 seats. The Plaid trim is the quickest production SUV ever made — 2.5 sec to 60 mph from a 1,020 hp tri-motor setup. Refreshed for 2024 with updated interior and improved range.",
+    "drives_like": "Instant. The Plaid's acceleration is physically uncomfortable. The standard Long Range is still faster than most sports cars. Air suspension is plush at highway speeds; sport modes firm everything up.",
     "features": [
       "Falcon Wing rear doors with sensors to avoid obstacles",
       "Available 7-seat or 6-seat configuration",
@@ -192,11 +356,25 @@
       "Bioweapon Defense Mode HEPA cabin filtration",
       "Tri-zone automatic climate with rear heated seats"
     ],
-    "best_for": "Buyers wanting maximum EV utility + supercar acceleration"
+    "pros": [
+      "Plaid 0-60 in 2.5s is the quickest production SUV in history",
+      "Tesla Supercharger network access — most reliable DC fast charging in US",
+      "Bioweapon Defense Mode HEPA filtration is unique in class",
+      "Falcon Wing doors solve real parking-lot ingress problems"
+    ],
+    "cons": [
+      "Falcon Wing doors are slow and have ongoing reliability concerns",
+      "Build quality below German luxury rivals",
+      "Touchscreen-only interface frustrates simple tasks like climate",
+      "Premium for the Plaid trim ($94K+) is steep"
+    ],
+    "awards": ["IIHS Top Safety Pick (with optional features)"],
+    "best_for": "Buyers wanting maximum EV utility plus supercar acceleration in a single vehicle",
+    "competitors": ["porsche-cayenne", "rivian-r1t", "bmw-i7"]
   },
   "porsche-cayenne": {
-    "overview": "Sport luxury SUV that drives like a 911 on stilts. The 2024 refresh brings new dual-screen cabin tech. Engines range from V6 to a 650 hp V8 in the Turbo GT.",
-    "drives_like": "Like no other SUV. Adaptive air suspension with active anti-roll keeps it flat through corners that would upset a sedan. The Turbo GT laps Nurburgring in 7:38.",
+    "overview": "Sport luxury SUV that drives like a 911 on stilts. The 2024 refresh brings new dual-screen cabin tech and updated chassis. Engines range from V6 to a 650 hp V8 in the Turbo GT, which lapped the Nurburgring in 7:38.",
+    "drives_like": "Like no other SUV. Adaptive air suspension with active anti-roll keeps it flat through corners that would upset a sedan. The Turbo GT laps Nurburgring faster than most sports cars. Cayenne S V8 strikes the best balance.",
     "features": [
       "New 12.6-inch curved cluster + 12.3-inch PCM 6.0 display",
       "Available air suspension with PASM adaptive damping",
@@ -207,11 +385,24 @@
       "Comfort Access keyless entry/start",
       "Available rear-axle steering for tighter turning"
     ],
-    "best_for": "Buyers who refuse to give up sports-car dynamics for SUV practicality"
+    "pros": [
+      "Best-driving SUV on the market by a wide margin",
+      "Turbo GT laps Nurburgring in 7:38 — quicker than most sports cars",
+      "Air suspension transforms ride comfort vs. base coil springs",
+      "Resale value is strongest in luxury SUV segment"
+    ],
+    "cons": [
+      "Options pricing escalates fast — a loaded Cayenne can hit $200K",
+      "Rear seat space lags BMW X5 and Mercedes GLE",
+      "Fuel economy mediocre (19/23 mpg) even on V6"
+    ],
+    "awards": ["MotorTrend SUV of the Year (previous gen)"],
+    "best_for": "Buyers who refuse to give up sports-car dynamics for SUV practicality",
+    "competitors": ["tesla-model-x", "ford-explorer", "porsche-911-carrera"]
   },
   "porsche-911-carrera": {
-    "overview": "Sixty years of evolutionary refinement. The 911's rear-engine layout, twin-turbo flat-six soundtrack, and telepathic chassis remain the gold standard for sports cars.",
-    "drives_like": "Sublime. Steering communicates every grain of road texture. The PDK transmission shifts in milliseconds; the optional 7-speed manual rewards skill. Limits are extremely high.",
+    "overview": "Sixty years of evolutionary refinement. The 911's rear-engine layout, twin-turbo flat-six soundtrack, and telepathic chassis remain the gold standard for sports cars. The 992.2 refresh (2025) adds T-Hybrid; the 2024 992.1 Carrera remains a pure ICE.",
+    "drives_like": "Sublime. Steering communicates every grain of road texture. The PDK transmission shifts in milliseconds; the optional 7-speed manual rewards skill. Limits are extremely high — nearly impossible to reach on public roads.",
     "features": [
       "Rear-engine 3.0L twin-turbo flat-six (379 hp Carrera)",
       "8-speed PDK dual-clutch standard, 7-speed manual available",
@@ -222,11 +413,27 @@
       "Sport Seats Plus with 4-way adjustment",
       "Available BOSE Surround Sound or Burmester High-End"
     ],
-    "best_for": "Drivers who want the most perfectly engineered sports car ever made"
+    "pros": [
+      "Best steering feel of any production car at any price",
+      "Daily-drivable supercar — small footprint, usable trunk, decent ride",
+      "Manual transmission available on Carrera T and GT3",
+      "Holds value better than nearly any new car"
+    ],
+    "cons": [
+      "Options pricing is brutal — easy to push base Carrera past $140K",
+      "Rear seats are nominal (kids only, short trips)",
+      "Carrera variants now all turbocharged — purists miss naturally-aspirated note"
+    ],
+    "awards": [
+      "Car and Driver 10Best Cars 2024",
+      "MotorTrend Best Driver's Car (multiple generations)"
+    ],
+    "best_for": "Drivers who want the most perfectly engineered sports car ever made",
+    "competitors": ["chevrolet-corvette-c8", "ferrari-296-gtb", "porsche-cayenne"]
   },
   "chevrolet-corvette-c8": {
-    "overview": "First mid-engine Corvette. Supercar performance at attainable prices — 2.9 sec to 60 mph and a removable roof panel, all for under $70K. Z06 variant pushes 670 hp.",
-    "drives_like": "Like a junior Ferrari. The mid-engine layout delivers exceptional balance. The 6.2L LT2 V8 is loud and visceral. Magnetic Ride Control optional damping is fast and intelligent.",
+    "overview": "First mid-engine Corvette. Supercar performance at attainable prices — 2.9 sec to 60 mph and a removable roof panel, all for under $70K. The Z06 variant pushes 670 hp with a flat-plane crank V8 that revs to 8,600 rpm.",
+    "drives_like": "Like a junior Ferrari. The mid-engine layout delivers exceptional balance. The 6.2L LT2 V8 is loud and visceral. Magnetic Ride Control optional damping is fast and intelligent — soft for cruising, firm for the canyon.",
     "features": [
       "Mid-engine 6.2L LT2 V8 (495 hp Stingray)",
       "8-speed dual-clutch automatic with paddle shifters",
@@ -237,11 +444,27 @@
       "Optional Front Lift System (records GPS locations)",
       "Bose Performance Series 14-speaker audio"
     ],
-    "best_for": "Sports-car buyers who want supercar speed at half supercar price"
+    "pros": [
+      "Mid-engine supercar performance at $67K base — unmatched value",
+      "Z06 variant produces 670 hp from a flat-plane V8 that revs to 8,600 rpm",
+      "Removable roof panel + front + rear trunk is genuinely practical",
+      "Magnetic Ride Control delivers civility and limit aggression"
+    ],
+    "cons": [
+      "Interior quality has improved but still trails Porsche 911",
+      "Long wait lists — most orders take 6-12 months",
+      "Premium gas required, fuel economy 16/24 mpg"
+    ],
+    "awards": [
+      "MotorTrend Car of the Year 2020 (C8 launch)",
+      "Car and Driver 10Best Cars (multiple years)"
+    ],
+    "best_for": "Sports-car buyers who want supercar speed at half supercar price",
+    "competitors": ["porsche-911-carrera", "ferrari-296-gtb", "ford-mustang-dark-horse"]
   },
   "ferrari-296-gtb": {
-    "overview": "Plug-in hybrid V6 supercar that redefines Ferrari for the electric era. 819 hp combined output, 25 km EV-only range, and the most sublime mid-engine balance the marque has ever produced.",
-    "drives_like": "Otherworldly. The hybrid V6 fills low-end torque the V8 generation lacked. Side-Slip Control 7.0 manages oversteer with surgical precision. Steering is impossibly direct.",
+    "overview": "Plug-in hybrid V6 supercar that redefines Ferrari for the electric era. 819 hp combined output, 25 km EV-only range, and the most sublime mid-engine balance the marque has ever produced. Replaces the F8 Tributo in the lineup.",
+    "drives_like": "Otherworldly. The hybrid V6 fills low-end torque the V8 generation lacked. Side-Slip Control 7.0 manages oversteer with surgical precision. Steering is impossibly direct. The 296 GTS adds a retractable hard top.",
     "features": [
       "3.0L V6 twin-turbo + electric motor (819 hp combined)",
       "25 km EV-only range with eDrive mode",
@@ -252,11 +475,25 @@
       "Carbon fiber steering wheel with capacitive touch controls",
       "Available JBL Premium Audio"
     ],
-    "best_for": "Buyers who want the most advanced mid-engine Ferrari ever built"
+    "pros": [
+      "Most powerful mid-engine V6 in any production car (819 hp combined)",
+      "Side-Slip Control 7.0 makes track driving accessible to enthusiasts",
+      "EV-only mode allows silent garage exits and zero-emission city driving",
+      "Faster around Fiorano than the F8 Tributo despite the V6"
+    ],
+    "cons": [
+      "V6 soundtrack divides Ferrari purists vs. departed V8",
+      "Hybrid system adds ~250 lb of curb weight",
+      "Starting price $322K+ before options",
+      "Touch-capacitive steering wheel buttons are unintuitive"
+    ],
+    "awards": ["MotorTrend Best Driver's Car finalist 2023"],
+    "best_for": "Buyers who want the most advanced mid-engine Ferrari ever built and embrace electrification",
+    "competitors": ["porsche-911-carrera", "chevrolet-corvette-c8", "ford-mustang-dark-horse"]
   },
   "ford-mustang-dark-horse": {
-    "overview": "Track-focused Mustang flagship with a high-revving 5.0L V8 (500 hp) and a Tremec 6-speed manual standard. The most powerful naturally-aspirated 5.0 Coyote ever produced.",
-    "drives_like": "Old-school muscle car energy with modern chassis tech. The Tremec shifter is crisp. MagneRide damping keeps the live-axle rear shockingly composed on broken pavement.",
+    "overview": "Track-focused Mustang flagship with a high-revving 5.0L V8 (500 hp) and a Tremec 6-speed manual standard. The most powerful naturally-aspirated 5.0 Coyote ever produced — the swan song before Mustang hybridizes.",
+    "drives_like": "Old-school muscle car energy with modern chassis tech. The Tremec shifter is crisp. MagneRide damping keeps the live-axle rear shockingly composed on broken pavement. The Handling Package adds Drift Brake — yes, really.",
     "features": [
       "500 hp 5.0L Coyote V8 with strengthened block",
       "Tremec TR-3160 6-speed manual — standard (10-speed auto optional)",
@@ -267,11 +504,24 @@
       "B&O 12-speaker premium audio",
       "Handling Package adds Drift Brake (electronic e-brake)"
     ],
-    "best_for": "Manual-transmission devotees who want a track-day Mustang"
+    "pros": [
+      "Best naturally-aspirated 5.0 Coyote V8 Ford has ever built (500 hp)",
+      "Tremec 6-speed manual is the segment's best — crisp, quick, mechanical",
+      "Drift Brake on Handling Pack is genuinely useful and fun",
+      "Iconic styling refreshed for the S650 generation"
+    ],
+    "cons": [
+      "Live rear axle is dated next to Mustang Mach 1 GT or Corvette",
+      "Fuel economy 15/24 mpg makes road trips expensive",
+      "Interior tech is impressive on paper but plasticky in execution"
+    ],
+    "awards": ["MotorTrend Best Driver's Car finalist 2023"],
+    "best_for": "Manual-transmission devotees who want a track-day Mustang with the last great naturally-aspirated V8",
+    "competitors": ["chevrolet-corvette-c8", "porsche-911-carrera", "ferrari-296-gtb"]
   },
   "tesla-model-3": {
-    "overview": "Refreshed for 2024 with quieter cabin, sharper styling, and longer range (341 miles). The world's best-selling EV — and it shows in the polish.",
-    "drives_like": "Instant torque from a stoplight makes traffic disappear. Steering is light, ride is firm. The 15.4-inch center screen controls everything (climate, vents, glovebox).",
+    "overview": "Refreshed for 2024 with the Highland update — quieter cabin, sharper styling, longer range (341 miles), and improved suspension refinement. The world's best-selling EV, and the Highland refresh shows in the polish.",
+    "drives_like": "Instant torque from a stoplight makes traffic disappear. Steering is light, ride is firmer than Highland predecessor but better damped. The 15.4-inch center screen controls everything (climate, vents, glovebox).",
     "features": [
       "341-mile EPA range (Long Range RWD)",
       "Tesla Supercharger network with route planning",
@@ -282,11 +532,29 @@
       "17-speaker premium audio (Long Range / Performance)",
       "Dual wireless phone chargers in console"
     ],
-    "best_for": "Tech-forward commuters who want the most polished mid-range EV"
+    "pros": [
+      "Highland refresh fixed road noise — cabin now quieter than rival EVs",
+      "Tesla Supercharger network is the most reliable DC fast charging in US",
+      "341-mile EPA range (Long Range RWD) is segment-leading",
+      "Matrix LED headlights with localized dimming improve night driving"
+    ],
+    "cons": [
+      "Base LFP version isn't eligible for $7,500 EV tax credit",
+      "Touchscreen-only interface buries common functions in menus",
+      "Yoke-removal of stalks (turn signals on wheel buttons) divides drivers",
+      "Nine-speaker base audio lacks low-mid frequency richness"
+    ],
+    "awards": ["IIHS Top Safety Pick+", "Edmunds Top Rated EV (multiple years)"],
+    "expert_quote": {
+      "text": "The Highland refresh takes good and makes it great — creating a very, very compelling EV.",
+      "source": "techAU"
+    },
+    "best_for": "Tech-forward commuters who want the most polished mid-range EV with the best charging network",
+    "competitors": ["hyundai-ioniq-6", "tesla-model-s-plaid", "bmw-i7"]
   },
   "tesla-model-s-plaid": {
-    "overview": "Tri-motor electric sedan with 1,020 hp and the fastest production-car acceleration ever recorded — 1.99 seconds to 60 mph. Practical luxury wrapped around insanity.",
-    "drives_like": "Physics-defying. Cheetah Stance lowers the front for launch. The Plaid pulls hard well past 150 mph. Yoke steering wheel is divisive — round wheel now optional.",
+    "overview": "Tri-motor electric sedan with 1,020 hp and the fastest production-car acceleration ever recorded — 1.99 seconds to 60 mph. Practical luxury wrapped around insanity. Refreshed in 2021, no major updates for 2024.",
+    "drives_like": "Physics-defying. Cheetah Stance lowers the front for launch. The Plaid pulls hard well past 150 mph. Yoke steering wheel is divisive — round wheel now optional. Track Mode unlocks 200 mph top speed.",
     "features": [
       "Tri-motor electric (1,020 hp / 1,050 lb-ft)",
       "0-60 mph in 1.99 sec (with rollout subtracted)",
@@ -297,11 +565,25 @@
       "HEPA cabin air filtration (Bioweapon Defense Mode)",
       "Yoke or round steering wheel option"
     ],
-    "best_for": "EV enthusiasts wanting the fastest accelerating production car"
+    "pros": [
+      "Fastest accelerating production car ever made (1.99s 0-60)",
+      "348-mile range despite the performance focus",
+      "22-speaker audio is genuinely audiophile-grade",
+      "Tesla Supercharger network access"
+    ],
+    "cons": [
+      "Build quality lags German luxury sedans at the price",
+      "Yoke steering wheel polarizes drivers (round optional now)",
+      "Premium for the Plaid trim ($90K+) buys equally fast competitors",
+      "Long-term battery degradation concerns under repeated Plaid launches"
+    ],
+    "awards": [],
+    "best_for": "EV enthusiasts wanting the fastest accelerating production car at any price",
+    "competitors": ["bmw-i7", "lucid-air-pure", "porsche-911-carrera"]
   },
   "lucid-air-pure": {
-    "overview": "Stunning American EV with the best efficiency of any production car (~5 mi/kWh). Long Range RWD achieves 420+ miles. Interior styling rivals German flagships.",
-    "drives_like": "Smooth and silent like a Rolls, but with instant EV torque. Single motor RWD is surprisingly playful. 900V architecture enables ultra-fast 300+ kW charging.",
+    "overview": "Stunning American EV with the best efficiency of any production car (~5 mi/kWh). Long Range RWD achieves 420+ miles. Interior styling rivals German flagships. Founded by ex-Tesla VP Peter Rawlinson, Lucid is Tesla's most credible direct challenger.",
+    "drives_like": "Smooth and silent like a Rolls, but with instant EV torque. Single motor RWD is surprisingly playful. 900V architecture enables ultra-fast 300+ kW charging — the fastest in production.",
     "features": [
       "410-mile EPA range (Pure RWD)",
       "900V electrical architecture (ultra-fast DC charging)",
@@ -312,11 +594,25 @@
       "Frunk and trunk for combined 32 cu-ft cargo",
       "Premium leather and Alcantara interior options"
     ],
-    "best_for": "Range-anxious EV buyers who want luxury and efficiency"
+    "pros": [
+      "Most efficient production EV ever — ~5 mi/kWh real-world",
+      "900V architecture enables 300+ kW DC fast charging",
+      "Interior styling rivals Mercedes-Benz S-Class",
+      "Lidar-based DreamDrive Pro is more capable than Tesla Autopilot"
+    ],
+    "cons": [
+      "Charging network access lags Tesla (relies on EA + opening Supercharger)",
+      "Lucid's long-term viability less certain than Tesla's",
+      "Touring and Grand Touring trims push past $100K quickly",
+      "Service network limited compared to established brands"
+    ],
+    "awards": ["MotorTrend Car of the Year 2022", "Car and Driver EV of the Year"],
+    "best_for": "Range-anxious EV buyers who want luxury and efficiency above all else",
+    "competitors": ["tesla-model-s-plaid", "bmw-i7", "hyundai-ioniq-6"]
   },
   "rivian-r1t": {
-    "overview": "World's first electric adventure truck. Quad-motor variant produces 835 hp, tows 11,000 lbs, and crawls rocks while doing 0-60 in 3.0 sec. A genuinely new vehicle category.",
-    "drives_like": "Big but light on its feet. Tank turn mode pivots the truck in place. Air suspension raises clearance for trail use. Quad-motor torque vectoring is uncanny.",
+    "overview": "World's first electric adventure truck. Quad-motor variant produces 835 hp, tows 11,000 lbs, and crawls rocks while doing 0-60 in 3.0 sec. A genuinely new vehicle category — neither truck nor SUV nor sports car, but somehow all three.",
+    "drives_like": "Big but light on its feet. Tank turn mode pivots the truck in place. Air suspension raises clearance for trail use. Quad-motor torque vectoring is uncanny — it can apply opposite-direction torque to wheels on the same axle.",
     "features": [
       "Quad-motor electric (835 hp / 908 lb-ft)",
       "11,000 lb maximum towing capacity",
@@ -327,11 +623,28 @@
       "1,500W house outlets (4 in bed, 2 in cab)",
       "Air suspension with 7.9-15.4 inches of clearance"
     ],
-    "best_for": "Outdoor adventurers and EV early-adopters who actually use trucks"
+    "pros": [
+      "Quad-motor torque vectoring delivers truly novel off-road capability",
+      "11,000 lb towing capacity matches half-ton ICE trucks",
+      "Gear Tunnel storage is a genuinely useful innovation",
+      "Looks like nothing else on the road — strong styling identity"
+    ],
+    "cons": [
+      "Charging infrastructure for trucks is sparse — towing range drops sharply",
+      "Service centers limited geographically — long wait times common",
+      "Long-term company viability uncertain",
+      "Range when towing drops to ~150 miles in real-world use"
+    ],
+    "awards": [
+      "MotorTrend Truck of the Year 2022",
+      "NHTSA 5-Star Overall Safety Rating"
+    ],
+    "best_for": "Outdoor adventurers and EV early-adopters who actually use trucks for trails, not just commuting",
+    "competitors": ["tesla-model-x", "ford-explorer", "porsche-cayenne"]
   },
   "hyundai-ioniq-6": {
-    "overview": "Streamlined electric sedan with class-leading 361-mile range (RWD Long Range) and 800V ultra-fast charging (10-80% in 18 minutes). Distinctive aero-focused styling.",
-    "drives_like": "Quiet, smooth, and efficient. Steering is light but accurate. Suspension is comfort-tuned for highway cruising. Dual-motor AWD adds genuine quickness.",
+    "overview": "Streamlined electric sedan with class-leading 361-mile range (RWD Long Range) and 800V ultra-fast charging (10-80% in 18 minutes). Distinctive aero-focused styling — drag coefficient of 0.21 is among the lowest in any production car.",
+    "drives_like": "Quiet, smooth, and efficient. Steering is light but accurate. Suspension is comfort-tuned for highway cruising. Dual-motor AWD adds genuine quickness (5.1 sec 0-60). The N performance version is in development.",
     "features": [
       "361-mile EPA range (RWD Long Range)",
       "800V electrical architecture (10-80% in 18 min on 350 kW charger)",
@@ -342,11 +655,28 @@
       "Heat pump standard for cold-weather range",
       "BOSE 8-speaker premium audio (Limited)"
     ],
-    "best_for": "Long-haul EV drivers and buyers wanting fastest-in-class DC charging"
+    "pros": [
+      "800V architecture enables the fastest DC charging in this price range",
+      "361 miles of EPA range for $42K — best range-per-dollar in class",
+      "Vehicle-to-Load lets you power tools, appliances, or a campsite",
+      "Distinctive streamliner styling stands out in EV showrooms"
+    ],
+    "cons": [
+      "Polarizing styling — divides opinion sharply",
+      "Rear visibility hampered by sloping roofline",
+      "Cargo capacity below Tesla Model 3 and Polestar 2"
+    ],
+    "awards": [
+      "World Car of the Year 2023",
+      "Car and Driver 10Best Cars 2023",
+      "IIHS Top Safety Pick+"
+    ],
+    "best_for": "Long-haul EV drivers and buyers wanting fastest-in-class DC charging with strong real-world range",
+    "competitors": ["tesla-model-3", "bmw-i7", "lucid-air-pure"]
   },
   "bmw-i7": {
-    "overview": "Flagship electric luxury sedan with a 31-inch 8K Theater Screen for rear passengers. Lounge-like back seat, 318-mile range, and BMW's most opulent cabin ever.",
-    "drives_like": "Silent and serene. The 5,500-lb i7 disguises its weight with active anti-roll bars and adaptive air suspension. Rear-seat passenger experience is the real story.",
+    "overview": "Flagship electric luxury sedan with a 31-inch 8K Theater Screen for rear passengers. Lounge-like back seat, 318-mile range, and BMW's most opulent cabin ever. Sister model to the gas 7 Series — share the same body and chassis, different powertrain.",
+    "drives_like": "Silent and serene. The 5,500-lb i7 disguises its weight with active anti-roll bars and adaptive air suspension. Rear-seat passenger experience is the real story — Executive Lounge package reclines + massages.",
     "features": [
       "31.3-inch 8K rear Theater Screen with Amazon Fire TV",
       "318-mile EPA range (xDrive60)",
@@ -357,6 +687,20 @@
       "Available Executive Lounge rear seating with massage",
       "Sky Lounge Panoramic LED roof"
     ],
-    "best_for": "Chauffeured executives and luxury buyers who care most about rear-seat experience"
+    "pros": [
+      "31-inch 8K rear theater screen has no peer at any price",
+      "Highway Assistant hands-off driving works on more roads than Tesla FSD",
+      "Bowers & Wilkins Diamond Surround is the best in-car audio system",
+      "Cabin opulence rivals Bentley and Rolls-Royce at half the price"
+    ],
+    "cons": [
+      "Polarizing front-end styling (large kidney grilles)",
+      "Real-world range varies widely with HVAC use",
+      "Charging slower than Lucid Air or Hyundai Ioniq 6 (200 kW vs 300+)",
+      "Loaded examples push past $150K"
+    ],
+    "awards": ["World Luxury Car of the Year 2023"],
+    "best_for": "Chauffeured executives and luxury buyers who care most about rear-seat experience",
+    "competitors": ["tesla-model-s-plaid", "lucid-air-pure", "tesla-model-3"]
   }
 }

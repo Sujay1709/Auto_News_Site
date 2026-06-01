@@ -4,26 +4,50 @@
 {% block content %}
 <article class="car-page">
 
-  <!-- Top bar: back link + breadcrumb -->
-  <div class="car-page-bar">
+  <!-- Breadcrumb bar -->
+  <nav class="car-page-bar">
     <a href="{{ url_for('cars') }}" class="car-page-back">
       <i class="fas fa-arrow-left"></i> All cars
     </a>
     <span class="car-page-crumb">{{ car.year }} · {{ car.category }}</span>
-  </div>
+  </nav>
 
-  <!-- Hero: title + 3D viewer side-by-side on desktop, stacked on mobile -->
+  <!-- HERO -->
   <header class="car-page-hero">
     <div class="car-page-headline">
       <div class="car-page-make">{{ car.make }}</div>
       <h1 class="car-page-model">{{ car.model }}</h1>
+
       <div class="car-page-meta">
-        {% if car.new %}<span class="car-page-tag-new">NEW</span>{% endif %}
+        {% if car.new %}<span class="car-page-tag-new">NEW for {{ car.year }}</span>{% endif %}
         <span class="car-page-price">{{ car.price }}</span>
+        <span class="car-page-meta-sep">·</span>
+        <span class="car-page-meta-cat">{{ car.category }}</span>
       </div>
+
       {% if car.overview %}
       <p class="car-page-lede">{{ car.overview }}</p>
       {% endif %}
+
+      <!-- Quick-stat strip -->
+      <div class="car-page-quickstats">
+        <div class="quickstat">
+          <div class="quickstat-val">{{ car.acceleration }}</div>
+          <div class="quickstat-lbl">0–60 mph</div>
+        </div>
+        <div class="quickstat">
+          <div class="quickstat-val">{{ car.horsepower }}</div>
+          <div class="quickstat-lbl">Power</div>
+        </div>
+        <div class="quickstat">
+          <div class="quickstat-val">{{ car.fuel_economy }}</div>
+          <div class="quickstat-lbl">Economy</div>
+        </div>
+        <div class="quickstat">
+          <div class="quickstat-val">{{ car.seating.split(' ')[0] if car.seating else '—' }}</div>
+          <div class="quickstat-lbl">Seats</div>
+        </div>
+      </div>
     </div>
 
     <div class="car-page-viewer">
@@ -32,18 +56,19 @@
           src="{{ car.model_3d_url }}"
           alt="{{ car.make }} {{ car.model }} 3D model"
           auto-rotate
-          auto-rotate-delay="1000"
+          auto-rotate-delay="800"
           rotation-per-second="20deg"
           camera-controls
           camera-orbit="-25deg 75deg auto"
-          field-of-view="30deg"
-          shadow-intensity="1.5"
-          shadow-softness="0.6"
+          field-of-view="28deg"
+          shadow-intensity="1.4"
+          shadow-softness="0.7"
           environment-image="https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr"
-          exposure="1.1"
+          exposure="1.0"
           tone-mapping="aces"
           interaction-prompt="auto"
-          style="width:100%;height:100%;background:radial-gradient(circle at 50% 60%, #1a2030 0%, #0a0e18 100%);border-radius:14px"
+          interaction-prompt-style="basic"
+          interaction-prompt-threshold="3000"
         >
           <div slot="progress-bar" style="display:none"></div>
         </model-viewer>
@@ -53,65 +78,40 @@
           <span>3D model not available yet</span>
         </div>
       {% endif %}
-      {% if car.model_is_placeholder %}
+      {% if car.model_3d_available %}
       <div class="car-page-viewer-note">
-        3D model: {{ car.model_display_name }} (generic placeholder) · {{ car.model_license }}
-      </div>
-      {% elif car.model_3d_available %}
-      <div class="car-page-viewer-note">
-        3D model: {{ car.model_display_name }} · {{ car.model_license }}
+        <i class="fas fa-cube"></i>
+        {{ car.model_display_name }}
+        {% if car.model_is_placeholder %} <span class="placeholder-flag">generic placeholder</span>{% endif %}
+        · {{ car.model_license }}
       </div>
       {% endif %}
     </div>
   </header>
 
-  <!-- Optional hero image -->
-  {% if car.hero_image_url %}
-  <figure class="car-page-photo">
-    <img src="{{ car.hero_image_url }}" alt="{{ car.make }} {{ car.model }}" loading="lazy">
-  </figure>
+  <!-- EXPERT QUOTE (pulled review) -->
+  {% if car.expert_quote %}
+  <section class="car-page-section">
+    <blockquote class="expert-quote">
+      <i class="fas fa-quote-left expert-quote-mark"></i>
+      <p class="expert-quote-text">{{ car.expert_quote.text }}</p>
+      <footer class="expert-quote-source">— {{ car.expert_quote.source }}</footer>
+    </blockquote>
+  </section>
   {% endif %}
 
-  <!-- Specs grid -->
+  <!-- AWARDS BADGES -->
+  {% if car.awards %}
   <section class="car-page-section">
-    <h2 class="car-page-h2">Specifications</h2>
-    <div class="car-page-specs">
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">0–60 mph</div>
-        <div class="car-page-spec-val">{{ car.acceleration }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Top speed</div>
-        <div class="car-page-spec-val">{{ car.top_speed }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Engine</div>
-        <div class="car-page-spec-val">{{ car.engine }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Horsepower</div>
-        <div class="car-page-spec-val">{{ car.horsepower }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Transmission</div>
-        <div class="car-page-spec-val">{{ car.transmission }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Drivetrain</div>
-        <div class="car-page-spec-val">{{ car.drivetrain }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Fuel economy</div>
-        <div class="car-page-spec-val">{{ car.fuel_economy }}</div>
-      </div>
-      <div class="car-page-spec">
-        <div class="car-page-spec-lbl">Seating</div>
-        <div class="car-page-spec-val">{{ car.seating }}</div>
-      </div>
+    <div class="awards-strip">
+      {% for award in car.awards %}
+      <span class="award-badge"><i class="fas fa-award"></i> {{ award }}</span>
+      {% endfor %}
     </div>
   </section>
+  {% endif %}
 
-  <!-- How it drives -->
+  <!-- HOW IT DRIVES -->
   {% if car.drives_like %}
   <section class="car-page-section">
     <h2 class="car-page-h2"><i class="fas fa-tachometer-alt"></i> How it drives</h2>
@@ -119,22 +119,62 @@
   </section>
   {% endif %}
 
-  <!-- Features -->
+  <!-- PROS / CONS -->
+  {% if car.pros or car.cons %}
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-balance-scale"></i> Honest verdict</h2>
+    <div class="proscons">
+      {% if car.pros %}
+      <div class="proscons-col proscons-pros">
+        <div class="proscons-heading"><i class="fas fa-thumbs-up"></i> Strengths</div>
+        <ul>{% for p in car.pros %}<li>{{ p }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      {% if car.cons %}
+      <div class="proscons-col proscons-cons">
+        <div class="proscons-heading"><i class="fas fa-thumbs-down"></i> Trade-offs</div>
+        <ul>{% for c in car.cons %}<li>{{ c }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- HERO PHOTO (if available) -->
+  {% if car.hero_image_url %}
+  <figure class="car-page-photo">
+    <img src="{{ car.hero_image_url }}" alt="{{ car.make }} {{ car.model }}" loading="lazy">
+  </figure>
+  {% endif %}
+
+  <!-- FULL SPECS -->
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-list"></i> Full specifications</h2>
+    <div class="car-page-specs">
+      <div class="car-page-spec"><div class="car-page-spec-lbl">0–60 mph</div><div class="car-page-spec-val">{{ car.acceleration }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Top speed</div><div class="car-page-spec-val">{{ car.top_speed }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Engine</div><div class="car-page-spec-val">{{ car.engine }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Horsepower</div><div class="car-page-spec-val">{{ car.horsepower }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Transmission</div><div class="car-page-spec-val">{{ car.transmission }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Drivetrain</div><div class="car-page-spec-val">{{ car.drivetrain }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Fuel economy</div><div class="car-page-spec-val">{{ car.fuel_economy }}</div></div>
+      <div class="car-page-spec"><div class="car-page-spec-lbl">Seating</div><div class="car-page-spec-val">{{ car.seating }}</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
   {% if car.features %}
   <section class="car-page-section">
     <h2 class="car-page-h2"><i class="fas fa-star"></i> Notable features</h2>
     <ul class="car-page-features">
       {% for f in car.features %}
-      <li>
-        <i class="fas fa-check"></i>
-        <span>{{ f }}</span>
-      </li>
+      <li><i class="fas fa-check"></i><span>{{ f }}</span></li>
       {% endfor %}
     </ul>
   </section>
   {% endif %}
 
-  <!-- Best for -->
+  <!-- BEST FOR -->
   {% if car.best_for %}
   <section class="car-page-section">
     <div class="car-page-bestfor">
@@ -144,7 +184,30 @@
   </section>
   {% endif %}
 
-  <!-- Footer: back link again -->
+  <!-- COMPETITORS -->
+  {% if competitors %}
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-exchange-alt"></i> Compare with</h2>
+    <div class="compare-grid">
+      {% for c in competitors %}
+      <a href="{{ url_for('car_detail_page', slug=c.slug) }}" class="compare-card">
+        <div class="compare-card-icon">
+          {% if c.type == 'sedan' %}<i class="fas fa-car-side"></i>
+          {% elif c.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
+          {% elif c.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
+          {% elif c.type == 'electric' %}<i class="fas fa-bolt"></i>
+          {% else %}<i class="fas fa-car"></i>{% endif %}
+        </div>
+        <div class="compare-card-make">{{ c.make }}</div>
+        <div class="compare-card-model">{{ c.model }}</div>
+        <div class="compare-card-price">{{ c.price }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- FOOTER -->
   <div class="car-page-footer">
     <a href="{{ url_for('cars') }}" class="car-page-back">
       <i class="fas fa-arrow-left"></i> Browse all cars
