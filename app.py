@@ -556,6 +556,20 @@ def load_cars_details() -> dict:
     return {}
 
 
+# Hero image extensions tried in priority order. Real raster photos
+# (webp/jpg/png) win over the generated SVG banner so a user can later
+# drop in a real photo and it takes over automatically.
+HERO_IMAGE_EXTS = (".webp", ".jpg", ".jpeg", ".png", ".svg")
+
+
+def resolve_hero_url(slug: str) -> str | None:
+    """First existing static/images/cars/<slug>.<ext> as a /static URL, else None."""
+    for ext in HERO_IMAGE_EXTS:
+        if Path(f"static/images/cars/{slug}{ext}").exists():
+            return f"/static/images/cars/{slug}{ext}"
+    return None
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -610,9 +624,7 @@ def cars():
 
         slug = _car_slug(car)
         car_details = details_map.get(slug, {})
-        hero_path = f"static/images/cars/{slug}.webp"
-        has_hero_image = (Path(hero_path).exists() or
-                          Path(f"static/images/cars/{slug}.jpg").exists())
+        hero_url = resolve_hero_url(slug)
 
         enriched_cars.append({
             **car,
@@ -629,7 +641,7 @@ def cars():
             'drives_like': car_details.get('drives_like'),
             'features': car_details.get('features', []),
             'best_for': car_details.get('best_for'),
-            'hero_image_url': f"/static/images/cars/{slug}.webp" if has_hero_image else None,
+            'hero_image_url': hero_url,
         })
 
     # Resolve selected slug from querystring
@@ -678,13 +690,7 @@ def car_detail_page(slug):
     )
 
     car_details = details_map.get(slug, {})
-    hero_webp = Path(f"static/images/cars/{slug}.webp")
-    hero_jpg  = Path(f"static/images/cars/{slug}.jpg")
-    hero_url = None
-    if hero_webp.exists():
-        hero_url = f"/static/images/cars/{slug}.webp"
-    elif hero_jpg.exists():
-        hero_url = f"/static/images/cars/{slug}.jpg"
+    hero_url = resolve_hero_url(slug)
 
     enriched = {
         **car,

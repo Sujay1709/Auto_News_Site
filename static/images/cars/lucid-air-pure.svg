@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" width="1600" height="600" role="img" aria-label="2024 Lucid Air Pure">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2a4a"/>
+      <stop offset="1" stop-color="#0a1322"/>
+    </linearGradient>
+    <linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".97"/>
+      <stop offset="1" stop-color="#cfd6de" stop-opacity=".92"/>
+    </linearGradient>
+    <linearGradient id="carGlass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9db4d8" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#0b0f17" stop-opacity=".55"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.7" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#9db4d8" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#9db4d8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#bg)"/>
+  <rect width="1600" height="600" fill="url(#glow)"/>
+
+  <!-- decorative speed stripes -->
+  <g opacity="0.07" fill="#ffffff">
+    <polygon points="-200,600 200,0 320,0 -80,600"/>
+    <polygon points="60,600 460,0 520,0 120,600"/>
+  </g>
+  <circle cx="1230" cy="150" r="240" fill="#ffffff" opacity="0.04"/>
+
+  <!-- accent ground line -->
+  <rect x="0" y="520" width="1600" height="4" fill="#9db4d8" opacity="0.55"/>
+
+  <!-- car -->
+  <g transform="translate(540,150) scale(1.0)">
+    <ellipse cx="500" cy="372" rx="430" ry="26" fill="rgba(0,0,0,.35)"/>
+    <circle cx="250" cy="300" r="56" fill="rgba(0,0,0,.55)"/><circle cx="250" cy="300" r="38" fill="rgba(255,255,255,.18)"/><circle cx="250" cy="300" r="15" fill="rgba(0,0,0,.5)"/><circle cx="772" cy="300" r="56" fill="rgba(0,0,0,.55)"/><circle cx="772" cy="300" r="38" fill="rgba(255,255,255,.18)"/><circle cx="772" cy="300" r="15" fill="rgba(0,0,0,.5)"/><path d="M55,300 L55,250 Q58,238 82,236 L150,232 Q262,196 360,176 Q520,150 700,168 Q832,180 906,220 Q940,232 940,272 L940,300 Z" fill="url(#carBody)"/><path d="M342,184 Q520,162 690,180 L760,214 L372,214 Z" fill="url(#carGlass)"/>
+  </g>
+
+  <!-- text block -->
+  <text x="90" y="150" fill="#9db4d8" font-family="'Helvetica Neue',Arial,sans-serif"
+        font-size="34" font-weight="700" letter-spacing="8">LUCID</text>
+  <text x="86" y="250" fill="#ffffff" font-family="'Helvetica Neue',Arial,sans-serif"
+        font-size="94" font-weight="800" letter-spacing="-2">Air Pure</text>
+  <rect x="92" y="276" width="120" height="6" fill="#9db4d8"/>
+  <g transform="translate(92,318)">
+    <rect x="0" y="-26" rx="6" ry="6" width="150" height="40"
+          fill="rgba(255,255,255,.10)" stroke="#9db4d8" stroke-opacity=".6"/>
+    <text x="18" y="1" fill="#ffffff" font-family="'Helvetica Neue',Arial,sans-serif"
+          font-size="20" font-weight="700" letter-spacing="3">ELECTRIC</text>
+  </g>
+  <text x="94" y="400" fill="#ffffff" fill-opacity=".82"
+        font-family="'Helvetica Neue',Arial,sans-serif" font-size="26"
+        font-weight="600" letter-spacing="1">430 hp   •   4.5 sec   •   $77,400</text>
+
+  <!-- watermark -->
+  <text x="1560" y="566" text-anchor="end" fill="#ffffff" fill-opacity=".28"
+        font-family="'Helvetica Neue',Arial,sans-serif" font-size="22"
+        font-weight="800" letter-spacing="4">AUTOHUB</text>
+</svg>
