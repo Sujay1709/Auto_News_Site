@@ -45,7 +45,8 @@ USER appuser
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 5000
+EXPOSE 8080
 
-# Run the application.
-CMD python app.py
+# Run the application via gunicorn for production. The PORT env var is
+# honored when set (Render, Fly, Railway all inject it); falls back to 8080.
+CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-8080} --workers 2 --threads 4 --timeout 90"]

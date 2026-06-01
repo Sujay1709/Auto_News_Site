@@ -655,6 +655,55 @@ def cars():
     )
 
 
+@app.route('/cars/<slug>')
+def car_detail_page(slug):
+    """
+    Full-page detail view for one car. Shareable URL, mobile-first layout.
+    Hit from any card's "View details" link on /cars.
+    """
+    slug = slug.strip().lower()
+    car = next((c for c in cars_data if _car_slug(c) == slug), None)
+    if car is None:
+        return render_template('car_not_found.html', slug=slug), 404
+
+    catalog = load_3d_catalog()
+    details_map = load_cars_details()
+
+    model_entry, model_3d_source, matched_key = resolve_3d_model(
+        catalog=catalog,
+        make=car.get('make'),
+        model=car.get('model'),
+        year=car.get('year'),
+        trim=car.get('trim', 'default'),
+    )
+
+    car_details = details_map.get(slug, {})
+    hero_webp = Path(f"static/images/cars/{slug}.webp")
+    hero_jpg  = Path(f"static/images/cars/{slug}.jpg")
+    hero_url = None
+    if hero_webp.exists():
+        hero_url = f"/static/images/cars/{slug}.webp"
+    elif hero_jpg.exists():
+        hero_url = f"/static/images/cars/{slug}.jpg"
+
+    enriched = {
+        **car,
+        'slug': slug,
+        'model_3d_url': model_entry['url'],
+        'model_3d_available': model_entry['model_available'],
+        'model_display_name': model_entry['display_name'],
+        'model_license': model_entry['license'],
+        'model_is_placeholder': model_entry['is_placeholder'],
+        'overview': car_details.get('overview'),
+        'drives_like': car_details.get('drives_like'),
+        'features': car_details.get('features', []),
+        'best_for': car_details.get('best_for'),
+        'hero_image_url': hero_url,
+    }
+
+    return render_template('car_detail.html', car=enriched)
+
+
 @app.route('/api/car-details')
 def car_details():
     make = request.args.get('make')

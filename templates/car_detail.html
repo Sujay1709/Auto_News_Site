@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}{{ car.year }} {{ car.make }} {{ car.model }} — AutoHub{% endblock %}
+
+{% block content %}
+<article class="car-page">
+
+  <!-- Top bar: back link + breadcrumb -->
+  <div class="car-page-bar">
+    <a href="{{ url_for('cars') }}" class="car-page-back">
+      <i class="fas fa-arrow-left"></i> All cars
+    </a>
+    <span class="car-page-crumb">{{ car.year }} · {{ car.category }}</span>
+  </div>
+
+  <!-- Hero: title + 3D viewer side-by-side on desktop, stacked on mobile -->
+  <header class="car-page-hero">
+    <div class="car-page-headline">
+      <div class="car-page-make">{{ car.make }}</div>
+      <h1 class="car-page-model">{{ car.model }}</h1>
+      <div class="car-page-meta">
+        {% if car.new %}<span class="car-page-tag-new">NEW</span>{% endif %}
+        <span class="car-page-price">{{ car.price }}</span>
+      </div>
+      {% if car.overview %}
+      <p class="car-page-lede">{{ car.overview }}</p>
+      {% endif %}
+    </div>
+
+    <div class="car-page-viewer">
+      {% if car.model_3d_available and car.model_3d_url %}
+        <model-viewer
+          src="{{ car.model_3d_url }}"
+          alt="{{ car.make }} {{ car.model }} 3D model"
+          auto-rotate
+          auto-rotate-delay="1000"
+          rotation-per-second="20deg"
+          camera-controls
+          camera-orbit="-25deg 75deg auto"
+          field-of-view="30deg"
+          shadow-intensity="1.5"
+          shadow-softness="0.6"
+          environment-image="https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr"
+          exposure="1.1"
+          tone-mapping="aces"
+          interaction-prompt="auto"
+          style="width:100%;height:100%;background:radial-gradient(circle at 50% 60%, #1a2030 0%, #0a0e18 100%);border-radius:14px"
+        >
+          <div slot="progress-bar" style="display:none"></div>
+        </model-viewer>
+      {% else %}
+        <div class="car-page-viewer-empty">
+          <i class="fas fa-cube"></i>
+          <span>3D model not available yet</span>
+        </div>
+      {% endif %}
+      {% if car.model_is_placeholder %}
+      <div class="car-page-viewer-note">
+        3D model: {{ car.model_display_name }} (generic placeholder) · {{ car.model_license }}
+      </div>
+      {% elif car.model_3d_available %}
+      <div class="car-page-viewer-note">
+        3D model: {{ car.model_display_name }} · {{ car.model_license }}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Optional hero image -->
+  {% if car.hero_image_url %}
+  <figure class="car-page-photo">
+    <img src="{{ car.hero_image_url }}" alt="{{ car.make }} {{ car.model }}" loading="lazy">
+  </figure>
+  {% endif %}
+
+  <!-- Specs grid -->
+  <section class="car-page-section">
+    <h2 class="car-page-h2">Specifications</h2>
+    <div class="car-page-specs">
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">0–60 mph</div>
+        <div class="car-page-spec-val">{{ car.acceleration }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Top speed</div>
+        <div class="car-page-spec-val">{{ car.top_speed }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Engine</div>
+        <div class="car-page-spec-val">{{ car.engine }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Horsepower</div>
+        <div class="car-page-spec-val">{{ car.horsepower }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Transmission</div>
+        <div class="car-page-spec-val">{{ car.transmission }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Drivetrain</div>
+        <div class="car-page-spec-val">{{ car.drivetrain }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Fuel economy</div>
+        <div class="car-page-spec-val">{{ car.fuel_economy }}</div>
+      </div>
+      <div class="car-page-spec">
+        <div class="car-page-spec-lbl">Seating</div>
+        <div class="car-page-spec-val">{{ car.seating }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it drives -->
+  {% if car.drives_like %}
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-tachometer-alt"></i> How it drives</h2>
+    <p class="car-page-body">{{ car.drives_like }}</p>
+  </section>
+  {% endif %}
+
+  <!-- Features -->
+  {% if car.features %}
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-star"></i> Notable features</h2>
+    <ul class="car-page-features">
+      {% for f in car.features %}
+      <li>
+        <i class="fas fa-check"></i>
+        <span>{{ f }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <!-- Best for -->
+  {% if car.best_for %}
+  <section class="car-page-section">
+    <div class="car-page-bestfor">
+      <div class="car-page-bestfor-lbl"><i class="fas fa-thumbs-up"></i> Best for</div>
+      <p class="car-page-bestfor-text">{{ car.best_for }}</p>
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Footer: back link again -->
+  <div class="car-page-footer">
+    <a href="{{ url_for('cars') }}" class="car-page-back">
+      <i class="fas fa-arrow-left"></i> Browse all cars
+    </a>
+  </div>
+
+</article>
+{% endblock %}

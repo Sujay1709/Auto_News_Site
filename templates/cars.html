@@ -25,6 +25,7 @@
           class="car-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} selected{% endif %}"
           data-type="{{ car.type }}"
           data-slug="{{ car.slug }}"
+          data-detail-href="{{ url_for('car_detail_page', slug=car.slug) }}"
           data-index="{{ loop.index0 }}"
           role="button"
           tabindex="0"
@@ -157,6 +158,13 @@
           </div>
         </div>
 
+        {% if first.car %}
+        <a href="{{ url_for('car_detail_page', slug=first.car.slug) }}"
+           id="d-detail-link" class="detail-cta">
+          View full details <i class="fas fa-arrow-right"></i>
+        </a>
+        {% endif %}
+
         <div class="detail-attr" id="d-attr">
           {% if first.car.model_3d_available %}
             <i class="fas fa-cube" style="color:var(--red);margin-right:5px"></i>
@@ -259,6 +267,7 @@
   const fFuel  = document.getElementById('d-fuel');
   const fSeat  = document.getElementById('d-seat');
   const fAttr  = document.getElementById('d-attr');
+  const fDetailLink = document.getElementById('d-detail-link');
   const fOverview = document.getElementById('d-overview');
   const fDrives   = document.getElementById('d-drives');
   const fFeatures = document.getElementById('d-features');
@@ -311,6 +320,10 @@
       }
     }
 
+    if (fDetailLink && car.slug) {
+      fDetailLink.setAttribute('href', `/cars/${car.slug}`);
+    }
+
     // Update 3D viewer
     if (!viewer) return;
 
@@ -351,19 +364,24 @@
     if (hintBar) hintBar.style.display = '';
   }
 
-  // ── Card click ──
+  // ── Card click: navigate to full-page detail view ──
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      cards.forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-
-      const idx = parseInt(card.dataset.index, 10);
-      const car = carsData[idx];
-      if (car) updatePanel(car);
+      const href = card.dataset.detailHref;
+      if (href) {
+        window.location.href = href;
+      }
     });
 
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+
+    // Hover updates the preview panel so users still see what each card holds
+    card.addEventListener('mouseenter', () => {
+      const idx = parseInt(card.dataset.index, 10);
+      const car = carsData[idx];
+      if (car) updatePanel(car);
     });
   });
 

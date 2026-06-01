@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Car not found — AutoHub{% endblock %}
+
+{% block content %}
+<div class="info-page">
+  <h1 class="page-title">Car not found</h1>
+  <p class="page-lead">
+    No car in our fleet matches the slug
+    <code>{{ slug }}</code>.
+  </p>
+  <p>
+    <a href="{{ url_for('cars') }}" class="car-page-back">
+      <i class="fas fa-arrow-left"></i> Back to all cars
+    </a>
+  </p>
+</div>
+{% endblock %}
