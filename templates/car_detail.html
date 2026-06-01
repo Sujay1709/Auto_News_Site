@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block title %}{{ car.year }} {{ car.make }} {{ car.model }} — AutoHub{% endblock %}
+
+{% block title %}{{ car.year }} {{ car.make }} {{ car.model }} — AutoHub-render.com{% endblock %}
 
 {% block content %}
 <article class="car-page">
-
   <!-- Breadcrumb bar -->
   <nav class="car-page-bar">
     <a href="{{ url_for('cars') }}" class="car-page-back">
       <i class="fas fa-arrow-left"></i> All cars
     </a>
-    <span class="car-page-crumb">{{ car.year }} · {{ car.category }}</span>
+    <span class="car-page-crumb">{{ car.year }} &middot; {{ car.category }}</span>
   </nav>
 
   <!-- HERO -->
@@ -17,11 +17,11 @@
     <div class="car-page-headline">
       <div class="car-page-make">{{ car.make }}</div>
       <h1 class="car-page-model">{{ car.model }}</h1>
-
+      
       <div class="car-page-meta">
         {% if car.new %}<span class="car-page-tag-new">NEW for {{ car.year }}</span>{% endif %}
         <span class="car-page-price">{{ car.price }}</span>
-        <span class="car-page-meta-sep">·</span>
+        <span class="car-page-meta-sep">&middot;</span>
         <span class="car-page-meta-cat">{{ car.category }}</span>
       </div>
 
@@ -50,42 +50,8 @@
       </div>
     </div>
 
-    <div class="car-page-viewer">
-      {% if car.model_3d_available and car.model_3d_url %}
-        <model-viewer
-          src="{{ car.model_3d_url }}"
-          alt="{{ car.make }} {{ car.model }} 3D model"
-          auto-rotate
-          auto-rotate-delay="800"
-          rotation-per-second="20deg"
-          camera-controls
-          camera-orbit="-25deg 75deg auto"
-          field-of-view="28deg"
-          shadow-intensity="1.4"
-          shadow-softness="0.7"
-          environment-image="https://modelviewer.dev/shared-assets/environments/aircraft_workshop_01_1k.hdr"
-          exposure="1.0"
-          tone-mapping="aces"
-          interaction-prompt="auto"
-          interaction-prompt-style="basic"
-          interaction-prompt-threshold="3000"
-        >
-          <div slot="progress-bar" style="display:none"></div>
-        </model-viewer>
-      {% else %}
-        <div class="car-page-viewer-empty">
-          <i class="fas fa-cube"></i>
-          <span>3D model not available yet</span>
-        </div>
-      {% endif %}
-      {% if car.model_3d_available %}
-      <div class="car-page-viewer-note">
-        <i class="fas fa-cube"></i>
-        {{ car.model_display_name }}
-        {% if car.model_is_placeholder %} <span class="placeholder-flag">generic placeholder</span>{% endif %}
-        · {{ car.model_license }}
-      </div>
-      {% endif %}
+    <div class="car-page-viewer" style="background: #000; border-radius: 14px; overflow: hidden;">
+      <img src="{{ car.image }}" alt="{{ car.make }} {{ car.model }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
     </div>
   </header>
 
@@ -105,7 +71,7 @@
   <section class="car-page-section">
     <div class="awards-strip">
       {% for award in car.awards %}
-      <span class="award-badge"><i class="fas fa-award"></i> {{ award }}</span>
+        <span class="award-badge"><i class="fas fa-award"></i> {{ award }}</span>
       {% endfor %}
     </div>
   </section>
@@ -140,13 +106,6 @@
   </section>
   {% endif %}
 
-  <!-- HERO PHOTO (if available) -->
-  {% if car.hero_image_url %}
-  <figure class="car-page-photo">
-    <img src="{{ car.hero_image_url }}" alt="{{ car.make }} {{ car.model }}" loading="lazy">
-  </figure>
-  {% endif %}
-
   <!-- FULL SPECS -->
   <section class="car-page-section">
     <h2 class="car-page-h2"><i class="fas fa-list"></i> Full specifications</h2>
@@ -168,7 +127,7 @@
     <h2 class="car-page-h2"><i class="fas fa-star"></i> Notable features</h2>
     <ul class="car-page-features">
       {% for f in car.features %}
-      <li><i class="fas fa-check"></i><span>{{ f }}</span></li>
+        <li><i class="fas fa-check"></i><span>{{ f }}</span></li>
       {% endfor %}
     </ul>
   </section>
@@ -190,18 +149,18 @@
     <h2 class="car-page-h2"><i class="fas fa-exchange-alt"></i> Compare with</h2>
     <div class="compare-grid">
       {% for c in competitors %}
-      <a href="{{ url_for('car_detail_page', slug=c.slug) }}" class="compare-card">
-        <div class="compare-card-icon">
-          {% if c.type == 'sedan' %}<i class="fas fa-car-side"></i>
-          {% elif c.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
-          {% elif c.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
-          {% elif c.type == 'electric' %}<i class="fas fa-bolt"></i>
-          {% else %}<i class="fas fa-car"></i>{% endif %}
-        </div>
-        <div class="compare-card-make">{{ c.make }}</div>
-        <div class="compare-card-model">{{ c.model }}</div>
-        <div class="compare-card-price">{{ c.price }}</div>
-      </a>
+        <a href="{{ url_for('car_detail_page', slug=c.slug) }}" class="compare-card">
+          <div class="compare-card-icon">
+            {% if c.type == 'sedan' %}<i class="fas fa-car-side"></i>
+            {% elif c.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
+            {% elif c.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
+            {% elif c.type == 'electric' %}<i class="fas fa-bolt"></i>
+            {% else %}<i class="fas fa-car"></i>{% endif %}
+          </div>
+          <div class="compare-card-make">{{ c.make }}</div>
+          <div class="compare-card-model">{{ c.model }}</div>
+          <div class="compare-card-price">{{ c.price }}</div>
+        </a>
       {% endfor %}
     </div>
   </section>
@@ -213,6 +172,5 @@
       <i class="fas fa-arrow-left"></i> Browse all cars
     </a>
   </div>
-
 </article>
 {% endblock %}

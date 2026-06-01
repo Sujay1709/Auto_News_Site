@@ -14,4 +14,3 @@ services:
 volumes:
   auto_data:
   auto_models:
- 

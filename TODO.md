@@ -10,4 +10,3 @@
 - [x] 7. Improve news page (news.html) - Card design with thumbnails
 - [x] 8. Update app.py - Add /cars route with car data
 - [x] 9. Test all pages render correctly
-

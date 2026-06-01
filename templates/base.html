@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}AutoHub — Premium Automotive Intelligence{% endblock %}</title>
+  <title>{% block title %}AutoHub-render.com — Premium Automotive Intelligence{% endblock %}</title>
   <meta name="description" content="The definitive automotive resource. Real-time news, 3D car models, and deep industry insights.">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='gaming-theme.css') }}">
@@ -16,12 +16,11 @@
   {% block head_extra %}{% endblock %}
 </head>
 <body>
-
   <header>
     <div class="header-container">
       <a href="/" class="site-logo">
         <div class="logo-mark">AH</div>
-        <span>Auto<strong>Hub</strong></span>
+        <span>AutoHub<strong>-render.com</strong></span>
       </a>
       <nav>
         <a href="/" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
@@ -49,7 +48,7 @@
         <div class="footer-brand">
           <a href="/" class="site-logo">
             <div class="logo-mark">AH</div>
-            <span>Auto<strong>Hub</strong></span>
+            <span>AutoHub<strong>-render.com</strong></span>
           </a>
           <p>Your definitive resource for automotive news, interactive 3D car models, and deep industry insights.</p>
         </div>
@@ -76,71 +75,74 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 AutoHub. All rights reserved.</span>
+        <span>&copy; 2025 AutoHub-render.com. All rights reserved.</span>
         <span>Privacy Policy &nbsp;&middot;&nbsp; Terms of Service</span>
       </div>
     </div>
   </footer>
 
   {% block scripts %}{% endblock %}
-
   <script>
-  // Global search: filters cars in place on /cars, otherwise routes to /cars?q=
-  (function () {
-    const input = document.getElementById('global-search-input');
-    const btn   = document.getElementById('global-search-btn');
-    if (!input || !btn) return;
+    // Global search: filters cars in place on /cars, otherwise routes to /cars?q=
+    (function () {
+      const input = document.getElementById('global-search-input');
+      const btn = document.getElementById('global-search-btn');
+      if (!input || !btn) return;
 
-    function applyCarsFilter(query) {
-      const cards = document.querySelectorAll('.car-card');
-      if (!cards.length) return false;
-      const q = (query || '').trim().toLowerCase();
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        const show = !q || text.includes(q);
-        card.style.display = show ? '' : 'none';
-      });
-      // Reset category chips to "all" so the search isn't masked by a type filter
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      const allChip = document.querySelector('.filter-chip[data-filter="all"]');
-      if (allChip) allChip.classList.add('active');
-      return true;
-    }
-
-    function doSearch() {
-      const q = input.value.trim();
-      const onCars = window.location.pathname.startsWith('/cars');
-      if (onCars) {
-        applyCarsFilter(q);
-      } else {
-        window.location.href = q ? `/cars?q=${encodeURIComponent(q)}` : '/cars';
+      function applyCarsFilter(query) {
+        const cards = document.querySelectorAll('.car-card');
+        if (!cards.length) return false;
+        const q = (query || '').trim().toLowerCase();
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          const show = !q || text.includes(q);
+          card.style.display = show ? '' : 'none';
+        });
+        // Reset category chips to "all" so the search isn't masked by a type filter
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        const allChip = document.querySelector('.filter-chip[data-filter="all"]');
+        if (allChip) allChip.classList.add('active');
+        return true;
       }
-    }
 
-    btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); doSearch(); }
-    });
-    // Live filter while typing on /cars
-    input.addEventListener('input', () => {
-      if (window.location.pathname.startsWith('/cars')) applyCarsFilter(input.value);
-    });
-
-    // On /cars page load: prefill from ?q= and apply
-    if (window.location.pathname.startsWith('/cars')) {
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get('q') || '';
-      if (q) {
-        input.value = q;
-        const tryApply = () => applyCarsFilter(q);
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', tryApply);
+      function doSearch() {
+        const q = input.value.trim();
+        const onCars = window.location.pathname.startsWith('/cars');
+        if (onCars) {
+          applyCarsFilter(q);
         } else {
-          tryApply();
+          window.location.href = q ? `/cars?q=${encodeURIComponent(q)}` : '/cars';
         }
       }
-    }
-  })();
+
+      btn.addEventListener('click', doSearch);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          doSearch();
+        }
+      });
+
+      // Live filter while typing on /cars
+      input.addEventListener('input', () => {
+        if (window.location.pathname.startsWith('/cars')) applyCarsFilter(input.value);
+      });
+
+      // On /cars page load: prefill from ?q= and apply
+      if (window.location.pathname.startsWith('/cars')) {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q') || '';
+        if (q) {
+          input.value = q;
+          const tryApply = () => applyCarsFilter(q);
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryApply);
+          } else {
+            tryApply();
+          }
+        }
+      }
+    })();
   </script>
 </body>
 </html>

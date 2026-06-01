@@ -1,25 +1,26 @@
 {% extends "base.html" %}
-{% block title %}AutoHub — The Automotive Intelligence Platform{% endblock %}
+
+{% block title %}AutoHub-render.com — The Automotive Intelligence Platform{% endblock %}
 
 {% block content %}
-
-<!-- ── HERO: full-bleed dark section with live 3D model ── -->
+<!-- ── HERO: full-bleed dark section ── -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">
-      <i class="fas fa-circle" style="font-size:0.45rem"></i>
-      Live Automotive Intelligence
+      <i class="fas fa-circle" style="font-size: 0.45rem;"></i> Live Automotive Intelligence
     </div>
     <h1>Drive <em>smarter</em><br>decisions.</h1>
-    <p class="hero-sub">Real-time news, interactive 3D car models, and deep industry data — everything you need in one place.</p>
+    <p class="hero-sub">Real-time news, high-resolution photography, and deep industry data — everything you need in one place.</p>
+    
     <div class="hero-actions">
-      <a href="/cars" class="btn btn-primary"><i class="fas fa-cube"></i> Explore 3D Garage</a>
+      <a href="/cars" class="btn btn-primary"><i class="fas fa-image"></i> Explore Gallery</a>
       <a href="/news" class="btn btn-outline-inv"><i class="fas fa-newspaper"></i> Latest News</a>
     </div>
+
     <div class="hero-stats">
       <div>
-        <div class="hero-stat-val">25+</div>
-        <div class="hero-stat-label">3D Car Models</div>
+        <div class="hero-stat-val">24</div>
+        <div class="hero-stat-label">Stunning Vehicles</div>
       </div>
       <div>
         <div class="hero-stat-val">Live</div>
@@ -33,28 +34,7 @@
   </div>
 
   <div class="hero-3d-pane">
-    <model-viewer
-      src="{{ url_for('static', filename='models/carconcept/CarConcept.gltf') }}"
-      alt="Interactive 3D concept car — drag to rotate"
-      auto-rotate
-      auto-rotate-delay="1000"
-      rotation-per-second="18deg"
-      camera-controls
-      shadow-intensity="1.2"
-      shadow-softness="0.9"
-      environment-image="neutral"
-      exposure="1.1"
-      camera-orbit="-20deg 75deg 8m"
-      min-camera-orbit="auto auto 4m"
-      max-camera-orbit="auto auto 14m"
-      interaction-prompt="auto"
-    >
-      <div slot="progress-bar" style="display:none"></div>
-    </model-viewer>
-    <div class="viewer-hint-bar">
-      <span><i class="fas fa-hand-pointer"></i> Drag to rotate</span>
-      <span><i class="fas fa-search-plus"></i> Scroll to zoom</span>
-    </div>
+    <img src="{{ url_for('static', filename='images/cars/_hero-bugatti.webp') }}" alt="Supercar" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;" onerror="this.src='https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1024'">
   </div>
 </section>
 
@@ -65,6 +45,7 @@
     <h2 class="section-title">What are you looking for?</h2>
     <p class="section-sub">From daily commuters to track-focused exotics — explore every segment with full specs.</p>
   </div>
+
   <div class="category-grid">
     <a href="/cars?type=sedan" class="category-card c-sedan">
       <div class="cat-icon"><i class="fas fa-car-side"></i></div>
@@ -93,32 +74,21 @@
   </div>
 </div>
 
-<!-- ── 3D FEATURE CALLOUT ── -->
+<!-- ── HD IMAGERY FEATURE CALLOUT ── -->
 <div class="section-dark">
-  <div class="section-dark-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+  <div class="section-dark-inner" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
     <div>
-      <div class="section-label">3D Technology</div>
-      <h2 class="section-title">Inspect every detail — in three dimensions.</h2>
-      <p class="section-sub" style="margin-bottom:2rem">
-        AutoHub uses WebGL-powered 3D models so you can rotate, zoom, and explore vehicles as if they were right in front of you. Paint variants, interior details, and real-time lighting — no showroom required.
+      <div class="section-label">Visual Fidelity</div>
+      <h2 class="section-title">Inspect every detail — in stunning high resolution.</h2>
+      <p class="section-sub" style="margin-bottom: 2rem;">
+        AutoHub-render.com utilizes actual, authentic photography of every vehicle model in our encyclopedia. No more generic placeholders or toy 3D models. See the engineering exactly as it exists in the real world.
       </p>
-      <a href="/cars" class="btn btn-primary"><i class="fas fa-cube"></i> Open 3D Garage</a>
+      <a href="/cars" class="btn btn-primary"><i class="fas fa-image"></i> Open Gallery</a>
     </div>
-    <div style="background:var(--dark-3);border-radius:14px;overflow:hidden;aspect-ratio:4/3;position:relative">
-      <model-viewer
-        src="{{ url_for('static', filename='models/carconcept/CarConcept.gltf') }}"
-        alt="3D car model"
-        auto-rotate
-        camera-controls
-        shadow-intensity="1"
-        environment-image="neutral"
-        exposure="0.9"
-        style="width:100%;height:100%"
-      >
-        <div slot="progress-bar" style="display:none"></div>
-      </model-viewer>
+    <div style="background: var(--dark-3); border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; position: relative;">
+      <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&q=80&w=1024" alt="High Resolution Car" style="width: 100%; height: 100%; object-fit: cover;">
       <div class="viewer-hint-bar">
-        <span><i class="fas fa-hand-pointer"></i> Interactive</span>
+        <span><i class="fas fa-camera"></i> Authentic Photography</span>
       </div>
     </div>
   </div>
@@ -130,28 +100,29 @@
     <div class="section-label">Quick Access</div>
     <h2 class="section-title">Everything in one place.</h2>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-    <a href="/news" style="display:flex;align-items:center;gap:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all 220ms;text-decoration:none" onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
-      <div style="width:56px;height:56px;border-radius:12px;background:rgba(212,0,42,0.08);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--red);flex-shrink:0">
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+    <a href="/news" style="display: flex; align-items: center; gap: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 220ms; text-decoration: none;" onmouseover="this.style.boxShadow='var(--shadow-md)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow=''; this.style.transform=''">
+      <div style="width: 56px; height: 56px; border-radius: 12px; background: rgba(212,0,42,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--red); flex-shrink: 0;">
         <i class="fas fa-newspaper"></i>
       </div>
       <div>
-        <div style="font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text)">Latest News</div>
-        <div style="font-size:0.85rem;color:var(--text-2)">Real-time auto industry news powered by NewsAPI.</div>
+        <div style="font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text);">Latest News</div>
+        <div style="font-size: 0.85rem; color: var(--text-2);">Real-time auto industry news powered by NewsAPI.</div>
       </div>
-      <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-3)"></i>
+      <i class="fas fa-arrow-right" style="margin-left: auto; color: var(--text-3);"></i>
     </a>
-    <a href="/info" style="display:flex;align-items:center;gap:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all 220ms;text-decoration:none" onmouseover="this.style.boxShadow='var(--shadow-md)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
-      <div style="width:56px;height:56px;border-radius:12px;background:rgba(74,144,226,0.09);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#4A90E2;flex-shrink:0">
+
+    <a href="/info" style="display: flex; align-items: center; gap: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: all 220ms; text-decoration: none;" onmouseover="this.style.boxShadow='var(--shadow-md)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.boxShadow=''; this.style.transform=''">
+      <div style="width: 56px; height: 56px; border-radius: 12px; background: rgba(74,144,226,0.09); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #4A90E2; flex-shrink: 0;">
         <i class="fas fa-industry"></i>
       </div>
       <div>
-        <div style="font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text)">Industry Info</div>
-        <div style="font-size:0.85rem;color:var(--text-2)">History, market data, trends, and global statistics.</div>
+        <div style="font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--text);">Industry Info</div>
+        <div style="font-size: 0.85rem; color: var(--text-2);">History, market data, trends, and global statistics.</div>
       </div>
-      <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-3)"></i>
+      <i class="fas fa-arrow-right" style="margin-left: auto; color: var(--text-3);"></i>
     </a>
   </div>
 </div>
-
 {% endblock %}

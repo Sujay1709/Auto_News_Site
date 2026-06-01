@@ -96,4 +96,3 @@ curl -X POST localhost:8080/api/generate-3d \
   $10–$50. Check your balance at 3daistudio.com first.
 - ~3–10 minutes per car, but jobs run in parallel on Tripo's side.
   The full batch typically completes within ~30 minutes.
-

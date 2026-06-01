@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #000;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark-hud {
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Custom Sleek Scrollbar for Side Panel */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #27272a; /* zinc-800 */
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #dc2626; /* red-600 */
+}
