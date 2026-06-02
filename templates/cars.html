@@ -4,168 +4,170 @@
 
 {% block content %}
 <div class="cars-page-wrap">
-  <!-- Filter bar -->
-  <div class="filter-bar">
-    <span class="filter-bar-label">Filter:</span>
-    <button class="filter-chip active" data-filter="all">All ({{ cars|length }})</button>
-    <button class="filter-chip" data-filter="sedan">Sedans</button>
-    <button class="filter-chip" data-filter="suv">SUVs</button>
-    <button class="filter-chip" data-filter="sports">Sports Cars</button>
-    <button class="filter-chip" data-filter="electric">Electric</button>
-  </div>
-
-  <!-- Main layout: grid + detail panel -->
-  <div class="cars-layout">
-    <!-- Left: car card grid -->
-    <div class="cars-list-pane">
-      <div class="cars-grid" id="cars-grid">
-        {% for car in cars %}
-          <div 
-            class="car-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} selected{% endif %}" 
-            data-type="{{ car.type }}" 
-            data-slug="{{ car.slug }}"
-            data-detail-href="{{ url_for('car_detail_page', slug=car.slug) }}"
-            data-index="{{ loop.index0 }}"
-            role="button"
-            tabindex="0"
-          >
-            {% if car.new %}<span class="car-new-tag">NEW</span>{% endif %}
-
-            <div class="car-card-icon">
-              {% if car.type == 'sedan' %}<i class="fas fa-car-side"></i>
-              {% elif car.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
-              {% elif car.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
-              {% elif car.type == 'electric' %}<i class="fas fa-bolt"></i>
-              {% else %}<i class="fas fa-car"></i>{% endif %}
-            </div>
-            
-            <div class="car-card-make">{{ car.make }}</div>
-            <div class="car-card-name">{{ car.model }}</div>
-            <div class="car-card-cat">{{ car.year }} &middot; {{ car.category }}</div>
-            
-            <div class="car-card-stats">
-              <div class="cstat">
-                <span class="cstat-val">{{ car.horsepower }}</span>
-                <span class="cstat-lbl">Power</span>
-              </div>
-              <div class="cstat">
-                <span class="cstat-val">{{ car.acceleration }}</span>
-                <span class="cstat-lbl">0–60</span>
-              </div>
-              <div class="cstat">
-                <span class="cstat-val">{{ car.price }}</span>
-                <span class="cstat-lbl">MSRP</span>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
+    <!-- Filter bar -->
+    <div class="filter-bar">
+        <span class="filter-bar-label">Filter:</span>
+        <button class="filter-chip active" data-filter="all">All ({{ cars|length }})</button>
+        <button class="filter-chip" data-filter="sedan">Sedans</button>
+        <button class="filter-chip" data-filter="suv">SUVs</button>
+        <button class="filter-chip" data-filter="sports">Sports Cars</button>
+        <button class="filter-chip" data-filter="electric">Electric</button>
     </div>
 
-    <!-- Right: sticky detail panel -->
-    <aside class="car-detail-panel" id="car-detail-panel">
-      <!-- High-Res Image Viewer -->
-      <div class="detail-viewer" id="detail-viewer" style="position: relative; background: #000;">
-        {% set first = namespace(car=None) %}
-        {% for car in cars %}
-          {% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %}
-            {% set first.car = car %}
-          {% endif %}
-        {% endfor %}
-
-        <img id="main-car-image" src="{{ first.car.image if first.car else '' }}" alt="Selected Car" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
-        <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card), transparent 25%); pointer-events: none;"></div>
-      </div>
-
-      <!-- Specs -->
-      <div class="detail-body" id="detail-body">
-        {% if first.car %}
-          <div class="detail-yr-cat" id="d-yr-cat">{{ first.car.year }} &middot; {{ first.car.category }}</div>
-          <div class="detail-title" id="d-title">{{ first.car.make }} {{ first.car.model }}</div>
-          <div class="detail-price" id="d-price">{{ first.car.price }}</div>
-
-          <div class="detail-specs" id="d-specs">
-            <div class="spec-item full">
-              <div>
-                <div class="spec-lbl">0–60 mph</div>
-                <div class="spec-val" id="d-accel">{{ first.car.acceleration }}</div>
-              </div>
-              <div>
-                <div class="spec-lbl">Top Speed</div>
-                <div class="spec-val" id="d-top">{{ first.car.top_speed }}</div>
-              </div>
+    <!-- Main layout: grid + detail panel -->
+    <div class="cars-layout">
+        <!-- Left: car card grid -->
+        <div class="cars-list-pane">
+            <div class="cars-grid" id="cars-grid">
+                {% for car in cars %}
+                <div class="car-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} selected{% endif %}" 
+                     data-type="{{ car.type }}" 
+                     data-slug="{{ car.slug }}"
+                     data-detail-href="{{ url_for('car_detail_page', slug=car.slug) }}"
+                     data-index="{{ loop.index0 }}"
+                     role="button" 
+                     tabindex="0">
+                    
+                    {% if car.new %}<span class="car-new-tag" style="z-index: 2;">NEW</span>{% endif %}
+                    
+                    <div class="car-card-img" style="aspect-ratio: 16/9; margin: calc(var(--s5) * -1) calc(var(--s5) * -1) var(--s4) calc(var(--s5) * -1); overflow: hidden; border-bottom: 1px solid var(--border); background: var(--bg-alt);">
+                        <img src="{{ car.image }}" alt="{{ car.make }} {{ car.model }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                    </div>
+                    
+                    <div class="car-card-make">{{ car.make }}</div>
+                    <div class="car-card-name">{{ car.model }}</div>
+                    <div class="car-card-cat">
+                        {% if car.type == 'sedan' %}<i class="fas fa-car-side" style="margin-right: 4px;"></i>
+                        {% elif car.type == 'suv' %}<i class="fas fa-truck-pickup" style="margin-right: 4px;"></i>
+                        {% elif car.type == 'sports' %}<i class="fas fa-flag-checkered" style="margin-right: 4px;"></i>
+                        {% elif car.type == 'electric' %}<i class="fas fa-bolt" style="margin-right: 4px;"></i>
+                        {% else %}<i class="fas fa-car" style="margin-right: 4px;"></i>{% endif %}
+                        {{ car.year }} &middot; {{ car.category }}
+                    </div>
+                    
+                    <div class="car-card-stats">
+                        <div class="cstat">
+                            <span class="cstat-val">{{ car.horsepower }}</span>
+                            <span class="cstat-lbl">Power</span>
+                        </div>
+                        <div class="cstat">
+                            <span class="cstat-val">{{ car.acceleration }}</span>
+                            <span class="cstat-lbl">0–60</span>
+                        </div>
+                        <div class="cstat">
+                            <span class="cstat-val">{{ car.price }}</span>
+                            <span class="cstat-lbl">MSRP</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Engine</div>
-              <div class="spec-val" id="d-engine">{{ first.car.engine }}</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Horsepower</div>
-              <div class="spec-val" id="d-hp">{{ first.car.horsepower }}</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Transmission</div>
-              <div class="spec-val" id="d-trans">{{ first.car.transmission }}</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Drivetrain</div>
-              <div class="spec-val" id="d-drive">{{ first.car.drivetrain }}</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Fuel Economy</div>
-              <div class="spec-val" id="d-fuel">{{ first.car.fuel_economy }}</div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-lbl">Seating</div>
-              <div class="spec-val" id="d-seat">{{ first.car.seating }}</div>
-            </div>
-          </div>
+        </div>
 
-          {% if first.car %}
-          <a href="{{ url_for('car_detail_page', slug=first.car.slug) }}" id="d-detail-link" class="detail-cta">
-            View full details <i class="fas fa-arrow-right"></i>
-          </a>
-          {% endif %}
+        <!-- Right: sticky detail panel -->
+        <aside class="car-detail-panel" id="car-detail-panel">
+            <!-- High-Res Image Viewer -->
+            <div class="detail-viewer" id="detail-viewer" style="position: relative; background: #000;">
+                {% set first = namespace(car=None) %}
+                {% for car in cars %}
+                    {% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %}
+                        {% set first.car = car %}
+                    {% endif %}
+                {% endfor %}
+                
+                <img id="main-car-image" src="{{ first.car.image if first.car else '' }}" alt="Selected Car" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+                
+                <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card), transparent 25%); pointer-events: none;"></div>
+            </div>
 
-          <!-- Rich content: overview + driving feel + features + best-for -->
-          <div class="detail-rich" id="d-rich">
-            {% if first.car.overview %}
-              <div class="rich-block">
-                <div class="rich-heading"><i class="fas fa-info-circle"></i> Overview</div>
-                <p class="rich-text" id="d-overview">{{ first.car.overview }}</p>
-              </div>
-            {% endif %}
-            
-            {% if first.car.drives_like %}
-              <div class="rich-block">
-                <div class="rich-heading"><i class="fas fa-tachometer-alt"></i> How it drives</div>
-                <p class="rich-text" id="d-drives">{{ first.car.drives_like }}</p>
-              </div>
-            {% endif %}
-            
-            {% if first.car.features %}
-              <div class="rich-block">
-                <div class="rich-heading"><i class="fas fa-star"></i> Notable features</div>
-                <ul class="rich-list" id="d-features">
-                  {% for f in first.car.features %}<li>{{ f }}</li>{% endfor %}
-                </ul>
-              </div>
-            {% endif %}
+            <!-- Specs -->
+            <div class="detail-body" id="detail-body">
+                {% if first.car %}
+                    <div class="detail-yr-cat" id="d-yr-cat">{{ first.car.year }} &middot; {{ first.car.category }}</div>
+                    <div class="detail-title" id="d-title">{{ first.car.make }} {{ first.car.model }}</div>
+                    <div class="detail-price" id="d-price">{{ first.car.price }}</div>
 
-            {% if first.car.best_for %}
-              <div class="rich-block best-for-block">
-                <div class="rich-heading"><i class="fas fa-thumbs-up"></i> Best for</div>
-                <p class="rich-text best-for-text" id="d-bestfor">{{ first.car.best_for }}</p>
-              </div>
-            {% endif %}
-          </div>
+                    <div class="detail-specs" id="d-specs">
+                        <div class="spec-item full">
+                            <div>
+                                <div class="spec-lbl">0–60 mph</div>
+                                <div class="spec-val" id="d-accel">{{ first.car.acceleration }}</div>
+                            </div>
+                            <div>
+                                <div class="spec-lbl">Top Speed</div>
+                                <div class="spec-val" id="d-top">{{ first.car.top_speed }}</div>
+                            </div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Engine</div>
+                            <div class="spec-val" id="d-engine">{{ first.car.engine }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Horsepower</div>
+                            <div class="spec-val" id="d-hp">{{ first.car.horsepower }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Transmission</div>
+                            <div class="spec-val" id="d-trans">{{ first.car.transmission }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Drivetrain</div>
+                            <div class="spec-val" id="d-drive">{{ first.car.drivetrain }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Fuel Economy</div>
+                            <div class="spec-val" id="d-fuel">{{ first.car.fuel_economy }}</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-lbl">Seating</div>
+                            <div class="spec-val" id="d-seat">{{ first.car.seating }}</div>
+                        </div>
+                    </div>
+                    
+                    {% if first.car %}
+                    <a href="{{ url_for('car_detail_page', slug=first.car.slug) }}" id="d-detail-link" class="detail-cta">
+                        View full details <i class="fas fa-arrow-right"></i>
+                    </a>
+                    {% endif %}
 
-        {% else %}
-          <p style="color: var(--text-3); padding: var(--s8) 0; text-align: center;">Select a car to view specs.</p>
-        {% endif %}
-      </div>
-    </aside>
-  </div>
+                    <!-- Rich content: overview + driving feel + features + best-for -->
+                    <div class="detail-rich" id="d-rich">
+                        {% if first.car.overview %}
+                        <div class="rich-block">
+                            <div class="rich-heading"><i class="fas fa-info-circle"></i> Overview</div>
+                            <p class="rich-text" id="d-overview">{{ first.car.overview }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if first.car.drives_like %}
+                        <div class="rich-block">
+                            <div class="rich-heading"><i class="fas fa-tachometer-alt"></i> How it drives</div>
+                            <p class="rich-text" id="d-drives">{{ first.car.drives_like }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if first.car.features %}
+                        <div class="rich-block">
+                            <div class="rich-heading"><i class="fas fa-star"></i> Notable features</div>
+                            <ul class="rich-list" id="d-features">
+                                {% for f in first.car.features %}<li>{{ f }}</li>{% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                        {% if first.car.best_for %}
+                        <div class="rich-block best-for-block">
+                            <div class="rich-heading"><i class="fas fa-thumbs-up"></i> Best for</div>
+                            <p class="rich-text best-for-text" id="d-bestfor">{{ first.car.best_for }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <p style="color: var(--text-3); padding: var(--s8) 0; text-align: center;">Select a car to view specs.</p>
+                {% endif %}
+            </div>
+        </aside>
+    </div>
 </div>
 
 <!-- Cars data injected for JS -->
@@ -176,121 +178,120 @@
 
 {% block scripts %}
 <script>
-  (function () {
-    const carsData = JSON.parse(document.getElementById('cars-data').textContent);
-    const cards = document.querySelectorAll('.car-card');
-    const filterBtns = document.querySelectorAll('.filter-chip');
-    
-    const mainImage = document.getElementById('main-car-image');
-
-    // ── Field refs ──
-    const fYrCat = document.getElementById('d-yr-cat');
-    const fTitle = document.getElementById('d-title');
-    const fPrice = document.getElementById('d-price');
-    const fAccel = document.getElementById('d-accel');
-    const fTop = document.getElementById('d-top');
-    const fEng = document.getElementById('d-engine');
-    const fHp = document.getElementById('d-hp');
-    const fTrans = document.getElementById('d-trans');
-    const fDrive = document.getElementById('d-drive');
-    const fFuel = document.getElementById('d-fuel');
-    const fSeat = document.getElementById('d-seat');
-    const fDetailLink = document.getElementById('d-detail-link');
-    
-    const fOverview = document.getElementById('d-overview');
-    const fDrives = document.getElementById('d-drives');
-    const fFeatures = document.getElementById('d-features');
-    const fBestFor = document.getElementById('d-bestfor');
-
-    function setBlockVisibility(parent, hasContent) {
-      const block = parent ? parent.closest('.rich-block') : null;
-      if (block) block.style.display = hasContent ? '' : 'none';
-    }
-
-    function updatePanel(car) {
-      if (!car) return;
-
-      // Update High-Res Image
-      if (mainImage) {
-          mainImage.src = car.image || '';
-          mainImage.alt = `${car.make} ${car.model}`;
-      }
-
-      // Update text fields
-      if (fYrCat) fYrCat.textContent = `${car.year} &middot; ${car.category}`;
-      if (fTitle) fTitle.textContent = `${car.make} ${car.model}`;
-      if (fPrice) fPrice.textContent = car.price;
-      if (fAccel) fAccel.textContent = car.acceleration;
-      if (fTop) fTop.textContent = car.top_speed;
-      if (fEng) fEng.textContent = car.engine;
-      if (fHp) fHp.textContent = car.horsepower;
-      if (fTrans) fTrans.textContent = car.transmission;
-      if (fDrive) fDrive.textContent = car.drivetrain;
-      if (fFuel) fFuel.textContent = car.fuel_economy;
-      if (fSeat) fSeat.textContent = car.seating;
-
-      // Update rich content blocks (overview / drives_like / features / best_for)
-      if (fOverview) {
-        fOverview.textContent = car.overview || '';
-        setBlockVisibility(fOverview, !!car.overview);
-      }
-      if (fDrives) {
-        fDrives.textContent = car.drives_like || '';
-        setBlockVisibility(fDrives, !!car.drives_like);
-      }
-      if (fBestFor) {
-        fBestFor.textContent = car.best_for || '';
-        setBlockVisibility(fBestFor, !!car.best_for);
-      }
-      if (fFeatures) {
-        const features = Array.isArray(car.features) ? car.features : [];
-        fFeatures.innerHTML = features.map(f => `<li>${f.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('');
-        setBlockVisibility(fFeatures, features.length > 0);
-      }
-
-      if (fDetailLink && car.slug) {
-        fDetailLink.setAttribute('href', `/cars/${car.slug}`);
-      }
-    }
-
-    // ── Card click: navigate to full-page detail view ──
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const href = card.dataset.detailHref;
-        if (href) {
-          window.location.href = href;
-        }
-      });
-
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.click();
-        }
-      });
-      
-      // Hover updates the preview panel so users still see what each card holds
-      card.addEventListener('mouseenter', () => {
-        const idx = parseInt(card.dataset.index, 10);
-        const car = carsData[idx];
-        if (car) updatePanel(car);
-      });
-    });
-
-    // ── Filter chips ──
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    (function() {
+        const carsData = JSON.parse(document.getElementById('cars-data').textContent);
         
-        const f = btn.dataset.filter;
-        cards.forEach(card => {
-          const show = f === 'all' || card.dataset.type === f;
-          card.style.display = show ? '' : 'none';
-        });
-      });
-    });
+        const cards = document.querySelectorAll('.car-card');
+        const filterBtns = document.querySelectorAll('.filter-chip');
+        const mainImage = document.getElementById('main-car-image');
+        
+        // ── Field refs ──
+        const fYrCat = document.getElementById('d-yr-cat');
+        const fTitle = document.getElementById('d-title');
+        const fPrice = document.getElementById('d-price');
+        const fAccel = document.getElementById('d-accel');
+        const fTop   = document.getElementById('d-top');
+        const fEng   = document.getElementById('d-engine');
+        const fHp    = document.getElementById('d-hp');
+        const fTrans = document.getElementById('d-trans');
+        const fDrive = document.getElementById('d-drive');
+        const fFuel  = document.getElementById('d-fuel');
+        const fSeat  = document.getElementById('d-seat');
+        const fDetailLink = document.getElementById('d-detail-link');
+        
+        const fOverview = document.getElementById('d-overview');
+        const fDrives = document.getElementById('d-drives');
+        const fFeatures = document.getElementById('d-features');
+        const fBestFor = document.getElementById('d-bestfor');
 
-  })();
+        function setBlockVisibility(parent, hasContent) {
+            const block = parent ? parent.closest('.rich-block') : null;
+            if (block) block.style.display = hasContent ? '' : 'none';
+        }
+
+        function updatePanel(car) {
+            if (!car) return;
+
+            // Update High-Res Image
+            if (mainImage) {
+                mainImage.src = car.image || '';
+                mainImage.alt = `${car.make} ${car.model}`;
+            }
+
+            // Update text fields
+            if (fYrCat) fYrCat.innerHTML = `${car.year} &middot; ${car.category}`;
+            if (fTitle) fTitle.textContent = `${car.make} ${car.model}`;
+            if (fPrice) fPrice.textContent = car.price;
+            if (fAccel) fAccel.textContent = car.acceleration;
+            if (fTop)   fTop.textContent   = car.top_speed;
+            if (fEng)   fEng.textContent   = car.engine;
+            if (fHp)    fHp.textContent    = car.horsepower;
+            if (fTrans) fTrans.textContent = car.transmission;
+            if (fDrive) fDrive.textContent = car.drivetrain;
+            if (fFuel)  fFuel.textContent  = car.fuel_economy;
+            if (fSeat)  fSeat.textContent  = car.seating;
+
+            // Update rich content blocks (overview / drives_like / features / best_for)
+            if (fOverview) {
+                fOverview.textContent = car.overview || '';
+                setBlockVisibility(fOverview, !!car.overview);
+            }
+            if (fDrives) {
+                fDrives.textContent = car.drives_like || '';
+                setBlockVisibility(fDrives, !!car.drives_like);
+            }
+            if (fBestFor) {
+                fBestFor.textContent = car.best_for || '';
+                setBlockVisibility(fBestFor, !!car.best_for);
+            }
+            if (fFeatures) {
+                const features = Array.isArray(car.features) ? car.features : [];
+                fFeatures.innerHTML = features.map(f => `<li>${f.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`).join('');
+                setBlockVisibility(fFeatures, features.length > 0);
+            }
+
+            if (fDetailLink && car.slug) {
+                fDetailLink.setAttribute('href', `/cars/${car.slug}`);
+            }
+        }
+
+        // ── Card click: navigate to full-page detail view ──
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const href = card.dataset.detailHref;
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+            
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+
+            // Hover updates the preview panel so users still see what each card holds
+            card.addEventListener('mouseenter', () => {
+                const idx = parseInt(card.dataset.index, 10);
+                const car = carsData[idx];
+                if (car) updatePanel(car);
+            });
+        });
+
+        // ── Filter chips ──
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const f = btn.dataset.filter;
+                cards.forEach(card => {
+                    const show = f === 'all' || card.dataset.type === f;
+                    card.style.display = show ? '' : 'none';
+                });
+            });
+        });
+    })();
 </script>
 {% endblock %}
