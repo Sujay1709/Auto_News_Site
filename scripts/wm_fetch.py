@@ -73,6 +73,7 @@ MIN_SHORT_SIDE = 1024     # InstantMesh's effective minimum input dimension
 
 
 def api_get(params: dict) -> dict:
+    """GET the Commons API with our User-Agent and decode the JSON reply."""
     qs = urllib.parse.urlencode(params)
     req = urllib.request.Request(f"{API_URL}?{qs}",
                                  headers={"User-Agent": USER_AGENT})
@@ -142,6 +143,7 @@ def pick_best(candidates: list[dict]) -> dict | None:
 
 
 def download_url(url: str, dest: Path) -> None:
+    """Stream the image at `url` to `dest`, creating parent dirs as needed."""
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     dest.parent.mkdir(parents=True, exist_ok=True)
     with urllib.request.urlopen(req, timeout=60) as resp, dest.open("wb") as out:
