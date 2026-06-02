@@ -17,49 +17,48 @@
   <!-- Main layout: grid + detail panel -->
   <div class="cars-layout">
 
-    <!-- Left: car card grid -->
+    <!-- Left: car card grid (Greta-style) -->
     <div class="cars-list-pane">
-      <div class="cars-grid" id="cars-grid">
+      <div class="ah-grid ah-grid--compact" id="cars-grid">
         {% for car in cars %}
-        <div
-          class="car-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} selected{% endif %}"
-          data-type="{{ car.type }}"
-          data-slug="{{ car.slug }}"
-          data-detail-href="{{ url_for('car_detail_page', slug=car.slug) }}"
-          data-index="{{ loop.index0 }}"
-          role="button"
-          tabindex="0"
-        >
-          {% if car.new %}<span class="car-new-tag">NEW</span>{% endif %}
-          {% if car.model_3d_available %}<span class="car-3d-tag"><i class="fas fa-cube"></i> 3D</span>{% endif %}
+        <a href="{{ url_for('car_detail_page', slug=car.slug) }}"
+           class="ah-card{% if (selected_slug and car.slug == selected_slug) or (not selected_slug and loop.first) %} ah-card-selected{% endif %}"
+           data-type="{{ car.type }}"
+           data-slug="{{ car.slug }}"
+           data-detail-href="{{ url_for('car_detail_page', slug=car.slug) }}"
+           data-index="{{ loop.index0 }}"
+           aria-label="{{ car.year }} {{ car.make }} {{ car.model }}">
+          <div class="ah-card-media">
+            {% if car.hero_image_url %}
+            <img src="{{ car.hero_image_url }}" alt="{{ car.make }} {{ car.model }}"
+                 loading="lazy" class="ah-card-bg">
+            {% endif %}
+            <div class="ah-card-veil"></div>
 
-          <div class="car-card-icon">
-            {% if car.type == 'sedan' %}<i class="fas fa-car-side"></i>
-            {% elif car.type == 'suv' %}<i class="fas fa-truck-pickup"></i>
-            {% elif car.type == 'sports' %}<i class="fas fa-flag-checkered"></i>
-            {% elif car.type == 'electric' %}<i class="fas fa-bolt"></i>
-            {% else %}<i class="fas fa-car"></i>{% endif %}
+            <div class="ah-card-top">
+              <span class="ah-card-eyebrow">{{ car.model }}</span>
+              {% if car.model_3d_available %}
+              <span class="ah-card-zoom" title="3D model available"><i class="fas fa-cube"></i></span>
+              {% else %}
+              <span class="ah-card-zoom" aria-hidden="true"><i class="fas fa-expand"></i></span>
+              {% endif %}
+            </div>
+
+            <div class="ah-card-bottom">
+              <div class="ah-card-make">{{ car.make }}</div>
+              <div class="ah-card-model">{{ car.model | upper }}</div>
+              <div class="ah-card-meta">
+                <span>{{ car.horsepower }}</span>
+                <span class="ah-card-dot">·</span>
+                <span>{{ car.acceleration }}</span>
+                <span class="ah-card-dot">·</span>
+                <span>{{ car.price }}</span>
+              </div>
+            </div>
+
+            {% if car.new %}<span class="ah-card-newtag">NEW</span>{% endif %}
           </div>
-
-          <div class="car-card-make">{{ car.make }}</div>
-          <div class="car-card-name">{{ car.model }}</div>
-          <div class="car-card-cat">{{ car.year }} · {{ car.category }}</div>
-
-          <div class="car-card-stats">
-            <div class="cstat">
-              <span class="cstat-val">{{ car.horsepower }}</span>
-              <span class="cstat-lbl">Power</span>
-            </div>
-            <div class="cstat">
-              <span class="cstat-val">{{ car.acceleration }}</span>
-              <span class="cstat-lbl">0–60</span>
-            </div>
-            <div class="cstat">
-              <span class="cstat-val">{{ car.price }}</span>
-              <span class="cstat-lbl">MSRP</span>
-            </div>
-          </div>
-        </div>
+        </a>
         {% endfor %}
       </div>
     </div>
@@ -230,7 +229,7 @@
 <script>
 (function () {
   const carsData  = JSON.parse(document.getElementById('cars-data').textContent);
-  const cards     = document.querySelectorAll('.car-card');
+  const cards     = document.querySelectorAll('.ah-card');
   const filterBtns= document.querySelectorAll('.filter-chip');
   const viewer    = document.getElementById('detail-viewer');
   const hintBar   = viewer ? viewer.querySelector('.detail-viewer-hint') : null;

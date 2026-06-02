@@ -572,7 +572,28 @@ def resolve_hero_url(slug: str) -> str | None:
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    """
+    Landing page: AUTOHUB hero + grid of every car using the generated
+    hero banners as card backgrounds. Same card markup as /cars so the
+    Greta-style cards work on both routes.
+    """
+    cards = []
+    for car in cars_data:
+        slug = _car_slug(car)
+        cards.append({
+            'slug':       slug,
+            'make':       car['make'],
+            'model':      car['model'],
+            'year':       car.get('year', ''),
+            'category':   car.get('category', ''),
+            'type':       car.get('type', 'car'),
+            'price':      car.get('price', ''),
+            'horsepower': car.get('horsepower', ''),
+            'acceleration': car.get('acceleration', ''),
+            'new':        car.get('new', False),
+            'hero_image_url': resolve_hero_url(slug),
+        })
+    return render_template('index.html', cars=cards)
 
 
 @app.route('/news')
