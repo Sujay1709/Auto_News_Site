@@ -18,3 +18,6 @@ env/
 # Build / dist
 build/
 dist/
+
+# BlackBox CLI (contains secrets)
+.blackboxcli/
