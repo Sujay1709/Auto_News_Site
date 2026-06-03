@@ -26,11 +26,11 @@
                 <span>AutoHub<strong>-render.com</strong></span>
             </a>
             
-            <nav>
-                <a href="/" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
-                <a href="/news" {% if request.path == '/news' %}class="active"{% endif %}>News</a>
-                <a href="/cars" {% if request.path == '/cars' %}class="active"{% endif %}>Cars</a>
-                <a href="/info" {% if request.path == '/info' %}class="active"{% endif %}>Industry</a>
+            <nav aria-label="Primary">
+                <a href="/" {% if request.path == '/' %}class="active" aria-current="page"{% endif %}>Home</a>
+                <a href="/news" {% if request.path == '/news' %}class="active" aria-current="page"{% endif %}>News</a>
+                <a href="/cars" {% if request.path.startswith('/cars') %}class="active" aria-current="page"{% endif %}>Cars</a>
+                <a href="/info" {% if request.path == '/info' %}class="active" aria-current="page"{% endif %}>Industry</a>
             </nav>
             
             <div class="header-right">
@@ -73,10 +73,10 @@
                 </div>
                 <div class="footer-col">
                     <h5>Connect</h5>
-                    <a href="#"><i class="fab fa-x-twitter"></i> Twitter / X</a>
-                    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                    <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i> Twitter / X</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 </div>
             </div>
             <div class="footer-bottom">

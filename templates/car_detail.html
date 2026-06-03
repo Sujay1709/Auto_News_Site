@@ -50,8 +50,10 @@
       </div>
     </div>
 
-    <div class="car-page-viewer" style="background: #000; border-radius: 14px; overflow: hidden;">
-      <img src="{{ car.image }}" alt="{{ car.make }} {{ car.model }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;">
+    <div class="car-page-viewer car-page-viewer-img">
+      <img src="{{ car.image }}"
+           alt="{{ car.year }} {{ car.make }} {{ car.model }}, {{ car.category }}"
+           loading="eager" decoding="async" referrerpolicy="no-referrer">
     </div>
   </header>
 
@@ -82,6 +84,14 @@
   <section class="car-page-section">
     <h2 class="car-page-h2"><i class="fas fa-tachometer-alt"></i> How it drives</h2>
     <p class="car-page-body">{{ car.drives_like }}</p>
+  </section>
+  {% endif %}
+
+  <!-- MODEL HISTORY -->
+  {% if car.history %}
+  <section class="car-page-section">
+    <h2 class="car-page-h2"><i class="fas fa-landmark"></i> Model history</h2>
+    <p class="car-page-body">{{ car.history }}</p>
   </section>
   {% endif %}
 
@@ -173,4 +183,178 @@
     </a>
   </div>
 </article>
+
+<!-- ═══ AI ASSISTANT CHATBOT ═══ -->
+<button type="button" id="carbot-launcher" class="carbot-launcher" aria-label="Ask the AI assistant about this car" aria-expanded="false" aria-controls="carbot-panel">
+  <i class="fas fa-robot"></i>
+  <span>Ask AI</span>
+</button>
+
+<section id="carbot-panel" class="carbot-panel" role="dialog" aria-modal="false" aria-labelledby="carbot-title" hidden>
+  <header class="carbot-head">
+    <div class="carbot-head-id">
+      <span class="carbot-avatar"><i class="fas fa-robot"></i></span>
+      <div>
+        <div id="carbot-title" class="carbot-title">AutoHub Assistant</div>
+        <div class="carbot-sub">{{ car.make }} {{ car.model }}</div>
+      </div>
+    </div>
+    <button type="button" id="carbot-close" class="carbot-close" aria-label="Close assistant"><i class="fas fa-times"></i></button>
+  </header>
+
+  <div id="carbot-log" class="carbot-log" aria-live="polite"></div>
+
+  <div class="carbot-chips" id="carbot-chips">
+    <button type="button" class="carbot-chip" data-intent="pros">Pros</button>
+    <button type="button" class="carbot-chip" data-intent="cons">Cons</button>
+    <button type="button" class="carbot-chip" data-intent="awards">Awards</button>
+    <button type="button" class="carbot-chip" data-intent="history">History</button>
+    <button type="button" class="carbot-chip" data-intent="price">Price</button>
+    <button type="button" class="carbot-chip" data-intent="specs">Specs</button>
+  </div>
+
+  <form class="carbot-form" id="carbot-form">
+    <input type="text" id="carbot-input" class="carbot-input" autocomplete="off"
+           placeholder="Ask about pros, cons, awards, history…" aria-label="Ask a question about this car">
+    <button type="submit" class="carbot-send" aria-label="Send"><i class="fas fa-paper-plane"></i></button>
+  </form>
+</section>
+
+<script type="application/json" id="carbot-data">{{ {
+  'make': car.make, 'model': car.model, 'year': car.year, 'price': car.price,
+  'category': car.category,
+  'pros': car.pros, 'cons': car.cons, 'awards': car.awards, 'history': car.history,
+  'overview': car.overview, 'drives_like': car.drives_like, 'best_for': car.best_for,
+  'specs': {
+    'acceleration': car.acceleration, 'top_speed': car.top_speed, 'engine': car.engine,
+    'horsepower': car.horsepower, 'transmission': car.transmission, 'drivetrain': car.drivetrain,
+    'fuel_economy': car.fuel_economy, 'seating': car.seating
+  }
+} | tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const data = JSON.parse(document.getElementById('carbot-data').textContent);
+  const launcher = document.getElementById('carbot-launcher');
+  const panel = document.getElementById('carbot-panel');
+  const closeBtn = document.getElementById('carbot-close');
+  const log = document.getElementById('carbot-log');
+  const form = document.getElementById('carbot-form');
+  const input = document.getElementById('carbot-input');
+  const chips = document.getElementById('carbot-chips');
+  const name = `${data.make} ${data.model}`;
+
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const list = (arr) => Array.isArray(arr) && arr.length
+    ? '<ul class="carbot-ul">' + arr.map(x => `<li>${esc(x)}</li>`).join('') + '</ul>' : '';
+
+  // ── Intent answer builders ──
+  const intents = {
+    pros: () => list(data.pros) ? `Here's what the ${esc(name)} does well:${list(data.pros)}`
+                                : `I don't have a strengths breakdown on file for the ${esc(name)}.`,
+    cons: () => list(data.cons) ? `The main trade-offs to weigh on the ${esc(name)}:${list(data.cons)}`
+                                : `No notable downsides are recorded for the ${esc(name)}.`,
+    awards: () => list(data.awards) ? `Accolades earned by the ${esc(name)}:${list(data.awards)}`
+                                    : `I don't have any awards listed for the ${esc(name)} yet.`,
+    history: () => data.history ? `<p>${esc(data.history)}</p>`
+                                : `I don't have the model history for the ${esc(name)} on file.`,
+    price: () => `The ${esc(name)} starts at <strong>${esc(data.price)}</strong> (${esc(data.year)}, ${esc(data.category)}).`,
+    drive: () => data.drives_like ? `<p>${esc(data.drives_like)}</p>`
+                                  : `No driving impressions are recorded for the ${esc(name)}.`,
+    bestfor: () => data.best_for ? `<p>Best for: ${esc(data.best_for)}</p>`
+                                 : `No "best for" note is recorded for the ${esc(name)}.`,
+    overview: () => data.overview ? `<p>${esc(data.overview)}</p>` : intents.specs(),
+    specs: () => {
+      const s = data.specs || {};
+      const rows = [
+        ['0–60 mph', s.acceleration], ['Top speed', s.top_speed], ['Engine', s.engine],
+        ['Power', s.horsepower], ['Transmission', s.transmission], ['Drivetrain', s.drivetrain],
+        ['Fuel economy', s.fuel_economy], ['Seating', s.seating]
+      ].filter(r => r[1]);
+      return `Key specs for the ${esc(name)}:` +
+        '<ul class="carbot-ul">' + rows.map(r => `<li><strong>${esc(r[0])}:</strong> ${esc(r[1])}</li>`).join('') + '</ul>';
+    }
+  };
+
+  // keyword → intent
+  const rules = [
+    [/\b(pro|pros|strength|strong|good|advantage|like|love|upside)\b/, 'pros'],
+    [/\b(con|cons|weak|downside|drawback|bad|problem|issue|negative|trade)\b/, 'cons'],
+    [/\b(award|won|win|accolade|prize|recogni|honou?r)\b/, 'awards'],
+    [/\b(history|histori|origin|generation|started|launch|debut|background|story|when.*(made|introduc))\b/, 'history'],
+    [/\b(price|cost|msrp|expensive|how much|worth|\$)\b/, 'price'],
+    [/\b(drive|driving|handl|feel|ride|steer|corner)\b/, 'drive'],
+    [/\b(best for|who.*for|suit|recommend)\b/, 'bestfor'],
+    [/\b(spec|specs|engine|horsepower|\bhp\b|power|0-?60|acceler|top speed|transmission|gearbox|drivetrain|mpg|economy|range|seat|fuel)\b/, 'specs'],
+    [/\b(overview|about|tell me|summary|what is|describe)\b/, 'overview'],
+  ];
+
+  function bubble(who, html) {
+    const div = document.createElement('div');
+    div.className = `carbot-msg carbot-msg-${who}`;
+    div.innerHTML = html;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function answer(q) {
+    const t = (q || '').toLowerCase().trim();
+    if (!t) return;
+    if (/\b(hi|hello|hey|yo|sup)\b/.test(t) && t.length < 12) {
+      return `Hi! Ask me about the ${esc(name)}'s <strong>pros</strong>, <strong>cons</strong>, <strong>awards</strong>, <strong>history</strong>, price, or specs.`;
+    }
+    if (/\b(thank|thanks|cheers|ty)\b/.test(t)) return `Happy to help. Anything else about the ${esc(name)}?`;
+    for (const [re, key] of rules) { if (re.test(t)) return intents[key](); }
+    return `I can answer questions about the ${esc(name)}'s <strong>pros</strong>, <strong>cons</strong>, <strong>awards</strong>, <strong>history</strong>, price, driving feel, and specs. Try one of the chips below.`;
+  }
+
+  function ask(q, opts) {
+    if (!(opts && opts.silent)) bubble('user', esc(q));
+    const html = answer(q);
+    if (html) setTimeout(() => bubble('bot', html), 180);
+  }
+
+  let opened = false;
+  function openPanel() {
+    panel.hidden = false;
+    launcher.setAttribute('aria-expanded', 'true');
+    panel.classList.add('open');
+    if (!opened) {
+      opened = true;
+      bubble('bot', `Hi — I'm the AutoHub assistant for the <strong>${esc(name)}</strong>. ` +
+        `Ask me about its <strong>pros</strong>, <strong>cons</strong>, <strong>awards</strong>, or <strong>history</strong> — or tap a chip below.`);
+    }
+    setTimeout(() => input.focus(), 50);
+  }
+  function closePanel() {
+    panel.classList.remove('open');
+    launcher.setAttribute('aria-expanded', 'false');
+    setTimeout(() => { panel.hidden = true; }, 200);
+    launcher.focus();
+  }
+
+  launcher.addEventListener('click', () => (panel.hidden ? openPanel() : closePanel()));
+  closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) closePanel(); });
+
+  chips.addEventListener('click', (e) => {
+    const btn = e.target.closest('.carbot-chip');
+    if (!btn) return;
+    const intent = btn.dataset.intent;
+    bubble('user', esc(btn.textContent));
+    setTimeout(() => bubble('bot', intents[intent] ? intents[intent]() : answer(intent)), 180);
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value;
+    if (!q.trim()) return;
+    input.value = '';
+    ask(q);
+  });
+})();
+</script>
 {% endblock %}

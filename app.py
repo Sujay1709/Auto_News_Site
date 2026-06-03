@@ -18,7 +18,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 app = Flask(__name__)
-API_KEY = '7120175e997a4aae8edc62c5167858bf'
+# Prefer NEWS_API_KEY from the environment; fall back to the bundled demo key for local runs.
+API_KEY = os.environ.get('NEWS_API_KEY', '7120175e997a4aae8edc62c5167858bf')
 NEWS_URL = f'https://newsapi.org/v2/everything?q=automobile+industry&apiKey={API_KEY}&pageSize=10'
 
 cars_data = [
@@ -75,32 +76,33 @@ def get_car_image_url(slug):
             if os.path.exists(file_path):
                 return f"/static/{d}/{slug}{ext}"
                 
-    # High-quality fallback images for every car in the database
+    # High-quality fallback images for every car in the database.
+    # Live Wikimedia Commons URLs re-resolved via the Wikipedia REST API at 1280px.
     FALLBACK_IMAGES = {
-        'toyota-camry': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1024px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg',
-        'honda-accord': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Honda_Accord_%28CV3%29_EX_L_1.5T_2022_front_quarter.jpg/1024px-Honda_Accord_%28CV3%29_EX_L_1.5T_2022_front_quarter.jpg',
-        'bmw-3-series': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/2019_BMW_330i_M_Sport_Step_2.0_Front.jpg/1024px-2019_BMW_330i_M_Sport_Step_2.0_Front.jpg',
-        'mercedes-benz-c-class': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Mercedes-Benz_W206_1003250.jpg/1024px-Mercedes-Benz_W206_1003250.jpg',
-        'hyundai-sonata': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/2020_Hyundai_Sonata_SEL_Plus_in_Portofino_Gray%2C_Front_Left%2C_10-24-2021.jpg/1024px-2020_Hyundai_Sonata_SEL_Plus_in_Portofino_Gray%2C_Front_Left%2C_10-24-2021.jpg',
-        'kia-k5': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/2021_Kia_K5_EX_in_Everlasting_Silver%2C_front_left.jpg/1024px-2021_Kia_K5_EX_in_Everlasting_Silver%2C_front_left.jpg',
-        'nissan-altima': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/2019_Nissan_Altima_SR_AWD%2C_front_11.2.19.jpg/1024px-2019_Nissan_Altima_SR_AWD%2C_front_11.2.19.jpg',
-        'audi-a4': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/2016_Audi_A4_Sport_TDI_Quattro_S-A_2.0_Front.jpg/1024px-2016_Audi_A4_Sport_TDI_Quattro_S-A_2.0_Front.jpg',
-        'lexus-es': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Lexus_ES_300h_F_Sport_AXZH10_front.jpg/1024px-Lexus_ES_300h_F_Sport_AXZH10_front.jpg',
-        'genesis-g70': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Genesis_G70_2.0T_Elite_IK_front.jpg/1024px-Genesis_G70_2.0T_Elite_IK_front.jpg',
-        'toyota-rav4': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/2019_Toyota_RAV4_Icon_HEV_CVT_2.5_Front.jpg/1024px-2019_Toyota_RAV4_Icon_HEV_CVT_2.5_Front.jpg',
-        'ford-explorer': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/2020_Ford_Explorer_Platinum_AWD%2C_Front_Left%2C_10-18-2020.jpg/1024px-2020_Ford_Explorer_Platinum_AWD%2C_Front_Left%2C_10-18-2020.jpg',
-        'tesla-model-x': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/2018_Tesla_Model_X_100D_Front.jpg/1024px-2018_Tesla_Model_X_100D_Front.jpg',
-        'porsche-cayenne': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Porsche_Cayenne_S_E-Hybrid_%28PO536%29_%E2%80%93_Frontansicht%2C_30._Dezember_2019%2C_D%C3%BCsseldorf.jpg/1024px-Porsche_Cayenne_S_E-Hybrid_%28PO536%29_%E2%80%93_Frontansicht%2C_30._Dezember_2019%2C_D%C3%BCsseldorf.jpg',
-        'porsche-911-carrera': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Porsche_992_Carrera_4S_1.jpg/1024px-Porsche_992_Carrera_4S_1.jpg',
-        'chevrolet-corvette-c8': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/2020_Chevrolet_Corvette_C8_Stingray_front_10.24.20.jpg/1024px-2020_Chevrolet_Corvette_C8_Stingray_front_10.24.20.jpg',
-        'ferrari-296-gtb': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Ferrari_296_GTB_in_Monaco.jpg/1024px-Ferrari_296_GTB_in_Monaco.jpg',
-        'ford-mustang-dark-horse': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/2024_Ford_Mustang_Dark_Horse%2C_front_right.jpg/1024px-2024_Ford_Mustang_Dark_Horse%2C_front_right.jpg',
-        'tesla-model-3': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/2018_Tesla_Model_3_Long_Range_Dual_Motor_AWD_Front.jpg/1024px-2018_Tesla_Model_3_Long_Range_Dual_Motor_AWD_Front.jpg',
-        'tesla-model-s-plaid': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/2021_Tesla_Model_S_Plaid_in_Midnight_Silver_Metallic%2C_front_right.jpg/1024px-2021_Tesla_Model_S_Plaid_in_Midnight_Silver_Metallic%2C_front_right.jpg',
-        'lucid-air-pure': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Lucid_Air_at_IAA_2021_1M8A0201.jpg/1024px-Lucid_Air_at_IAA_2021_1M8A0201.jpg',
-        'rivian-r1t': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Rivian_R1T_at_LA_Auto_Show_2.jpg/1024px-Rivian_R1T_at_LA_Auto_Show_2.jpg',
-        'hyundai-ioniq-6': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Hyundai_Ioniq_6_CE_1.jpg/1024px-Hyundai_Ioniq_6_CE_1.jpg',
-        'bmw-i7': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/BMW_i7_xDrive60_Auto_Zuerich_2022_1M8A5553.jpg/1024px-BMW_i7_xDrive60_Auto_Zuerich_2022_1M8A5553.jpg'
+        'toyota-camry': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg/1280px-2018_Toyota_Camry_%28ASV70R%29_Ascent_sedan_%282018-08-27%29_01.jpg',
+        'honda-accord': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/2023_Honda_Accord_LX%2C_front_left%2C_07-13-2023.jpg/1280px-2023_Honda_Accord_LX%2C_front_left%2C_07-13-2023.jpg',
+        'bmw-3-series': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/BMW_G20_%282022%29_IMG_7316_%282%29.jpg/1280px-BMW_G20_%282022%29_IMG_7316_%282%29.jpg',
+        'mercedes-benz-c-class': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Mercedes-Benz_W206_IMG_6380.jpg/1280px-Mercedes-Benz_W206_IMG_6380.jpg',
+        'hyundai-sonata': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/2024_Hyundai_Sonata_SEL%2C_front_right.jpg/1280px-2024_Hyundai_Sonata_SEL%2C_front_right.jpg',
+        'kia-k5': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/2022_Kia_K5_GT-Line_in_Pacific_Blue%2C_Front_Left%2C_09-05-2022.jpg/1280px-2022_Kia_K5_GT-Line_in_Pacific_Blue%2C_Front_Left%2C_09-05-2022.jpg',
+        'nissan-altima': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/2024_Nissan_Altima_SR%2C_front_left%2C_05-05-2025.jpg/1280px-2024_Nissan_Altima_SR%2C_front_left%2C_05-05-2025.jpg',
+        'audi-a4': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Audi_A4_B9_sedans_%28FL%29_1X7A2441.jpg/1280px-Audi_A4_B9_sedans_%28FL%29_1X7A2441.jpg',
+        'lexus-es': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Lexus_ES_350_%28GSZ10%29_IMG_4332.jpg/1280px-Lexus_ES_350_%28GSZ10%29_IMG_4332.jpg',
+        'genesis-g70': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/2022_Genesis_G70_2.0T_Prestige%2C_front_left%2C_09-09-2023.jpg/1280px-2022_Genesis_G70_2.0T_Prestige%2C_front_left%2C_09-09-2023.jpg',
+        'toyota-rav4': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Toyota_RAV4_XLE_%28facelift%29_%28front%29.jpg/1280px-Toyota_RAV4_XLE_%28facelift%29_%28front%29.jpg',
+        'ford-explorer': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Ford_Explorer_%28sixth_generation%29_IMG_6063.jpg/1280px-Ford_Explorer_%28sixth_generation%29_IMG_6063.jpg',
+        'tesla-model-x': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/2017_Tesla_Model_X_100D_Front.jpg/1280px-2017_Tesla_Model_X_100D_Front.jpg',
+        'porsche-cayenne': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Porsche_Cayenne_%28III%2C_Facelift%29_%E2%80%93_f_01012025.jpg/1280px-Porsche_Cayenne_%28III%2C_Facelift%29_%E2%80%93_f_01012025.jpg',
+        'porsche-911-carrera': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Porsche_911_No_1000000%2C_70_Years_Porsche_Sports_Car%2C_Berlin_%281X7A3888%29.jpg/1280px-Porsche_911_No_1000000%2C_70_Years_Porsche_Sports_Car%2C_Berlin_%281X7A3888%29.jpg',
+        'chevrolet-corvette-c8': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Chevrolet_Corvette_C8_IAA_2021_1X7A0156.jpg/1280px-Chevrolet_Corvette_C8_IAA_2021_1X7A0156.jpg',
+        'ferrari-296-gtb': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/2022_Ferrari_296_%28cropped%29.jpg/1280px-2022_Ferrari_296_%28cropped%29.jpg',
+        'ford-mustang-dark-horse': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/2024_Ford_Mustang_GT_Premium_convertible%2C_front_left%2C_09-28-2024.jpg/1280px-2024_Ford_Mustang_GT_Premium_convertible%2C_front_left%2C_09-28-2024.jpg',
+        'tesla-model-3': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Tesla_Model_3_%282023%29_Autofr%C3%BChling_Ulm_IMG_9282.jpg/1280px-Tesla_Model_3_%282023%29_Autofr%C3%BChling_Ulm_IMG_9282.jpg',
+        'tesla-model-s-plaid': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Tesla_Model_S_%28Facelift_ab_04-2016%29_%28cropped%29.jpg/1280px-Tesla_Model_S_%28Facelift_ab_04-2016%29_%28cropped%29.jpg',
+        'lucid-air-pure': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/2022_Lucid_Air_Grand_Touring_in_Zenith_Red%2C_front_left.jpg/1280px-2022_Lucid_Air_Grand_Touring_in_Zenith_Red%2C_front_left.jpg',
+        'rivian-r1t': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/2022_Rivian_R1T_%28in_Glacier_White%29%2C_front_6.21.22.jpg/1280px-2022_Rivian_R1T_%28in_Glacier_White%29%2C_front_6.21.22.jpg',
+        'hyundai-ioniq-6': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/2023_Hyundai_Ioniq_6_Limited%2C_front_4.27.23.jpg/1280px-2023_Hyundai_Ioniq_6_Limited%2C_front_4.27.23.jpg',
+        'bmw-i7': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/BMW_7-Series_%28G70%29_750e_IMG_9358.jpg/1280px-BMW_7-Series_%28G70%29_750e_IMG_9358.jpg'
     }
     
     return FALLBACK_IMAGES.get(slug, "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80&w=1024")
@@ -194,6 +196,7 @@ def car_detail_page(slug):
         'pros': car_details.get('pros', []),
         'cons': car_details.get('cons', []),
         'awards': car_details.get('awards', []),
+        'history': car_details.get('history'),
         'expert_quote': car_details.get('expert_quote'),
         'best_for': car_details.get('best_for'),
         'competitor_slugs': car_details.get('competitors', []),
@@ -215,4 +218,6 @@ def car_detail_page(slug):
     return render_template('car_detail.html', car=enriched, competitors=competitor_cards)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    port = int(os.environ.get('PORT', 8080))
+    debug = os.environ.get('FLASK_DEBUG', '1') != '0'
+    app.run(host='0.0.0.0', port=port, debug=debug)
