@@ -1,0 +1,67 @@
+MIT License
+
+Copyright (c) 2024-2026 Sujay Gopal (GitHub: Sujay1709)
+
+This project — AutoHub / Auto Industry Hub — was created and is owned
+by Sujay Gopal. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Image and 3D Model Attributions
+
+This project bundles third-party imagery and 3D models in `static/images/cars/`,
+`static/images/source/`, and `static/models/`. Each file retains the license
+under which it was originally distributed.
+
+### Car hero photographs (`static/images/cars/`)
+Photographs in `static/images/cars/` are sourced from Wikimedia Commons under
+various Creative Commons licenses (CC-BY, CC-BY-SA, CC0, etc.). For full
+attribution of each image, see the corresponding Wikipedia article:
+
+- https://en.wikipedia.org/wiki/Toyota_Camry
+- https://en.wikipedia.org/wiki/Honda_Accord
+- https://en.wikipedia.org/wiki/BMW_3_Series
+- https://en.wikipedia.org/wiki/Mercedes-Benz_C-Class
+- https://en.wikipedia.org/wiki/Hyundai_Sonata
+- https://en.wikipedia.org/wiki/Kia_K5
+- https://en.wikipedia.org/wiki/Nissan_Altima
+- https://en.wikipedia.org/wiki/Audi_A4
+- https://en.wikipedia.org/wiki/Lexus_ES
+- https://en.wikipedia.org/wiki/Genesis_G70
+- https://en.wikipedia.org/wiki/Toyota_RAV4
+- https://en.wikipedia.org/wiki/Ford_Explorer
+- https://en.wikipedia.org/wiki/Tesla_Model_X
+- https://en.wikipedia.org/wiki/Porsche_Cayenne
+- https://en.wikipedia.org/wiki/Porsche_911
+- https://en.wikipedia.org/wiki/Chevrolet_Corvette_(C8)
+- https://en.wikipedia.org/wiki/Ferrari_296_GTB
+- https://en.wikipedia.org/wiki/Ford_Mustang_(seventh_generation)
+- https://en.wikipedia.org/wiki/Tesla_Model_3
+- https://en.wikipedia.org/wiki/Tesla_Model_S
+- https://en.wikipedia.org/wiki/Lucid_Air
+- https://en.wikipedia.org/wiki/Rivian_R1T
+- https://en.wikipedia.org/wiki/Hyundai_Ioniq_6
+- https://en.wikipedia.org/wiki/BMW_i7
+
+### 3D car models (`static/models/community-cars/` and `static/models/community/`)
+3D GLB assets are third-party downloads retained under their original licenses.
+See `static/models/community-cars/NOTICE.md` and
+`static/models/community/NOTICE.md` for per-file license details.

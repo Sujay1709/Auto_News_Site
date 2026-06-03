@@ -7,6 +7,7 @@
 /* ── CSS Variables ── */
 :root {
   --bg:          #FAFAF8;
+  --bg-2:        #F2F1EE;
   --bg-alt:      #F2F1EE;
   --bg-card:     #FFFFFF;
   --dark:        #0A0B0D;
@@ -15,6 +16,7 @@
   --dark-card:   #1A1C22;
 
   --text:        #0F0F0F;
+  --text-1:      #0F0F0F;
   --text-2:      #4A4A52;
   --text-3:      #8A8A96;
   --text-inv:    #FFFFFF;
