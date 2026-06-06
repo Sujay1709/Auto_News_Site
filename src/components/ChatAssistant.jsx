@@ -5,7 +5,11 @@ import SafeIcon from './common/SafeIcon';
 import { CARS_DATA } from '../data/cars';
 import { answerQuestion, SUGGESTED_QUESTIONS } from '../data/carChat';
 
-const { FiCpu, FiSend, FiLoader, FiUser } = FiIcons;
+const { FiCpu, FiSend, FiLoader, FiUser, FiTrash2 } = FiIcons;
+
+// Short HH:MM timestamp for a chat bubble.
+const stamp = () =>
+  new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
 // Reusable chat experience for the AI car assistant.
 //  - car:          the car to answer about (required unless showCarPicker)
@@ -17,14 +21,16 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
 
+  // Greeting used on mount and when the conversation is cleared.
+  const greeting = () => ({
+    role: 'bot',
+    text: `Hi! I'm the AutoHub assistant. Ask me anything about the ${car.make} ${car.model} — tyres, transmission, drivetrain, headlights, ADAS, power and more. Tap a suggestion below to get started.`,
+    time: stamp(),
+  });
+
   // Reset the conversation whenever the active car changes.
   useEffect(() => {
-    setMessages([
-      {
-        role: 'bot',
-        text: `Hi! I'm the AutoHub assistant. Ask me anything about the ${car.make} ${car.model} — tyres, transmission, drivetrain, headlights, ADAS, power and more. Tap a suggestion below to get started.`,
-      },
-    ]);
+    setMessages([greeting()]);
   }, [car.id]);
 
   useEffect(() => {
@@ -34,23 +40,29 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
   const send = (text) => {
     const q = (text ?? query).trim();
     if (!q || loading) return;
-    setMessages((m) => [...m, { role: 'user', text: q }]);
+    setMessages((m) => [...m, { role: 'user', text: q, time: stamp() }]);
     setQuery('');
     setLoading(true);
     // Brief delay to mimic a thinking assistant.
     setTimeout(() => {
       const reply = answerQuestion(car, q);
-      setMessages((m) => [...m, { role: 'bot', text: reply }]);
+      setMessages((m) => [...m, { role: 'bot', text: reply, time: stamp() }]);
       setLoading(false);
     }, 550);
+  };
+
+  const clearChat = () => {
+    if (loading) return;
+    setMessages([greeting()]);
   };
 
   return (
     <div className="flex flex-col h-full bg-black border border-white/5 rounded-3xl overflow-hidden">
       {/* Header */}
       <div className="flex items-center gap-3 p-4 border-b border-white/5 bg-zinc-950 shrink-0">
-        <div className="w-10 h-10 rounded-xl bg-red-600/10 flex items-center justify-center text-red-500 border border-red-500/20 shrink-0">
+        <div className="relative w-10 h-10 rounded-xl bg-red-600/10 flex items-center justify-center text-red-500 border border-red-500/20 shrink-0">
           <SafeIcon icon={FiCpu} size={20} />
+          <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-zinc-950 animate-soft-pulse" />
         </div>
         <div className="flex-1 min-w-0">
           <h4 className="text-sm font-black uppercase tracking-tighter text-white">AutoHub AI Assistant</h4>
@@ -58,6 +70,15 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
             {car.make} {car.model}
           </p>
         </div>
+        <button
+          onClick={clearChat}
+          disabled={loading || messages.length <= 1}
+          aria-label="Clear conversation"
+          title="Clear conversation"
+          className="w-8 h-8 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-red-500/50 flex items-center justify-center transition-colors disabled:opacity-30 shrink-0"
+        >
+          <SafeIcon icon={FiTrash2} size={14} />
+        </button>
         {showCarPicker && (
           <select
             value={car.id}
@@ -90,14 +111,17 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
               >
                 <SafeIcon icon={m.role === 'user' ? FiUser : FiCpu} size={13} />
               </div>
-              <div
-                className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
-                  m.role === 'user'
-                    ? 'bg-red-600 text-white rounded-tr-sm'
-                    : 'bg-zinc-900 text-zinc-200 border border-white/5 rounded-tl-sm'
-                }`}
-              >
-                {m.text}
+              <div className={`flex flex-col gap-1 max-w-[80%] ${m.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div
+                  className={`px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
+                    m.role === 'user'
+                      ? 'bg-red-600 text-white rounded-tr-sm'
+                      : 'bg-zinc-900 text-zinc-200 border border-white/5 rounded-tl-sm'
+                  }`}
+                >
+                  {m.text}
+                </div>
+                {m.time && <span className="text-[9px] text-white/25 px-1">{m.time}</span>}
               </div>
             </motion.div>
           ))}

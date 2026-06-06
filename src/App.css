@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ----------------------------------------------------------------------------
+   App-level utilities (imported by App.jsx).
+   Global resets and the .custom-scrollbar live in index.css; this file adds
+   reusable presentation helpers used by the comparison page and the assistant.
+---------------------------------------------------------------------------- */
+
+@layer components {
+  /* Red brand gradient text — used for hero numbers and headings. */
+  .text-gradient-red {
+    background: linear-gradient(120deg, #fff 0%, #f87171 55%, #dc2626 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Subtle elevated card with a red glow on hover — comparison columns. */
+  .card-glow {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .card-glow:hover {
+    border-color: rgba(220, 38, 38, 0.4);
+    box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.15), 0 18px 50px -20px rgba(220, 38, 38, 0.35);
+  }
+
+  /* "Winner" pill on a comparison row — the stronger spec of the two cars. */
+  .spec-win {
+    color: #fff;
+    background: rgba(220, 38, 38, 0.14);
+    border: 1px solid rgba(220, 38, 38, 0.35);
+  }
+}
+
+/* A slightly wider scrollbar variant for long comparison tables. */
+.compare-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.compare-scroll::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 6px;
+}
+.compare-scroll::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
+}
+
+/* Soft pulse used on the assistant's online dot. */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.animate-soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
