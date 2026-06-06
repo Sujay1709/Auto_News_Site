@@ -5,7 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
     <title>{% block title %}AutoHub-render.com — Premium Automotive Intelligence{% endblock %}</title>
-    <meta name="description" content="The definitive automotive resource. Real-time news, 3D car models, and deep industry insights.">
+    <meta name="description" content="The definitive automotive resource. Real-time news, 3D car models, AI chat assistant, side-by-side car comparison, and deep industry insights.">
+    <link rel="canonical" href="https://autohub.onrender.com{{ request.path }}">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AutoHub">
+    <meta property="og:title" content="{% block og_title %}AutoHub — Premium Automotive Intelligence{% endblock %}">
+    <meta property="og:description" content="Compare cars head-to-head, chat with our AI assistant, explore 3D models, and catch live automotive news.">
+    <meta property="og:url" content="https://autohub.onrender.com{{ request.path }}">
+    <meta property="og:image" content="https://autohub.onrender.com/static/images/og-cover.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AutoHub — Premium Automotive Intelligence">
+    <meta name="twitter:description" content="Compare cars head-to-head, chat with our AI assistant, and explore 3D models."
+>
     
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 

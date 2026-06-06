@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response, make_response
 import requests
 import json
 import re
@@ -18,8 +18,25 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 app = Flask(__name__)
-# Prefer NEWS_API_KEY from the environment; fall back to the bundled demo key for local runs.
-API_KEY = os.environ.get('NEWS_API_KEY', '7120175e997a4aae8edc62c5167858bf')
+
+# ---------------------------------------------------------------------------
+# Security headers — applied to every response
+# ---------------------------------------------------------------------------
+@app.after_request
+def set_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
+    # Cache static assets aggressively; don't cache HTML pages
+    if response.content_type and 'text/html' in response.content_type:
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
+
+# Prefer NEWS_API_KEY from the environment; fall back to empty string so the
+# /news route returns a clear error rather than leaking a demo key in production.
+API_KEY = os.environ.get('NEWS_API_KEY', '')
 NEWS_URL = f'https://newsapi.org/v2/everything?q=automobile+industry&apiKey={API_KEY}&pageSize=10'
 
 cars_data = [
@@ -217,7 +234,34 @@ def car_detail_page(slug):
 
     return render_template('car_detail.html', car=enriched, competitors=competitor_cards)
 
+# ---------------------------------------------------------------------------
+# SEO — sitemap & robots
+# ---------------------------------------------------------------------------
+@app.route('/sitemap.xml')
+def sitemap():
+    BASE = os.environ.get('SITE_URL', 'https://autohub.onrender.com')
+    static_urls = ['', '/cars', '/news', '/info', '/compare']
+    car_slugs = [_car_slug(c) for c in cars_data]
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for path in static_urls:
+        lines.append(f'  <url><loc>{BASE}{path}</loc><changefreq>daily</changefreq><priority>0.8</priority></url>')
+    for slug in car_slugs:
+        lines.append(f'  <url><loc>{BASE}/cars/{slug}</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>')
+    lines.append('</urlset>')
+    return Response('\n'.join(lines), mimetype='application/xml')
+
+@app.route('/robots.txt')
+def robots():
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /api/\n"
+        f"Sitemap: {os.environ.get('SITE_URL', 'https://autohub.onrender.com')}/sitemap.xml\n"
+    )
+    return Response(content, mimetype='text/plain')
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    debug = os.environ.get('FLASK_DEBUG', '1') != '0'
+    debug = os.environ.get('FLASK_DEBUG', '0') != '0'
     app.run(host='0.0.0.0', port=port, debug=debug)
