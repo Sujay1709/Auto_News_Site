@@ -5,9 +5,11 @@ import SafeIcon from '../components/common/SafeIcon';
 
 const { FiArrowRight, FiCalendar, FiLoader, FiWifiOff } = FiIcons;
 
-// NewsAPI demo key (same bundled key used by the Flask backend, app.py:22).
-// NewsAPI's developer plan permits browser requests from localhost, so the SPA
-// pulls live global automotive headlines directly during local development.
+// NewsAPI demo key. The developer plan permits requests from localhost via the
+// Vite dev proxy (see vite.config.js), so the News page pulls live global
+// automotive headlines during local development. In a deployed static build the
+// proxy is absent, the request fails, and the page falls back to the cached
+// headlines in FALLBACK below — showing a "Cached Feed" badge.
 const NEWS_API_KEY = '7120175e997a4aae8edc62c5167858bf';
 
 // Each topic maps to a NewsAPI search query for real-time, global results.

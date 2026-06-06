@@ -1,21 +1,21 @@
-# AutoHub-render.com — Premium Automotive Intelligence
+# AutoHub — Premium Automotive Intelligence
 
 > **The smartest car research platform on the web.** Live news, deep specs on 24 vehicles, AI-powered chat, side-by-side comparison, interactive 3D models, and a sleek React SPA — all in one place.
 
-🌐 **Live at:** [autohub.onrender.com](https://autohub.onrender.com)
+🌐 **Live at:** [autohub-xhgcy2euza-uc.a.run.app](https://autohub-xhgcy2euza-uc.a.run.app)
 
 ---
 
 ## What Makes AutoHub Different
 
-Most car sites are static brochures. AutoHub is a **living, intelligent platform** — ask it anything, compare any two cars head-to-head, spin a 3D model, and catch breaking industry news, all without leaving the page.
+Most car sites are static brochures. AutoHub is a **living, intelligent platform** — ask it anything, compare any two cars head-to-head, spin a 3D model, and catch breaking industry news, all without leaving the page. It's a **pure front-end app** with no backend to run.
 
 ---
 
 ## Features
 
 ### 🤖 AI Car Assistant (Chat)
-A persistent floating chat assistant powered by AI that knows the entire AutoHub vehicle catalog.
+A persistent floating chat assistant that knows the entire AutoHub vehicle catalog.
 - Ask natural questions: *"Which SUV has the best range?"*, *"Compare the Porsche 911 to the Corvette C8"*, *"What's the 0–60 on the Tesla Model S Plaid?"*
 - Maintains conversation history across your session with per-message timestamps
 - Pulsing online indicator so you always know it's ready
@@ -40,23 +40,13 @@ Every car gets a full editorial page: overview, drives-like description, standou
 **Electric** — Tesla Model S Plaid, Lucid Air, and more
 
 ### 🔄 Interactive 3D Models
-Select cars come with real GLB models you can drag, spin, and zoom directly in the browser via `<model-viewer>`. The model pipeline supports:
-- Committed branded GLBs (Ferrari 599, BMW M8, Tesla Roadster) that survive restarts
-- AI-generated models via HuggingFace InstantMesh (free) and Tripo (paid)
+Select cars come with real GLB models you can drag, spin, and zoom directly in the browser via `<model-viewer>` (loaded from CDN). Model URLs are defined per car in `src/data/cars.js`.
 
 ### 📰 Live Automotive News
-Real-time news fetched from NewsAPI on every page load. Covers:
-- Electric vehicle breakthroughs
-- Autonomous driving developments
-- New model reveals and launches
-- Global automotive market trends
+Real-time headlines from NewsAPI covering EV breakthroughs, autonomous driving, new model reveals, and global market trends. In local development the request is proxied through the Vite dev server (NewsAPI rejects direct browser calls); in the deployed static build the page gracefully falls back to a curated set of cached headlines.
 
 ### 🏭 Industry Intelligence
-A reference-grade industry overview page:
-- Automotive history timeline from 1886 to present
-- Current global market statistics
-- Key industry segment breakdowns
-- Major automotive market overviews by region
+A reference-grade industry overview page: automotive history timeline from 1886 to present, current global market statistics, key industry segment breakdowns, and major market overviews by region.
 
 ---
 
@@ -64,13 +54,14 @@ A reference-grade industry overview page:
 
 | Layer | Technology |
 |---|---|
-| **Frontend SPA** | React 18 + Vite + Tailwind CSS + Framer Motion |
-| **Backend** | Flask (Python) + Gunicorn |
+| **App** | React 18 + Vite + Tailwind CSS + Framer Motion |
+| **Routing** | React Router (client-side SPA) |
 | **3D Viewer** | `<model-viewer>` via CDN |
-| **AI Chat** | Integrated AI assistant API |
-| **News** | NewsAPI |
-| **Deployment** | Render.com (auto-deploy from `main`) |
-| **Containerisation** | Docker + Docker Compose |
+| **News** | NewsAPI (via Vite dev proxy; cached fallback in production) |
+| **Hosting** | Google Cloud Run — static `dist/` served by nginx |
+| **Build/Container** | Multi-stage Docker (Node build → nginx) |
+
+There is **no backend server** — all car data is bundled in `src/data/cars.js`.
 
 ---
 
@@ -78,28 +69,28 @@ A reference-grade industry overview page:
 
 ```
 Auto_News_Site/
-├── app.py                    # Flask backend — routes, image resolution, NewsAPI
-├── src/                      # React SPA (Vite)
+├── index.html                # Vite entry — mounts the React app
+├── src/                      # React SPA
+│   ├── main.jsx              # App bootstrap + router
 │   ├── pages/
 │   │   ├── Home.jsx          # Landing / gallery
-│   │   ├── Compare.jsx       # ← Side-by-side comparison page
-│   │   ├── Cars.jsx          # Car listing & detail
-│   │   └── News.jsx          # News feed
+│   │   ├── Compare.jsx       # Side-by-side comparison page
+│   │   ├── CarDetail.jsx     # Per-car detail page
+│   │   ├── News.jsx          # News feed (live in dev, cached in prod)
+│   │   ├── Info.jsx          # Industry overview
+│   │   └── Help.jsx          # Help / about
 │   ├── components/
-│   │   ├── ChatAssistant.jsx # ← AI chat popup
+│   │   ├── ChatAssistant.jsx # AI chat popup
 │   │   ├── Navbar.jsx        # Nav with Compare link
-│   │   └── CarViewer.jsx     # 3D model viewer
-│   └── data/cars.js          # Client-side car catalog
-├── templates/                # Jinja2 templates (Flask-rendered routes)
-├── data/
-│   ├── cars_details.json     # Editorial copy per car
-│   └── car_3d_catalog.json   # slug → GLB model path
-├── static/
-│   ├── images/cars/          # Local car images (slug.jpg/webp)
-│   └── models/               # GLB model files
-├── scripts/                  # 3D generation pipeline
-├── render.yaml               # Render.com one-click deploy config
-└── Dockerfile / compose.yaml
+│   │   └── …                 # 3D viewer, layout, etc.
+│   └── data/
+│       ├── cars.js           # The 24-vehicle catalog (specs, images, GLB URLs)
+│       └── carChat.js        # AI assistant copy
+├── public/                   # Copied verbatim into dist/ (robots.txt, sitemap.xml)
+├── vite.config.js            # Dev server (port 5175) + /newsapi proxy
+├── Dockerfile                # Node build → nginx static serve
+├── nginx.conf                # SPA routing for Cloud Run
+└── scripts/                  # Legacy AI 3D-generation pipeline (see note below)
 ```
 
 ---
@@ -107,72 +98,33 @@ Auto_News_Site/
 ## Getting Started Locally
 
 ### Prerequisites
-- Python 3.11+
 - Node.js 18+
 
-### 1 — Clone & install
+### Run it
 
 ```bash
 git clone https://github.com/Sujay1709/Auto_News_Site.git
 cd Auto_News_Site
-
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-
 npm install
+npm run dev        # → http://localhost:5175
 ```
 
-### 2 — Set environment variables (optional but recommended)
-
-```bash
-export NEWS_API_KEY=your_newsapi_key      # free at newsapi.org
-export TRIPO_API_KEY=your_tripo_key       # only needed for AI 3D generation
-```
-
-### 3 — Start both servers
-
-**Terminal 1 — Flask backend (internal API):**
-```bash
-.venv/bin/python app.py
-```
-
-**Terminal 2 — Vite dev server (the browser):**
-```bash
-npm run dev
-```
-
-### 4 — Open the app
-
-```
-http://localhost:5173
-```
-
-> The Vite dev server proxies `/api` and `/static` calls to Flask automatically. Never open `:8080` directly — that's the internal backend.
-
----
-
-## Docker (one command)
-
-```bash
-docker compose up --build
-```
-
-Access at `http://localhost:5173`
+That's the whole app — there's nothing else to start. `npm run build` produces the static `dist/`, and `npm run preview` serves that build locally.
 
 ---
 
 ## Deployment
 
-AutoHub deploys automatically to Render.com on every push to `main`.
+AutoHub is deployed to **Google Cloud Run** as a static site (nginx serving the Vite `dist/`). See [DEPLOY.md](DEPLOY.md) for the full guide. The short version:
 
-**First-time setup:**
-1. Go to [render.com](https://render.com) → **New → Blueprint**
-2. Connect the `Sujay1709/Auto_News_Site` repo
-3. Render detects `render.yaml` and provisions the `autohub` service automatically
-4. Set `NEWS_API_KEY` in the Environment tab
-5. Wait ~3-5 minutes → live at **`https://autohub.onrender.com`**
+```bash
+gcloud run deploy autohub \
+  --source . --region us-central1 --platform managed \
+  --allow-unauthenticated --min-instances 0 --max-instances 10 \
+  --memory 256Mi --timeout 90
+```
 
-Subsequent deploys: just `git push origin main`.
+The `Dockerfile` builds the SPA and serves it with nginx on the port Cloud Run injects; `nginx.conf` rewrites unknown paths to `index.html` so React Router routes work on refresh.
 
 ---
 
@@ -180,20 +132,17 @@ Subsequent deploys: just `git push origin main`.
 
 | URL | Description |
 |---|---|
-| `/` | React SPA — home, gallery, 3D viewer |
+| `/` | Home, gallery, 3D viewer |
 | `/compare` | Side-by-side car comparison |
-| `/cars` | Full car listing with type filter |
-| `/cars/<slug>` | Per-car detail page |
-| `/news` | Live automotive news |
+| `/cars/:slug` | Per-car detail page |
+| `/news` | Automotive news |
 | `/info` | Industry overview & history |
 
-**Filter by category:**
-```
-/cars?type=sedan
-/cars?type=suv
-/cars?type=sports
-/cars?type=electric
-```
+---
+
+## Legacy: AI 3D-model generation
+
+The `scripts/` directory contains an optional pipeline (HuggingFace InstantMesh + Tripo) that previously generated GLB models through a Flask `/api/generate-3d` endpoint. The Flask backend has since been removed in favour of a pure static SPA, so those scripts are **non-functional** unless reworked to run standalone. The 3D models currently shown come from GLB URLs in `src/data/cars.js`.
 
 ---
 

@@ -1,52 +1,21 @@
 # syntax=docker/dockerfile:1
 
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
+# AutoHub is a static Vite/React SPA. This image builds the bundle and serves it
+# with nginx — there is no Python/Flask backend.
 
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
-
-ARG PYTHON_VERSION=3.13.7
-FROM python:${PYTHON_VERSION}-slim as base
-
-# Prevents Python from writing pyc files.
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
-
+# ── Build stage: compile the SPA to static assets in /app/dist ──
+FROM node:20-slim AS build
 WORKDIR /app
-
-# Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
-ARG UID=10001
-RUN adduser \
-    --disabled-password \
-    --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
-    --uid "${UID}" \
-    appuser
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
-# Leverage a bind mount to requirements.txt to avoid having to copy them into
-# into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
-
-# Switch to the non-privileged user to run the application.
-USER appuser
-
-# Copy the source code into the container.
+COPY package*.json ./
+RUN npm ci
 COPY . .
+RUN npm run build
 
-# Expose the port that the application listens on.
-EXPOSE 8080
-
-# Run the application via gunicorn for production. The PORT env var is
-# honored when set (Render, Fly, Railway all inject it); falls back to 8080.
-CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-8080} --workers 2 --threads 4 --timeout 90"]
+# ── Serve stage: nginx serves dist/ on the port Cloud Run injects ($PORT) ──
+FROM nginx:1.27-alpine
+# nginx:alpine runs envsubst on /etc/nginx/templates/*.template at startup,
+# expanding ${PORT} (injected by Cloud Run; defaults to 8080 locally).
+COPY nginx.conf /etc/nginx/templates/default.conf.template
+COPY --from=build /app/dist /usr/share/nginx/html
+ENV PORT=8080
+CMD ["nginx", "-g", "daemon off;"]
