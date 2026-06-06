@@ -74,7 +74,7 @@ The script POSTs one job per car. The background poller in `app.py`
 curl -s localhost:8080/api/jobs | python3 -m json.tool
 ```
 
-Or refresh `http://localhost:8080/cars` in the browser — each car
+Or refresh `http://localhost:5173/cars` in the browser — each car
 swaps from its CC-licensed silhouette to its AI-generated model as
 soon as Tripo finishes that car.
 

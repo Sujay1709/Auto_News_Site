@@ -10,23 +10,21 @@ The app is **deployed publicly on Render.com** under the service name `autohub` 
 
 ## Common commands
 
-### Run the Flask backend (primary)
+### Run the app (browser = localhost:5173)
 ```bash
-# Activate existing venv
-.venv/bin/python app.py           # serves on http://localhost:8080
+# 1. Start Flask backend (internal API — do NOT open this in the browser)
+.venv/bin/python app.py           # binds to http://localhost:8080 (internal only)
 
-# Or fresh setup
+# 2. Start Vite dev server in a second terminal — this is the browser URL
+npm install
+npm run dev          # open http://localhost:5173  ← THE browser
+npm run build        # production build to dist/
+npm run preview      # preview the build
+
+# Or fresh venv setup
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python app.py
-```
-
-### Run the React/Vite frontend (secondary SPA at root `/`)
-```bash
-npm install
-npm run dev          # dev server with HMR
-npm run build        # production build to dist/
-npm run preview      # preview the build
 ```
 
 ### Docker (alternative)

@@ -56,7 +56,7 @@ auto_news_site/
 docker-compose up --build
 ```
 
-2. Access the application at `http://localhost:8080`
+2. Access the application at `http://localhost:5173`
 
 ### Manual Installation
 
@@ -71,12 +71,13 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Run the application:
+3. Run the Flask backend and Vite dev server:
 ```bash
-python app.py
+python app.py &       # Flask backend (internal, port 8080)
+npm run dev           # Vite dev server — open http://localhost:5173
 ```
 
-4. Access the application at `http://localhost:8080`
+4. Access the application at `http://localhost:5173`
 
 ## Configuration
 

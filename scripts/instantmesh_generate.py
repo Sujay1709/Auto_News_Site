@@ -196,7 +196,7 @@ def print_catalog_snippet(slug: str, glb_path: Path) -> None:
     print(f"(probably:  \"<make>|<model>|default|default\"):\n")
     print(json.dumps(snippet, indent=2))
     print("─" * 70)
-    print("\nThen refresh http://localhost:8080/cars to see the model.")
+    print("\nThen refresh http://localhost:5173/cars to see the model.")
 
 
 # ---------------------------------------------------------------------------
