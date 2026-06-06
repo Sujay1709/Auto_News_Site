@@ -1128,3 +1128,52 @@ footer { background:var(--dark); color:var(--text-inv-2); padding:var(--s16) var
   background: transparent; border: 1px solid var(--border, #e2e8f0); color: var(--text, #0f172a);
 }
 .btn-ghost:hover { background: var(--bg-subtle, #f1f5f9); }
+
+/* ═══ CHATBOT — BLACK BACKGROUND / RED CARD THEME ═════════════ */
+.carbot-launcher {
+  background: linear-gradient(135deg, #e11d2a, #7f0d14);
+  box-shadow: 0 10px 30px rgba(225,29,42,0.5);
+}
+.carbot-launcher:hover { box-shadow: 0 14px 40px rgba(225,29,42,0.65); }
+
+.carbot-panel {
+  background: #050505;
+  border: 1px solid #3a0c11;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.8);
+  color: #f4f4f5;
+}
+.carbot-head { background: linear-gradient(135deg, #e11d2a, #7f0d14); }
+.carbot-avatar { background: rgba(0,0,0,0.28); }
+.carbot-close { background: rgba(0,0,0,0.22); }
+.carbot-close:hover { background: rgba(0,0,0,0.4); }
+
+.carbot-log { background: #000; }
+
+/* Bot replies = red-outlined dark cards */
+.carbot-msg-bot {
+  background: #15080a;
+  border: 1px solid #e11d2a;
+  color: #f4f4f5;
+  box-shadow: 0 4px 14px rgba(225,29,42,0.12);
+}
+/* User messages = solid red card */
+.carbot-msg-user {
+  background: linear-gradient(135deg, #e11d2a, #7f0d14);
+  color: #fff;
+}
+.carbot-msg-bot strong { color: #ff6b73; }
+.carbot-ul li::marker { color: #e11d2a; }
+
+.carbot-chips { background: #050505; border-top: 1px solid #2a0a0c; }
+.carbot-chip {
+  background: #15080a; border: 1px solid #e11d2a; color: #ffb3b8;
+}
+.carbot-chip:hover { background: #e11d2a; border-color: #e11d2a; color: #fff; }
+
+.carbot-form { background: #050505; }
+.carbot-input {
+  background: #000; border: 1px solid #3a0c11; color: #f4f4f5;
+}
+.carbot-input::placeholder { color: #8a5b5f; }
+.carbot-input:focus { border-color: #e11d2a; box-shadow: 0 0 0 3px rgba(225,29,42,0.28); }
+.carbot-send { background: linear-gradient(135deg, #e11d2a, #7f0d14); }

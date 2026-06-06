@@ -248,34 +248,58 @@
 
   const esc = (s) => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const list = (arr) => Array.isArray(arr) && arr.length
-    ? '<ul class="carbot-ul">' + arr.map(x => `<li>${esc(x)}</li>`).join('') + '</ul>' : '';
+  // lowercase the first character so a phrase reads naturally mid-sentence
+  const decap = (s) => { s = String(s == null ? '' : s); return s ? s.charAt(0).toLowerCase() + s.slice(1) : s; };
+  const stripDot = (s) => String(s == null ? '' : s).replace(/[.\s]+$/, '');
+  // join already-escaped fragments into an Oxford-comma prose list
+  const prose = (items) => {
+    const a = (items || []).filter(Boolean);
+    if (!a.length) return '';
+    if (a.length === 1) return a[0];
+    if (a.length === 2) return `${a[0]} and ${a[1]}`;
+    return `${a.slice(0, -1).join(', ')}, and ${a[a.length - 1]}`;
+  };
+  const cat = (data.category || 'its segment');
 
-  // ── Intent answer builders ──
+  // ── Intent answer builders — full-paragraph prose, generated per model ──
   const intents = {
-    pros: () => list(data.pros) ? `Here's what the ${esc(name)} does well:${list(data.pros)}`
-                                : `I don't have a strengths breakdown on file for the ${esc(name)}.`,
-    cons: () => list(data.cons) ? `The main trade-offs to weigh on the ${esc(name)}:${list(data.cons)}`
-                                : `No notable downsides are recorded for the ${esc(name)}.`,
-    awards: () => list(data.awards) ? `Accolades earned by the ${esc(name)}:${list(data.awards)}`
-                                    : `I don't have any awards listed for the ${esc(name)} yet.`,
-    history: () => data.history ? `<p>${esc(data.history)}</p>`
-                                : `I don't have the model history for the ${esc(name)} on file.`,
-    price: () => `The ${esc(name)} starts at <strong>${esc(data.price)}</strong> (${esc(data.year)}, ${esc(data.category)}).`,
-    drive: () => data.drives_like ? `<p>${esc(data.drives_like)}</p>`
-                                  : `No driving impressions are recorded for the ${esc(name)}.`,
-    bestfor: () => data.best_for ? `<p>Best for: ${esc(data.best_for)}</p>`
-                                 : `No "best for" note is recorded for the ${esc(name)}.`,
+    pros: () => (data.pros && data.pros.length)
+      ? `<p>The ${esc(name)} earns its keep on several fronts. Reviewers and owners consistently single out ${prose(data.pros.map(p => esc(decap(p))))} — the qualities that help it stand out in the ${esc(cat).toLowerCase()} class.</p>`
+      : `<p>I don't have a detailed strengths breakdown on file for the ${esc(name)} just yet, but it holds its own in the ${esc(cat).toLowerCase()} class.</p>`,
+    cons: () => (data.cons && data.cons.length)
+      ? `<p>No car is without compromise, and the ${esc(name)} is no exception. The main trade-offs to weigh before you buy are ${prose(data.cons.map(c => esc(decap(c))))}. None are dealbreakers on their own, but they're worth factoring into your decision.</p>`
+      : `<p>There are no notable downsides recorded for the ${esc(name)} — it comes across as a genuinely well-rounded pick.</p>`,
+    awards: () => (data.awards && data.awards.length)
+      ? `<p>The ${esc(name)} has collected real industry recognition over its life, including ${prose(data.awards.map(esc))}. Accolades like these reflect strong showings in independent testing and professional reviews, and they're a useful shorthand for how it stacks up against rivals.</p>`
+      : `<p>I don't have any formal awards on file for the ${esc(name)} yet — but a thin trophy cabinet doesn't take away from what it delivers on the road.</p>`,
+    history: () => data.history
+      ? `<p>${esc(data.history)}</p>`
+      : `<p>I don't have the full model history for the ${esc(name)} on file, though it remains a recognised name in the ${esc(cat).toLowerCase()} class.</p>`,
+    price: () => `<p>The ${esc(name)} carries a starting price of <strong>${esc(data.price)}</strong> for the ${esc(data.year)} model year, which places it squarely in the ${esc(cat)} segment. Expect the figure to climb once you add higher trims, options and the usual dealer fees, so treat it as a floor rather than an out-the-door number.</p>`,
+    drive: () => data.drives_like
+      ? `<p>${esc(data.drives_like)}</p>`
+      : `<p>I don't have detailed driving impressions recorded for the ${esc(name)}, but its hardware suggests it behaves much as you'd expect for a ${esc(cat).toLowerCase()}.</p>`,
+    bestfor: () => data.best_for
+      ? `<p>The ${esc(name)} is best suited to ${esc(stripDot(decap(data.best_for)))}. If that describes how you'll actually use the car, it's an easy one to recommend.</p>`
+      : `<p>I don't have a specific "best for" note recorded for the ${esc(name)}, but it suits buyers shopping the ${esc(cat).toLowerCase()} class.</p>`,
     overview: () => data.overview ? `<p>${esc(data.overview)}</p>` : intents.specs(),
     specs: () => {
       const s = data.specs || {};
-      const rows = [
-        ['0–60 mph', s.acceleration], ['Top speed', s.top_speed], ['Engine', s.engine],
-        ['Power', s.horsepower], ['Transmission', s.transmission], ['Drivetrain', s.drivetrain],
-        ['Fuel economy', s.fuel_economy], ['Seating', s.seating]
-      ].filter(r => r[1]);
-      return `Key specs for the ${esc(name)}:` +
-        '<ul class="carbot-ul">' + rows.map(r => `<li><strong>${esc(r[0])}:</strong> ${esc(r[1])}</li>`).join('') + '</ul>';
+      const paras = [];
+      const mech = [];
+      if (s.engine) mech.push(`a ${esc(s.engine)}${s.horsepower ? ` good for ${esc(s.horsepower)}` : ''}`);
+      if (s.transmission) mech.push(`a ${esc(s.transmission)}`);
+      if (s.drivetrain) mech.push(`${esc(s.drivetrain)} drive`);
+      if (mech.length) paras.push(`Mechanically, the ${esc(name)} pairs ${prose(mech)}.`);
+      const perf = [];
+      if (s.acceleration) perf.push(`hits 0–60 mph in ${esc(s.acceleration)}`);
+      if (s.top_speed) perf.push(`tops out at ${esc(s.top_speed)}`);
+      if (s.fuel_economy) perf.push(`returns ${esc(s.fuel_economy)}`);
+      if (s.seating) perf.push(`seats ${esc(s.seating)}`);
+      if (perf.length) paras.push(`On the road it ${prose(perf)}.`);
+      return paras.length
+        ? paras.map(p => `<p>${p}</p>`).join('')
+        : `<p>I don't have detailed specifications for the ${esc(name)} on file.</p>`;
     }
   };
 
