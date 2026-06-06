@@ -15,7 +15,7 @@ services:
     runtime: python
     plan: free
     region: oregon
-    branch: feat/real-3d-car-models
+    branch: main
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 90
     healthCheckPath: /
