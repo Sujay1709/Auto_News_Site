@@ -3,11 +3,12 @@ import { NavLink, Link } from 'react-router-dom';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from './common/SafeIcon';
 
-const { FiHome, FiRss, FiInfo, FiHelpCircle, FiMenu, FiX } = FiIcons;
+const { FiHome, FiRss, FiInfo, FiHelpCircle, FiMenu, FiX, FiColumns } = FiIcons;
 
 const LINKS = [
   { to: '/', label: 'Home', icon: FiHome, end: true },
   { to: '/news', label: 'News', icon: FiRss },
+  { to: '/compare', label: 'Compare', icon: FiColumns },
   { to: '/info', label: 'Get Info', icon: FiInfo },
   { to: '/help', label: 'Get Help', icon: FiHelpCircle },
 ];
