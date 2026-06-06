@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../components/common/SafeIcon';
 import { CARS_DATA } from '../data/cars';
-import AIAssistant from '../components/AIAssistant';
+import ChatAssistant from '../components/ChatAssistant';
+import ChatPopup from '../components/ChatPopup';
 
 const { FiInfo, FiBox, FiUsers, FiShield, FiZap, FiArrowLeft, FiCpu } = FiIcons;
 
@@ -117,8 +118,10 @@ export default function CarDetail() {
             </motion.div>
           </div>
 
-          {/* AI Module */}
-          <AIAssistant carModel={car.model} />
+          {/* AI Module — full chat assistant scoped to this car */}
+          <div className="h-[520px]">
+            <ChatAssistant car={car} />
+          </div>
 
           <footer className="pt-8 border-t border-white/5 text-[9px] font-black uppercase tracking-[0.3em] text-white/20 text-center">
             AutoHub-render.com • Technical Details
@@ -126,6 +129,8 @@ export default function CarDetail() {
         </div>
       </section>
 
+      {/* Floating Ask-AI popup locked to this car */}
+      <ChatPopup carId={car.id} />
     </div>
   );
 }

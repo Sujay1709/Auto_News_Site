@@ -3,15 +3,31 @@
 {% block title %}Car not found — AutoHub-render.com{% endblock %}
 
 {% block content %}
-<div class="info-page">
-  <h1 class="page-title">Car not found</h1>
-  <p class="page-lead">
-    No car in our fleet matches the slug <code>{{ slug }}</code>.
+<div class="notfound-page">
+  <div class="notfound-icon"><i class="fas fa-car-crash"></i></div>
+  <div class="notfound-code">404</div>
+  <h1 class="notfound-title">We couldn't find that car</h1>
+  <p class="notfound-lead">
+    Nothing in our fleet matches <code>{{ slug }}</code>. It may have been renamed or it isn't in our database yet.
   </p>
-  <p>
-    <a href="{{ url_for('cars') }}" class="car-page-back">
-      <i class="fas fa-arrow-left"></i> Back to all cars
+
+  <div class="notfound-actions">
+    <a href="{{ url_for('cars') }}" class="btn btn-primary">
+      <i class="fas fa-th-large"></i> Browse all cars
     </a>
-  </p>
+    <a href="/" class="btn btn-ghost">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+
+  <div class="notfound-suggest">
+    <span class="notfound-suggest-lbl">Popular categories</span>
+    <div class="notfound-chips">
+      <a href="{{ url_for('cars') }}?type=sedan" class="carbot-chip">Sedans</a>
+      <a href="{{ url_for('cars') }}?type=suv" class="carbot-chip">SUVs</a>
+      <a href="{{ url_for('cars') }}?type=sports" class="carbot-chip">Sports</a>
+      <a href="{{ url_for('cars') }}?type=electric" class="carbot-chip">Electric</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

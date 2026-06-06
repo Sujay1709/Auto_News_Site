@@ -23,9 +23,17 @@
       "Cabin materials lag behind Honda Accord and Hyundai Sonata",
       "Some rivals offer more cargo space"
     ],
-    "awards": ["IIHS Top Safety Pick+ (2024)", "KBB Best Resale Value Award"],
+    "awards": [
+      "IIHS Top Safety Pick+ (2024)",
+      "KBB Best Resale Value Award"
+    ],
     "best_for": "Commuters, families, and anyone who wants peace-of-mind reliability and the lowest total cost of ownership in the segment",
-    "competitors": ["honda-accord", "hyundai-sonata", "nissan-altima"]
+    "competitors": [
+      "honda-accord",
+      "hyundai-sonata",
+      "nissan-altima"
+    ],
+    "history": "Launched in 1982 as a compact, the Camry grew into a midsize staple and was America's best-selling car for over 15 consecutive years. The ninth-generation XV80 (2025) moved to an all-hybrid lineup."
   },
   "honda-accord": {
     "overview": "A perennial Car of the Year contender and a Car and Driver 10Best 2024 winner. Sleek modern styling wraps a class-leading interior and engaging driving dynamics. Routinely outsmarts more expensive luxury sedans on long road trips.",
@@ -61,7 +69,12 @@
       "source": "Colin Ryan, Kelley Blue Book"
     },
     "best_for": "Buyers wanting Camry reliability with more driving engagement, a higher-end cabin, and modern tech integration",
-    "competitors": ["toyota-camry", "hyundai-sonata", "kia-k5"]
+    "competitors": [
+      "toyota-camry",
+      "hyundai-sonata",
+      "kia-k5"
+    ],
+    "history": "Introduced in 1976 as a compact hatchback and built in America since 1982, the Accord has earned a record number of Car and Driver 10Best wins. The eleventh generation arrived for 2023 with a hybrid-focused range."
   },
   "bmw-3-series": {
     "overview": "The benchmark sport sedan for 40 years. Surgical steering, perfectly balanced chassis, and a rev-happy turbo inline-4 that makes every commute feel a little more special. The 2024 refresh added the curved iDrive 8.5 display and refined the M Sport package.",
@@ -87,9 +100,17 @@
       "iDrive 8.5 buries common functions in menus",
       "Options pricing escalates rapidly — a loaded M340i nears $70K"
     ],
-    "awards": ["Car and Driver Editors' Choice 2024", "IIHS Top Safety Pick"],
+    "awards": [
+      "Car and Driver Editors' Choice 2024",
+      "IIHS Top Safety Pick"
+    ],
     "best_for": "Driving enthusiasts who still need 4 doors and a back seat — and aren't afraid of the options sheet",
-    "competitors": ["mercedes-benz-c-class", "audi-a4", "genesis-g70"]
+    "competitors": [
+      "mercedes-benz-c-class",
+      "audi-a4",
+      "genesis-g70"
+    ],
+    "history": "Born in 1975 as successor to the 02 Series, the 3 Series defined the sport-sedan segment across seven generations. The current G20 (2019, facelifted 2022) blends turbocharged efficiency with classic rear-drive balance."
   },
   "mercedes-benz-c-class": {
     "overview": "Looks like a baby S-Class, inside and out. The 2024 C-Class brings 'Hey Mercedes' voice control, augmented-reality navigation, and a portrait infotainment screen straight from the flagship. The W206 generation is the most luxurious C-Class ever.",
@@ -115,9 +136,16 @@
       "Touch-capacitive controls on the steering wheel are fiddly",
       "Rear seat is tight for a 6-footer"
     ],
-    "awards": ["IIHS Top Safety Pick+"],
+    "awards": [
+      "IIHS Top Safety Pick+"
+    ],
     "best_for": "Buyers who want luxury feel and tech, not lap times — and who appreciate Mercedes's heritage and resale value",
-    "competitors": ["bmw-3-series", "audi-a4", "lexus-es"]
+    "competitors": [
+      "bmw-3-series",
+      "audi-a4",
+      "lexus-es"
+    ],
+    "history": "Debuting in 1993 as successor to the 190E, the C-Class became Mercedes' best-seller. The fifth-generation W206 (2021) borrowed heavily from the S-Class with an all-four-cylinder, electrified lineup."
   },
   "hyundai-sonata": {
     "overview": "Bold-styled midsize sedan refreshed for 2024 with seamless front lighting. Exceptional value — equips like a luxury car at midsize-sedan money. Hybrid and N Line performance versions both excellent.",
@@ -143,9 +171,16 @@
       "Cabin materials below class average on lower trims",
       "Smaller dealer network than Toyota and Honda"
     ],
-    "awards": ["IIHS Top Safety Pick"],
+    "awards": [
+      "IIHS Top Safety Pick"
+    ],
     "best_for": "Value-seekers who want premium tech and styling without the premium price",
-    "competitors": ["kia-k5", "toyota-camry", "honda-accord"]
+    "competitors": [
+      "kia-k5",
+      "toyota-camry",
+      "honda-accord"
+    ],
+    "history": "Sold since 1985, the Sonata transformed Hyundai's quality reputation through its dramatic 2011 and 2020 redesigns. The eighth generation introduced bold styling and Hyundai's first sedan Digital Key."
   },
   "kia-k5": {
     "overview": "Aggressively styled midsize sedan with the segment's best warranty. The GT trim makes 290 hp from a 2.5L turbo — genuine fun for under $35K and the cheapest way into 5-second 0-60.",
@@ -171,9 +206,16 @@
       "Rear visibility hampered by aggressive C-pillar",
       "Cabin tech feels a generation behind the dual-screen Sonata"
     ],
-    "awards": ["IIHS Top Safety Pick"],
+    "awards": [
+      "IIHS Top Safety Pick"
+    ],
     "best_for": "Sedan buyers who want sport-trim performance and the longest warranty coverage in the segment",
-    "competitors": ["hyundai-sonata", "toyota-camry", "honda-accord"]
+    "competitors": [
+      "hyundai-sonata",
+      "toyota-camry",
+      "honda-accord"
+    ],
+    "history": "The K5 replaced the long-running Optima nameplate in 2020, adopting Kia's global naming and a sportier fastback-inspired design on the N3 platform shared with the Sonata."
   },
   "nissan-altima": {
     "overview": "Comfortable midsize sedan and the only one in its class offering all-wheel drive. ProPILOT Assist makes long highway drives noticeably less tiring. A practical choice in regions that see snow.",
@@ -199,9 +241,16 @@
       "No hybrid powertrain available",
       "CVT transmission can sound strained under hard acceleration"
     ],
-    "awards": ["IIHS Top Safety Pick"],
+    "awards": [
+      "IIHS Top Safety Pick"
+    ],
     "best_for": "Buyers in snow regions or anyone prioritizing seat comfort and minimum highway fatigue",
-    "competitors": ["toyota-camry", "honda-accord", "hyundai-sonata"]
+    "competitors": [
+      "toyota-camry",
+      "honda-accord",
+      "hyundai-sonata"
+    ],
+    "history": "Introduced in 1992 to slot between Sentra and Maxima, the Altima became a Nissan best-seller. The sixth generation (2019) added available all-wheel drive and the VC-Turbo variable-compression engine."
   },
   "audi-a4": {
     "overview": "Refined compact luxury sedan with Quattro all-wheel drive standard. Cabin quality is segment-leading and the Virtual Cockpit Plus digital cluster is still the best in the business. Replaced by the new A5 sedan for 2025, making 2024 the last A4.",
@@ -227,9 +276,16 @@
       "Rear-seat headroom tight under the sloped roofline",
       "2024 is the last A4 — A5 sedan replaces it for 2025"
     ],
-    "awards": ["IIHS Top Safety Pick"],
+    "awards": [
+      "IIHS Top Safety Pick"
+    ],
     "best_for": "All-weather drivers who want German build quality without 3 Series steering or C-Class flash",
-    "competitors": ["bmw-3-series", "mercedes-benz-c-class", "genesis-g70"]
+    "competitors": [
+      "bmw-3-series",
+      "mercedes-benz-c-class",
+      "genesis-g70"
+    ],
+    "history": "Replacing the Audi 80 in 1994, the A4 established Audi as a premium rival to BMW and Mercedes. The B9 generation (2016, facelifted 2019) refined quattro all-wheel drive and the Virtual Cockpit."
   },
   "lexus-es": {
     "overview": "Whisper-quiet luxury sedan with legendary Lexus reliability. The 300h Hybrid achieves 44 mpg combined — best-in-class for any luxury sedan. The ES has been the silent steady seller in Lexus's lineup for three decades.",
@@ -255,9 +311,17 @@
       "Front-wheel-drive layout dates the platform",
       "Cabin tech, while good, trails German rivals' polish"
     ],
-    "awards": ["IIHS Top Safety Pick+", "J.D. Power Most Dependable Midsize Premium Car"],
+    "awards": [
+      "IIHS Top Safety Pick+",
+      "J.D. Power Most Dependable Midsize Premium Car"
+    ],
     "best_for": "Buyers who prize quiet, reliability, and long-term ownership economics over driving thrills",
-    "competitors": ["mercedes-benz-c-class", "genesis-g70", "audi-a4"]
+    "competitors": [
+      "mercedes-benz-c-class",
+      "genesis-g70",
+      "audi-a4"
+    ],
+    "history": "One of Lexus's two launch models in 1989, the ES evolved into the brand's comfort-focused flagship for front-drive buyers. The seventh generation (2018) moved to the GA-K platform."
   },
   "genesis-g70": {
     "overview": "Korean luxury sport sedan that punches well above its price. Standout fastback styling, sharp dynamics, and complimentary scheduled maintenance for 3 years. The 3.3T trim gets BMW M340i-level performance for $15K less.",
@@ -283,9 +347,17 @@
       "Smaller dealer network than BMW/Mercedes/Audi",
       "Infotainment menu structure can feel clunky"
     ],
-    "awards": ["MotorTrend Car of the Year (G70, 2019)", "IIHS Top Safety Pick+"],
+    "awards": [
+      "MotorTrend Car of the Year (G70, 2019)",
+      "IIHS Top Safety Pick+"
+    ],
     "best_for": "BMW-curious buyers who want more luxury features per dollar and don't mind being early to a brand",
-    "competitors": ["bmw-3-series", "mercedes-benz-c-class", "audi-a4"]
+    "competitors": [
+      "bmw-3-series",
+      "mercedes-benz-c-class",
+      "audi-a4"
+    ],
+    "history": "The G70 launched in 2017 as the first true sport sedan from Hyundai's Genesis luxury brand, engineered by ex-BMW M and Bentley talent to challenge the German establishment."
   },
   "toyota-rav4": {
     "overview": "America's best-selling SUV. Practical packaging, hybrid efficiency (40 mpg), and the only PHEV in its class — the RAV4 Prime — with 42 miles of EV-only range and 302 combined horsepower.",
@@ -311,9 +383,17 @@
       "Interior materials lag class leaders",
       "Cargo capacity below Honda CR-V and Hyundai Tucson"
     ],
-    "awards": ["IIHS Top Safety Pick+ (with optional features)", "KBB Best Resale Value Award"],
+    "awards": [
+      "IIHS Top Safety Pick+ (with optional features)",
+      "KBB Best Resale Value Award"
+    ],
     "best_for": "Active families, light off-roaders, and EV-curious buyers (Prime) who want Toyota peace of mind",
-    "competitors": ["ford-explorer", "porsche-cayenne", "tesla-model-x"]
+    "competitors": [
+      "ford-explorer",
+      "porsche-cayenne",
+      "tesla-model-x"
+    ],
+    "history": "Pioneering the compact crossover segment in 1994, the RAV4 is now Toyota's best-selling model globally. The fifth generation (2019) added the powerful RAV4 Prime plug-in hybrid."
   },
   "ford-explorer": {
     "overview": "Three-row family SUV built on a rear-drive-based platform for towing capability. From efficient 4-cyl turbo to 400 hp ST and Hybrid — there's an Explorer for every need. The 2025 refresh is incoming, making 2024 a strong end-of-cycle value.",
@@ -339,9 +419,16 @@
       "Reliability scores below Toyota and Hyundai rivals",
       "Hybrid only achieves 27 mpg vs. competitors' 35-40 mpg"
     ],
-    "awards": ["NHTSA 5-Star Overall Safety Rating"],
+    "awards": [
+      "NHTSA 5-Star Overall Safety Rating"
+    ],
     "best_for": "Three-row families, light tow vehicles, road-trippers who want hands-free highway driving",
-    "competitors": ["toyota-rav4", "porsche-cayenne", "tesla-model-x"]
+    "competitors": [
+      "toyota-rav4",
+      "porsche-cayenne",
+      "tesla-model-x"
+    ],
+    "history": "Launched in 1990, the Explorer popularized the modern SUV and was the best-selling SUV of the 1990s. The sixth generation (2020) returned to a rear-drive platform for better towing and dynamics."
   },
   "tesla-model-x": {
     "overview": "Falcon-wing electric SUV with up to 7 seats. The Plaid trim is the quickest production SUV ever made — 2.5 sec to 60 mph from a 1,020 hp tri-motor setup. Refreshed for 2024 with updated interior and improved range.",
@@ -368,9 +455,16 @@
       "Touchscreen-only interface frustrates simple tasks like climate",
       "Premium for the Plaid trim ($94K+) is steep"
     ],
-    "awards": ["IIHS Top Safety Pick (with optional features)"],
+    "awards": [
+      "IIHS Top Safety Pick (with optional features)"
+    ],
     "best_for": "Buyers wanting maximum EV utility plus supercar acceleration in a single vehicle",
-    "competitors": ["porsche-cayenne", "rivian-r1t", "bmw-i7"]
+    "competitors": [
+      "porsche-cayenne",
+      "rivian-r1t",
+      "bmw-i7"
+    ],
+    "history": "Revealed in 2012 and launched in 2015, the Model X was Tesla's first SUV and introduced the dramatic Falcon Wing doors. A 2021 refresh brought the Plaid tri-motor powertrain."
   },
   "porsche-cayenne": {
     "overview": "Sport luxury SUV that drives like a 911 on stilts. The 2024 refresh brings new dual-screen cabin tech and updated chassis. Engines range from V6 to a 650 hp V8 in the Turbo GT, which lapped the Nurburgring in 7:38.",
@@ -396,9 +490,16 @@
       "Rear seat space lags BMW X5 and Mercedes GLE",
       "Fuel economy mediocre (19/23 mpg) even on V6"
     ],
-    "awards": ["MotorTrend SUV of the Year (previous gen)"],
+    "awards": [
+      "MotorTrend SUV of the Year (previous gen)"
+    ],
     "best_for": "Buyers who refuse to give up sports-car dynamics for SUV practicality",
-    "competitors": ["tesla-model-x", "ford-explorer", "porsche-911-carrera"]
+    "competitors": [
+      "tesla-model-x",
+      "ford-explorer",
+      "porsche-911-carrera"
+    ],
+    "history": "Porsche's controversial first SUV arrived in 2002 and became the financial success that funded its sports cars. Now in its third generation (2018, facelifted 2023), it remains the luxury-SUV dynamic benchmark."
   },
   "porsche-911-carrera": {
     "overview": "Sixty years of evolutionary refinement. The 911's rear-engine layout, twin-turbo flat-six soundtrack, and telepathic chassis remain the gold standard for sports cars. The 992.2 refresh (2025) adds T-Hybrid; the 2024 992.1 Carrera remains a pure ICE.",
@@ -429,7 +530,12 @@
       "MotorTrend Best Driver's Car (multiple generations)"
     ],
     "best_for": "Drivers who want the most perfectly engineered sports car ever made",
-    "competitors": ["chevrolet-corvette-c8", "ferrari-296-gtb", "porsche-cayenne"]
+    "competitors": [
+      "chevrolet-corvette-c8",
+      "ferrari-296-gtb",
+      "porsche-cayenne"
+    ],
+    "history": "Continuously produced since 1963, the rear-engine 911 is among the most iconic sports cars ever. The eighth-generation 992 (2019) modernized the formula while preserving its silhouette and flat-six character."
   },
   "chevrolet-corvette-c8": {
     "overview": "First mid-engine Corvette. Supercar performance at attainable prices — 2.9 sec to 60 mph and a removable roof panel, all for under $70K. The Z06 variant pushes 670 hp with a flat-plane crank V8 that revs to 8,600 rpm.",
@@ -460,7 +566,12 @@
       "Car and Driver 10Best Cars (multiple years)"
     ],
     "best_for": "Sports-car buyers who want supercar speed at half supercar price",
-    "competitors": ["porsche-911-carrera", "ferrari-296-gtb", "ford-mustang-dark-horse"]
+    "competitors": [
+      "porsche-911-carrera",
+      "ferrari-296-gtb",
+      "ford-mustang-dark-horse"
+    ],
+    "history": "America's sports car since 1953, the Corvette made its most radical change ever with the eighth generation (2020), moving the engine behind the driver for the first time to chase European exotics."
   },
   "ferrari-296-gtb": {
     "overview": "Plug-in hybrid V6 supercar that redefines Ferrari for the electric era. 819 hp combined output, 25 km EV-only range, and the most sublime mid-engine balance the marque has ever produced. Replaces the F8 Tributo in the lineup.",
@@ -487,9 +598,16 @@
       "Starting price $322K+ before options",
       "Touch-capacitive steering wheel buttons are unintuitive"
     ],
-    "awards": ["MotorTrend Best Driver's Car finalist 2023"],
+    "awards": [
+      "MotorTrend Best Driver's Car finalist 2023"
+    ],
     "best_for": "Buyers who want the most advanced mid-engine Ferrari ever built and embrace electrification",
-    "competitors": ["porsche-911-carrera", "chevrolet-corvette-c8", "ford-mustang-dark-horse"]
+    "competitors": [
+      "porsche-911-carrera",
+      "chevrolet-corvette-c8",
+      "ford-mustang-dark-horse"
+    ],
+    "history": "Unveiled in 2021, the 296 GTB marked Ferrari's return to a V6 road car for the first time since the Dino, paired with a plug-in hybrid system — a milestone in Ferrari's electrified era."
   },
   "ford-mustang-dark-horse": {
     "overview": "Track-focused Mustang flagship with a high-revving 5.0L V8 (500 hp) and a Tremec 6-speed manual standard. The most powerful naturally-aspirated 5.0 Coyote ever produced — the swan song before Mustang hybridizes.",
@@ -515,9 +633,16 @@
       "Fuel economy 15/24 mpg makes road trips expensive",
       "Interior tech is impressive on paper but plasticky in execution"
     ],
-    "awards": ["MotorTrend Best Driver's Car finalist 2023"],
+    "awards": [
+      "MotorTrend Best Driver's Car finalist 2023"
+    ],
     "best_for": "Manual-transmission devotees who want a track-day Mustang with the last great naturally-aspirated V8",
-    "competitors": ["chevrolet-corvette-c8", "porsche-911-carrera", "ferrari-296-gtb"]
+    "competitors": [
+      "chevrolet-corvette-c8",
+      "porsche-911-carrera",
+      "ferrari-296-gtb"
+    ],
+    "history": "The Mustang has been America's definitive pony car since 1964. The Dark Horse, launched with the seventh-generation S650 in 2024, is the most track-capable factory Mustang ever."
   },
   "tesla-model-3": {
     "overview": "Refreshed for 2024 with the Highland update — quieter cabin, sharper styling, longer range (341 miles), and improved suspension refinement. The world's best-selling EV, and the Highland refresh shows in the polish.",
@@ -544,13 +669,21 @@
       "Yoke-removal of stalks (turn signals on wheel buttons) divides drivers",
       "Nine-speaker base audio lacks low-mid frequency richness"
     ],
-    "awards": ["IIHS Top Safety Pick+", "Edmunds Top Rated EV (multiple years)"],
+    "awards": [
+      "IIHS Top Safety Pick+",
+      "Edmunds Top Rated EV (multiple years)"
+    ],
     "expert_quote": {
       "text": "The Highland refresh takes good and makes it great — creating a very, very compelling EV.",
       "source": "techAU"
     },
     "best_for": "Tech-forward commuters who want the most polished mid-range EV with the best charging network",
-    "competitors": ["hyundai-ioniq-6", "tesla-model-s-plaid", "bmw-i7"]
+    "competitors": [
+      "hyundai-ioniq-6",
+      "tesla-model-s-plaid",
+      "bmw-i7"
+    ],
+    "history": "Launched in 2017 as Tesla's first mass-market car, the Model 3 became the world's best-selling EV. The 2024 'Highland' update improved refinement and range."
   },
   "tesla-model-s-plaid": {
     "overview": "Tri-motor electric sedan with 1,020 hp and the fastest production-car acceleration ever recorded — 1.99 seconds to 60 mph. Practical luxury wrapped around insanity. Refreshed in 2021, no major updates for 2024.",
@@ -577,9 +710,17 @@
       "Premium for the Plaid trim ($90K+) buys equally fast competitors",
       "Long-term battery degradation concerns under repeated Plaid launches"
     ],
-    "awards": [],
+    "awards": [
+      "MotorTrend Performance Vehicle of the Year finalist",
+      "Quickest-accelerating production car (sub-2.0s 0–60 mph)"
+    ],
     "best_for": "EV enthusiasts wanting the fastest accelerating production car at any price",
-    "competitors": ["bmw-i7", "lucid-air-pure", "porsche-911-carrera"]
+    "competitors": [
+      "bmw-i7",
+      "lucid-air-pure",
+      "porsche-911-carrera"
+    ],
+    "history": "The Model S launched in 2012 as the car that proved EVs could be fast and desirable, redefining the luxury sedan. The 2021 Plaid tri-motor version set production-car acceleration records."
   },
   "lucid-air-pure": {
     "overview": "Stunning American EV with the best efficiency of any production car (~5 mi/kWh). Long Range RWD achieves 420+ miles. Interior styling rivals German flagships. Founded by ex-Tesla VP Peter Rawlinson, Lucid is Tesla's most credible direct challenger.",
@@ -606,9 +747,17 @@
       "Touring and Grand Touring trims push past $100K quickly",
       "Service network limited compared to established brands"
     ],
-    "awards": ["MotorTrend Car of the Year 2022", "Car and Driver EV of the Year"],
+    "awards": [
+      "MotorTrend Car of the Year 2022",
+      "Car and Driver EV of the Year"
+    ],
     "best_for": "Range-anxious EV buyers who want luxury and efficiency above all else",
-    "competitors": ["tesla-model-s-plaid", "bmw-i7", "hyundai-ioniq-6"]
+    "competitors": [
+      "tesla-model-s-plaid",
+      "bmw-i7",
+      "hyundai-ioniq-6"
+    ],
+    "history": "Lucid Motors, founded in 2007 (originally Atieva), delivered its first car — the Air — in 2021. Engineered by ex-Tesla and McLaren talent, it set EPA range records and won 2022 MotorTrend Car of the Year."
   },
   "rivian-r1t": {
     "overview": "World's first electric adventure truck. Quad-motor variant produces 835 hp, tows 11,000 lbs, and crawls rocks while doing 0-60 in 3.0 sec. A genuinely new vehicle category — neither truck nor SUV nor sports car, but somehow all three.",
@@ -640,7 +789,12 @@
       "NHTSA 5-Star Overall Safety Rating"
     ],
     "best_for": "Outdoor adventurers and EV early-adopters who actually use trucks for trails, not just commuting",
-    "competitors": ["tesla-model-x", "ford-explorer", "porsche-cayenne"]
+    "competitors": [
+      "tesla-model-x",
+      "ford-explorer",
+      "porsche-cayenne"
+    ],
+    "history": "Rivian, founded in 2009, delivered the R1T in 2021 as the world's first electric pickup to reach market, beating legacy rivals and pioneering features like the through-body Gear Tunnel."
   },
   "hyundai-ioniq-6": {
     "overview": "Streamlined electric sedan with class-leading 361-mile range (RWD Long Range) and 800V ultra-fast charging (10-80% in 18 minutes). Distinctive aero-focused styling — drag coefficient of 0.21 is among the lowest in any production car.",
@@ -672,7 +826,12 @@
       "IIHS Top Safety Pick+"
     ],
     "best_for": "Long-haul EV drivers and buyers wanting fastest-in-class DC charging with strong real-world range",
-    "competitors": ["tesla-model-3", "bmw-i7", "lucid-air-pure"]
+    "competitors": [
+      "tesla-model-3",
+      "bmw-i7",
+      "lucid-air-pure"
+    ],
+    "history": "Launched in 2022 as the second model in Hyundai's dedicated Ioniq EV sub-brand, the streamliner-styled Ioniq 6 rides on the 800-volt E-GMP platform and won multiple 2023 World Car of the Year category awards."
   },
   "bmw-i7": {
     "overview": "Flagship electric luxury sedan with a 31-inch 8K Theater Screen for rear passengers. Lounge-like back seat, 318-mile range, and BMW's most opulent cabin ever. Sister model to the gas 7 Series — share the same body and chassis, different powertrain.",
@@ -699,8 +858,15 @@
       "Charging slower than Lucid Air or Hyundai Ioniq 6 (200 kW vs 300+)",
       "Loaded examples push past $150K"
     ],
-    "awards": ["World Luxury Car of the Year 2023"],
+    "awards": [
+      "World Luxury Car of the Year 2023"
+    ],
     "best_for": "Chauffeured executives and luxury buyers who care most about rear-seat experience",
-    "competitors": ["tesla-model-s-plaid", "lucid-air-pure", "tesla-model-3"]
+    "competitors": [
+      "tesla-model-s-plaid",
+      "lucid-air-pure",
+      "tesla-model-3"
+    ],
+    "history": "The i7 launched in 2022 as the all-electric version of BMW's seventh-generation 7 Series (G70) — the brand's first battery-powered flagship limousine, with an available 31-inch rear Theatre Screen."
   }
 }

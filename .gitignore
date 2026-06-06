@@ -15,6 +15,12 @@ env/
 # Local-only environment
 .env
 
+# Node
+node_modules/
+
+# Tooling artifacts
+.playwright-mcp/
+
 # Build / dist
 build/
 dist/
