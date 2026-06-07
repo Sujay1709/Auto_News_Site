@@ -10,7 +10,9 @@ const TIMEOUT_MS = 20000;
 //   message: string
 //   history: [{ role: 'user' | 'bot', text: string }]
 //   carIds:  string[]  (currently viewed car ids)
-// Returns the reply string; throws on network error, timeout, or non-2xx.
+// Returns { reply: string, action: object | null }. `action` is an optional UI
+// directive (e.g. { type: 'navigate', target: 'compare', carIds: [...] }) the
+// caller may act on. Throws on network error, timeout, or non-2xx.
 export async function askAgent({ message, history = [], carIds = [] }) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
@@ -24,7 +26,7 @@ export async function askAgent({ message, history = [], carIds = [] }) {
     if (!res.ok) throw new Error(`Agent HTTP ${res.status}`);
     const data = await res.json();
     if (!data.reply) throw new Error('Empty agent reply');
-    return data.reply;
+    return { reply: data.reply, action: data.action || null };
   } finally {
     clearTimeout(timer);
   }

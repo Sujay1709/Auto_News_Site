@@ -52,8 +52,20 @@ class ChatRequest(BaseModel):
     carIds: list[str] = []
 
 
+class Action(BaseModel):
+    """A UI directive the SPA can act on, derived from the agent's tool use.
+
+    Currently only emitted for comparisons: when the agent calls the
+    `compare_cars` tool, we surface the (validated catalog) ids so the SPA can
+    deep-link to its /compare page."""
+    type: str  # "navigate"
+    target: str  # "compare"
+    carIds: list[str] = []
+
+
 class ChatResponse(BaseModel):
     reply: str
+    action: Action | None = None
 
 
 def _compose(req: ChatRequest) -> str:
@@ -85,10 +97,27 @@ async def chat(req: ChatRequest):
     content = types.Content(role="user", parts=[types.Part(text=_compose(req))])
 
     reply = ""
+    compare_ids: list[str] = []
     async for event in _runner.run_async(
         user_id="web", session_id=session_id, new_message=content
     ):
-        if event.is_final_response() and event.content and event.content.parts:
+        if not (event.content and event.content.parts):
+            continue
+        # Watch for a compare_cars tool call: its car_ids are validated catalog
+        # ids, so they double as a reliable "open the comparison" signal.
+        for part in event.content.parts:
+            fc = getattr(part, "function_call", None)
+            if fc and fc.name == "compare_cars":
+                ids = (fc.args or {}).get("car_ids") or []
+                if isinstance(ids, list):
+                    compare_ids = [str(i) for i in ids]
+        if event.is_final_response():
             reply = event.content.parts[0].text or reply
 
-    return ChatResponse(reply=reply or "Sorry, I couldn't generate a response.")
+    action = None
+    if len(compare_ids) >= 2:
+        action = Action(type="navigate", target="compare", carIds=compare_ids[:2])
+
+    return ChatResponse(
+        reply=reply or "Sorry, I couldn't generate a response.", action=action
+    )

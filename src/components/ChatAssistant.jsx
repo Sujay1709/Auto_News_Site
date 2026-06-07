@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from './common/SafeIcon';
@@ -22,6 +23,7 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
   const [loading, setLoading] = useState(false);
   const [localMode, setLocalMode] = useState(false);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
 
   // Greeting used on mount and when the conversation is cleared.
   const greeting = () => ({
@@ -47,9 +49,22 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
     setQuery('');
     setLoading(true);
     try {
-      const reply = await askAgent({ message: q, history, carIds: [car.id] });
+      const { reply, action } = await askAgent({ message: q, history, carIds: [car.id] });
       setLocalMode(false);
       setMessages((m) => [...m, { role: 'bot', text: reply, time: stamp() }]);
+      // If the agent compared cars, deep-link to the side-by-side view. Delay
+      // briefly so the user sees the reply before this component unmounts.
+      if (
+        action?.type === 'navigate' &&
+        action.target === 'compare' &&
+        action.carIds?.length >= 2
+      ) {
+        const [a, b] = action.carIds;
+        setTimeout(
+          () => navigate(`/compare?a=${encodeURIComponent(a)}&b=${encodeURIComponent(b)}`),
+          900,
+        );
+      }
     } catch {
       // Agent unreachable (e.g. static-only deploy or offline) — fall back to
       // the local rule-based engine, mirroring the News "Cached Feed" pattern.
