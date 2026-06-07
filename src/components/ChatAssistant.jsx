@@ -4,6 +4,7 @@ import * as FiIcons from 'react-icons/fi';
 import SafeIcon from './common/SafeIcon';
 import { CARS_DATA } from '../data/cars';
 import { answerQuestion, SUGGESTED_QUESTIONS } from '../data/carChat';
+import { askAgent } from '../data/carAgent';
 
 const { FiCpu, FiSend, FiLoader, FiUser, FiTrash2 } = FiIcons;
 
@@ -19,6 +20,7 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
   const [messages, setMessages] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
+  const [localMode, setLocalMode] = useState(false);
   const scrollRef = useRef(null);
 
   // Greeting used on mount and when the conversation is cleared.
@@ -37,18 +39,26 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, loading]);
 
-  const send = (text) => {
+  const send = async (text) => {
     const q = (text ?? query).trim();
     if (!q || loading) return;
+    const history = messages.map((m) => ({ role: m.role, text: m.text }));
     setMessages((m) => [...m, { role: 'user', text: q, time: stamp() }]);
     setQuery('');
     setLoading(true);
-    // Brief delay to mimic a thinking assistant.
-    setTimeout(() => {
+    try {
+      const reply = await askAgent({ message: q, history, carIds: [car.id] });
+      setLocalMode(false);
+      setMessages((m) => [...m, { role: 'bot', text: reply, time: stamp() }]);
+    } catch {
+      // Agent unreachable (e.g. static-only deploy or offline) — fall back to
+      // the local rule-based engine, mirroring the News "Cached Feed" pattern.
+      setLocalMode(true);
       const reply = answerQuestion(car, q);
       setMessages((m) => [...m, { role: 'bot', text: reply, time: stamp() }]);
+    } finally {
       setLoading(false);
-    }, 550);
+    }
   };
 
   const clearChat = () => {
@@ -68,6 +78,11 @@ export default function ChatAssistant({ car, showCarPicker = false, onCarChange 
           <h4 className="text-sm font-black uppercase tracking-tighter text-white">AutoHub AI Assistant</h4>
           <p className="text-[9px] text-red-500 uppercase font-bold tracking-widest truncate">
             {car.make} {car.model}
+            {localMode && (
+              <span className="ml-2 text-amber-400/80" title="Agent offline — answering from local data">
+                · Local
+              </span>
+            )}
           </p>
         </div>
         <button
