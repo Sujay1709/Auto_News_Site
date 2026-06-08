@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../components/common/SafeIcon';
@@ -90,8 +91,14 @@ function CarPicker({ side, value, onChange, exclude }) {
 }
 
 export default function Compare() {
-  const [idA, setIdA] = useState(CARS_DATA[0].id);
-  const [idB, setIdB] = useState(CARS_DATA[2]?.id || CARS_DATA[1].id);
+  // Allow deep-linking a comparison via ?a=<id>&b=<id> (e.g. from the AI
+  // assistant). Unknown ids fall back to the defaults.
+  const [searchParams] = useSearchParams();
+  const pick = (id, fallback) => (CARS_DATA.some((c) => c.id === id) ? id : fallback);
+  const [idA, setIdA] = useState(pick(searchParams.get('a'), CARS_DATA[0].id));
+  const [idB, setIdB] = useState(
+    pick(searchParams.get('b'), CARS_DATA[2]?.id || CARS_DATA[1].id),
+  );
 
   const carA = useMemo(() => CARS_DATA.find((c) => c.id === idA), [idA]);
   const carB = useMemo(() => CARS_DATA.find((c) => c.id === idB), [idB]);

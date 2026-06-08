@@ -21,6 +21,15 @@ export default defineConfig({
         secure: true,
         rewrite: (path) => path.replace(/^\/newsapi/, ''),
       },
+      '/agent': {
+        // Routes the SPA's agent calls to the local ADK service during
+        // `npm run dev`. In production set VITE_AGENT_URL to the deployed
+        // agent URL instead (this proxy is absent in a static build, and the
+        // chat falls back to the local engine if the agent is unreachable).
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/agent/, ''),
+      },
     },
   },
 })

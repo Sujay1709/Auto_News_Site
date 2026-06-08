@@ -32,6 +32,7 @@ There is no test suite and no backend to run. Validation is done by hitting rout
 - **Images** — sourced from external URLs in `cars.js` (Wikimedia Commons lead images, Unsplash). The SPA does not depend on any local `static/` files.
 - **3D models** — `<model-viewer>` (loaded from CDN in `index.html`) renders GLB files referenced by URL in `cars.js`.
 - **News page** (`src/pages/News.jsx`) — fetches live NewsAPI headlines through the Vite dev proxy `/newsapi` (see `vite.config.js`), which only exists during `npm run dev`. In a deployed static build the proxy is absent, the request fails, and the page falls back to the cached `FALLBACK` headlines, showing a "Cached Feed" badge.
+- **AI agent** (`agent/`) — a *separate* Python service (Google ADK + Gemini, FastAPI `POST /chat`) deployed independently to Cloud Run (`autohub-agent`). The SPA's `ChatAssistant` calls it via `src/data/carAgent.js` (dev: `/agent` Vite proxy → `:8000`; prod: `VITE_AGENT_URL`). If the agent is unreachable, the chat falls back to the local `carChat.js` engine and shows a "Local" badge. The agent's catalog (`agent/car_data.json`) is generated from `src/data/cars.js` by `scripts/export-cars.mjs` (run in `npm run build`'s `prebuild`).
 
 ## Deployment (Google Cloud Run, static)
 
