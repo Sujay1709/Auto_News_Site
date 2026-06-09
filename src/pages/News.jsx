@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../components/common/SafeIcon';
+import { normalizeFeed } from '../data/newsFeed';
 
 const { FiArrowRight, FiCalendar, FiLoader, FiWifiOff } = FiIcons;
 
-// NewsAPI demo key. The developer plan permits requests from localhost via the
-// Vite dev proxy (see vite.config.js), so the News page pulls live global
-// automotive headlines during local development. In a deployed static build the
-// proxy is absent, the request fails, and the page falls back to the cached
-// headlines in FALLBACK below — showing a "Cached Feed" badge.
-const NEWS_API_KEY = '7120175e997a4aae8edc62c5167858bf';
+// Live automotive headlines come from GNews.io, reached same-origin through the
+// `/newsproxy` reverse proxy (nginx in production, the Vite dev proxy locally).
+// The proxy injects the GNEWS_API_KEY server-side, so no key ships in this
+// bundle. If the proxy/feed is unreachable the page falls back to the cached
+// FALLBACK headlines below and shows a "Cached Feed" badge.
 
-// Each topic maps to a NewsAPI search query for real-time, global results.
+// Each topic maps to a GNews search query for real-time, global results.
 const TOPICS = [
-  { label: 'All', q: '(car OR cars OR automotive OR vehicle OR EV) AND (launch OR review OR model OR automaker OR electric OR engine OR industry)' },
-  { label: 'Electric Vehicles', q: 'electric vehicle OR EV OR battery car' },
-  { label: 'New Models', q: 'new car model OR car launch OR reveal' },
-  { label: 'Autonomous Tech', q: 'autonomous driving OR self-driving car OR ADAS' },
-  { label: 'Industry Trends', q: 'automotive industry OR car manufacturer' },
+  { label: 'All', q: 'car OR automotive OR EV OR vehicle' },
+  { label: 'Electric Vehicles', q: 'electric vehicle OR EV OR "battery car"' },
+  { label: 'New Models', q: '"new car" OR "car launch" OR "car reveal"' },
+  { label: 'Autonomous Tech', q: '"self-driving" OR "autonomous driving" OR ADAS' },
+  { label: 'Industry Trends', q: '"automotive industry" OR "car manufacturer"' },
 ];
 
 // Offline fallback so the page is never empty if the live feed is unreachable.
@@ -41,22 +41,17 @@ export default function News() {
     let cancelled = false;
     setLoading(true);
     const q = encodeURIComponent(TOPICS[topicIdx].q);
-    // Go through the Vite /newsapi proxy (see vite.config.js) so the request is
-    // made server-side — NewsAPI returns 426 for direct browser requests.
-    const url = `/newsapi/v2/everything?q=${q}&language=en&sortBy=publishedAt&pageSize=12&apiKey=${NEWS_API_KEY}`;
+    // Same-origin GNews call via the /newsproxy reverse proxy (it appends the
+    // API key). max=10 keeps us inside the free tier's per-request cap.
+    const url = `/newsproxy/api/v4/search?q=${q}&lang=en&max=10&sortby=publishedAt`;
 
     fetch(url)
       .then((r) => r.json())
       .then((data) => {
         if (cancelled) return;
-        const list = (data.articles || []).filter((a) => a.title && a.title !== '[Removed]');
-        if (list.length) {
-          setArticles(list);
-          setLive(true);
-        } else {
-          setArticles(FALLBACK);
-          setLive(false);
-        }
+        const { articles, live } = normalizeFeed(data, FALLBACK);
+        setArticles(articles);
+        setLive(live);
       })
       .catch(() => {
         if (cancelled) return;
