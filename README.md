@@ -43,7 +43,7 @@ Every car gets a full editorial page: overview, drives-like description, standou
 Select cars come with real GLB models you can drag, spin, and zoom directly in the browser via `<model-viewer>` (loaded from CDN). Model URLs are defined per car in `src/data/cars.js`.
 
 ### 📰 Live Automotive News
-Real-time headlines from NewsAPI covering EV breakthroughs, autonomous driving, new model reveals, and global market trends. In local development the request is proxied through the Vite dev server (NewsAPI rejects direct browser calls); in the deployed static build the page gracefully falls back to a curated set of cached headlines.
+Real-time headlines from **GNews.io** covering EV breakthroughs, autonomous driving, new model reveals, and global market trends — live in **both** local dev and production. Requests go through a same-origin `/newsproxy` (the Vite dev server locally, nginx on Cloud Run) that appends the API key server-side, so it never ships in the bundle. If the feed is ever unreachable the page gracefully falls back to a curated set of cached headlines.
 
 ### 🏭 Industry Intelligence
 A reference-grade industry overview page: automotive history timeline from 1886 to present, current global market statistics, key industry segment breakdowns, and major market overviews by region.
@@ -57,7 +57,7 @@ A reference-grade industry overview page: automotive history timeline from 1886 
 | **App** | React 18 + Vite + Tailwind CSS + Framer Motion |
 | **Routing** | React Router (client-side SPA) |
 | **3D Viewer** | `<model-viewer>` via CDN |
-| **News** | NewsAPI (via Vite dev proxy; cached fallback in production) |
+| **News** | GNews.io (via same-origin `/newsproxy`: Vite in dev, nginx in prod; cached fallback) |
 | **Hosting** | Google Cloud Run — static `dist/` served by nginx |
 | **Build/Container** | Multi-stage Docker (Node build → nginx) |
 
@@ -76,7 +76,7 @@ Auto_News_Site/
 │   │   ├── Home.jsx          # Landing / gallery
 │   │   ├── Compare.jsx       # Side-by-side comparison page
 │   │   ├── CarDetail.jsx     # Per-car detail page
-│   │   ├── News.jsx          # News feed (live in dev, cached in prod)
+│   │   ├── News.jsx          # Live news feed (GNews via /newsproxy)
 │   │   ├── Info.jsx          # Industry overview
 │   │   └── Help.jsx          # Help / about
 │   ├── components/
@@ -87,7 +87,7 @@ Auto_News_Site/
 │       ├── cars.js           # The 24-vehicle catalog (specs, images, GLB URLs)
 │       └── carChat.js        # AI assistant copy
 ├── public/                   # Copied verbatim into dist/ (robots.txt, sitemap.xml)
-├── vite.config.js            # Dev server (port 5175) + /newsapi proxy
+├── vite.config.js            # Dev server (port 5175) + /newsproxy & /agent proxies
 ├── Dockerfile                # Node build → nginx static serve
 ├── nginx.conf                # SPA routing for Cloud Run
 └── scripts/                  # Legacy AI 3D-generation pipeline (see note below)
@@ -106,10 +106,11 @@ Auto_News_Site/
 git clone https://github.com/Sujay1709/Auto_News_Site.git
 cd Auto_News_Site
 npm install
+cp .env.example .env   # add a free GNews key (https://gnews.io/) for the live News feed
 npm run dev        # → http://localhost:5175
 ```
 
-That's the whole app — there's nothing else to start. `npm run build` produces the static `dist/`, and `npm run preview` serves that build locally.
+That's the whole app — there's nothing else to start. Without a `GNEWS_API_KEY` in `.env`, the News page simply shows cached headlines. `npm run build` produces the static `dist/`, and `npm run preview` serves that build locally.
 
 ---
 
@@ -121,10 +122,11 @@ AutoHub is deployed to **Google Cloud Run** as a static site (nginx serving the 
 gcloud run deploy autohub \
   --source . --region us-central1 --platform managed \
   --allow-unauthenticated --min-instances 0 --max-instances 10 \
-  --memory 256Mi --timeout 90
+  --memory 256Mi --timeout 90 \
+  --set-env-vars GNEWS_API_KEY=YOUR_GNEWS_KEY
 ```
 
-The `Dockerfile` builds the SPA and serves it with nginx on the port Cloud Run injects; `nginx.conf` rewrites unknown paths to `index.html` so React Router routes work on refresh.
+`GNEWS_API_KEY` powers the nginx `/newsproxy` live-news feed (omit it and the News page falls back to cached headlines). The `Dockerfile` builds the SPA and serves it with nginx on the port Cloud Run injects; `nginx.conf` rewrites unknown paths to `index.html` so React Router routes work on refresh.
 
 ---
 
